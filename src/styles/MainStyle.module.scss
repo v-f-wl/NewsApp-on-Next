@@ -1,0 +1,11 @@
+.container{
+    padding-top: 50px;
+    margin: 0 auto;
+    max-width: 1200px;
+    height: 98vh;
+    display: grid;
+    grid-template-columns: 220px 900px;
+    justify-content: space-between;
+}
+
+

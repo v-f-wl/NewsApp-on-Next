@@ -1,0 +1,39 @@
+.container{
+    padding-top: 50px;
+    margin: 0 auto;
+    max-width: 1200px;
+    height: 98vh;
+    display: grid;
+    grid-template-columns: 220px 900px;
+    justify-content: space-between;
+}
+
+.Favorite{
+    height: 100%;
+    max-height: calc(100vh - 50px);
+    padding: 22px;
+    background-color: #ffffff;
+    border-radius: 20px 20px 0px 0px;
+    &Top{
+        display: flex;
+        justify-content: space-between;
+    }
+    &Title{
+        margin-top: 62px;
+        display: inline-flex;
+        padding-right: 80px;
+        padding-bottom: 10px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 54px;
+        text-transform: capitalize;
+        border-bottom: 2px solid #253C55;
+    }
+    &Container{
+        margin-top: 30px;
+    }
+}
+
+

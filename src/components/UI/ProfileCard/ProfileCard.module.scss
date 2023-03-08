@@ -1,0 +1,23 @@
+.ProfileCard{
+    height: 60px;
+    padding-left: 10px;
+    border-left: 3px solid #ED774E;
+    &Title{
+        max-width: 380px;
+        font-family: 'Open Sans';
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 30px;
+        text-transform: capitalize;
+
+        display: -moz-box;
+        -moz-box-orient: vertical;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        line-clamp: 2;
+        box-orient: vertical;
+
+        color: #253C55;
+    }
+}

@@ -1,0 +1,98 @@
+.Card{
+    position: relative;
+    padding: 10px 20px;
+    border-left: 2px solid #ED774E;
+    min-height: 200px;
+    &Title{
+        font-family: 'Poppins';
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+        text-transform: capitalize;
+        color: #253C55;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -moz-box;
+        -moz-box-orient: vertical;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        line-clamp: 2;
+        box-orient: vertical;
+    }
+    &Txt{
+        margin-top: 10px;
+        font-family: 'Open Sans';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        text-transform: capitalize;
+
+        color: rgba(37, 60, 85, 0.54);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -moz-box;
+        -moz-box-orient: vertical;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        line-clamp: 3;
+        box-orient: vertical;
+    }
+    &Link{
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+        width: 70px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        
+        background-color: #ED774E;
+        border-radius: 50px;
+
+        font-family: 'Open Sans';
+        font-weight: light;
+        font-style: normal;
+        font-size: 16px;
+        text-transform: capitalize;
+        color: #fff;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+    &Time{
+        position: absolute;
+        bottom: 15px;
+        right: 50px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &Active{
+            border-bottom: 2px solid #ED774E;
+            border-radius: 50px;
+        }
+    }
+    &Like{
+        position: absolute;
+        bottom: 15px;
+        right: 10px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &Active{
+            border-bottom: 2px solid #ED774E;
+            border-radius: 50px;
+        }
+    }
+}
