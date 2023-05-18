@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
@@ -12,6 +13,7 @@ const HeaderDash = () => {
         rounded-lg 
         bg-white 
         sticky 
+        z-10
         top-0 
         shadow-md 
         shadow-slate-400/10
@@ -20,7 +22,7 @@ const HeaderDash = () => {
       <div className="m-3 w-8 h-8 rounded-lg bg-slate-300"></div>
       <div
         onClick={() => setModal(true)}
-        className="text-zinc-300 font-light cursor-pointer">
+        className="text-zinc-300 font-light cursor-pointer text-sm lg:text-base">
         {modal ? '' : 'Create Post'}
       </div>
       <div 

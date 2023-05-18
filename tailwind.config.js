@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        'LeftRight': '2fr 8fr 2fr',
+        'LeftRight': '2fr 7fr 3fr',
+        'Profile': '2fr 10fr',
         'post': '32px 1fr'
       }
     },

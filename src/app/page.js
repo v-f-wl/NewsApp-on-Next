@@ -1,13 +1,24 @@
 'use client'
-import Auth from "@/pages/Auth";
-import Dashboard from "@/pages/Dashboard";
+import Header from "../components/Header";
+import LeftSide from "../components/LeftSide";
+import MainContainer from "../components/MainContainer";
+import MainDash from "../components/MainDash";
+import RightSide from "../components/dashboard/RightSide";
+import Container from '../components/ContainerApp'
+import 'tailwindcss/tailwind.css';
+
 
 export default function Home() {
-
   return (
     <div>
-        <Dashboard/>
-        {/* <Auth/> */}
+      <Container>
+        <Header/>
+        <MainContainer isGrid="true">
+          <LeftSide/>
+          <MainDash/>
+          <RightSide/>
+        </MainContainer>
+      </Container>
     </div>
   )
 }
