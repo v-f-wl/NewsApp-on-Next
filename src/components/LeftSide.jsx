@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { AiOutlineUser, AiOutlineBorderlessTable, AiOutlineMail, AiOutlineTeam, AiOutlineSetting } from 'react-icons/ai'
+import { AiOutlineUser, AiOutlineBorderlessTable, AiOutlineMail, AiOutlineTeam, AiOutlineSetting, AiOutlinePushpin } from 'react-icons/ai'
 import Link from 'next/link';
 
 const LeftSide = () => {
@@ -16,6 +16,10 @@ const LeftSide = () => {
             <AiOutlineBorderlessTable size={24} className='text-orange-500'/>
           <span className="hidden lg:block mt-0 tracking-wider">Dashdoard</span>
         </Link>
+        <li className="flex gap-2 items-center cursor-pointer">
+            <AiOutlinePushpin size={24} className='text-orange-500'/>
+          <span className="hidden lg:block mt-0 tracking-wider">Your Pins</span>
+        </li>
         <li className="flex gap-2 items-center cursor-pointer">
             <AiOutlineMail size={24} className='text-orange-500'/>
           <span className="hidden lg:block mt-0 tracking-wider">Chats</span>

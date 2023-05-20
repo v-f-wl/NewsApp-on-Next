@@ -1,5 +1,6 @@
-'use client'
+
 import 'tailwindcss/tailwind.css';
+import '../app/globals.css'
 import Container from "../components/ContainerApp";
 import Header from "../components/Header";
 import LeftSide from "../components/LeftSide";
@@ -9,13 +10,15 @@ import ProfileMain from "../components/ProfileMain";
 
 const ProfilePage = () => {
   return ( 
-    <Container>
-      <Header/>
-      <MainContainer isGrid="false" >
-        <LeftSide/>
-        <ProfileMain/>
-      </MainContainer>
-    </Container>
+    <div className='b-col'>
+      <Container>
+        <Header/>
+        <MainContainer isGrid={false} >
+          <LeftSide/>
+          <ProfileMain/>
+        </MainContainer>
+      </Container>
+    </div>
   );
 }
  

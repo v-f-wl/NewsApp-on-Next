@@ -22,7 +22,7 @@ const HeaderDash = () => {
       <div className="m-3 w-8 h-8 rounded-lg bg-slate-300"></div>
       <div
         onClick={() => setModal(true)}
-        className="text-zinc-300 font-light cursor-pointer text-sm lg:text-base">
+        className="text-zinc-300 font-light text-sm lg:text-base cursor-pointer w-full">
         {modal ? '' : 'Create Post'}
       </div>
       <div 
@@ -41,7 +41,16 @@ const HeaderDash = () => {
         `}
       >
         <div className="w-full h-full relative">
-          <div onClick={() => setModal(false)} className="text-slate-500 absolute top-4 right-4 cursor-pointer">
+          <div onClick={() => setModal(false)} 
+            className=" 
+              text-slate-500 
+              absolute 
+              top-4
+              right-4 
+              cursor-pointer
+              z-10
+            "
+            >
             <AiOutlineCloseCircle size={24}/>
           </div>
           <div className="py-8 px-4 flex flex-col gap-2">

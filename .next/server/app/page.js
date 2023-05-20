@@ -52,7 +52,7 @@ module.exports = require("next/dist/compiled/react/jsx-runtime");
 
 /***/ }),
 
-/***/ 1090:
+/***/ 5232:
 /***/ ((module) => {
 
 "use strict";
@@ -490,8 +490,12 @@ const Search = ()=>{
 };
 /* harmony default export */ const headerUI_Search = (Search);
 
+// EXTERNAL MODULE: ./node_modules/next/link.js
+var next_link = __webpack_require__(1621);
+var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 ;// CONCATENATED MODULE: ./src/components/Header.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
+
 
 
 
@@ -500,19 +504,22 @@ const Header = ()=>{
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: "h-[65px] bg-white rounded-b-lg grid grid-cols-2 lg:grid-cols-3 items-center px-5 shadow-md shadow-slate-400/10",
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "",
-                children: "Logo"
+            /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                href: "/",
+                className: "text-2xl font-semibold text-slate-600 tracking-big",
+                children: "AirPlay"
             }),
             /*#__PURE__*/ jsx_runtime_.jsx(headerUI_Search, {}),
             isAuth ? /*#__PURE__*/ jsx_runtime_.jsx(headerUI_Profile, {}) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "justify-self-end flex gap-4 items-center",
                 children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                        href: "/auth",
                         className: "py-2 px-3 rounded-lg border text-orange-400",
                         children: "LogIn"
                     }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                        href: "/auth?id=signin",
                         className: "py-2 px-3 rounded-lg bg-orange-400 text-white",
                         children: "Sign In"
                     })
@@ -525,9 +532,6 @@ const Header = ()=>{
 
 // EXTERNAL MODULE: ./node_modules/react-icons/ai/index.esm.js
 var ai_index_esm = __webpack_require__(9722);
-// EXTERNAL MODULE: ./node_modules/next/link.js
-var next_link = __webpack_require__(1621);
-var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 ;// CONCATENATED MODULE: ./src/components/LeftSide.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -565,6 +569,19 @@ const LeftSide = ()=>{
                         /*#__PURE__*/ jsx_runtime_.jsx("span", {
                             className: "hidden lg:block mt-0 tracking-wider",
                             children: "Dashdoard"
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
+                    className: "flex gap-2 items-center cursor-pointer",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlinePushpin */.bI9, {
+                            size: 24,
+                            className: "text-orange-500"
+                        }),
+                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                            className: "hidden lg:block mt-0 tracking-wider",
+                            children: "Your Pins"
                         })
                     ]
                 }),
@@ -614,7 +631,7 @@ const LeftSide = ()=>{
 /* harmony default export */ const components_LeftSide = (LeftSide);
 
 ;// CONCATENATED MODULE: ./src/components/MainContainer.jsx
-/* __next_internal_client_entry_do_not_use__  auto */ 
+
 const MainContainer = ({ isGrid , children  })=>{
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         className: `
@@ -625,7 +642,7 @@ const MainContainer = ({ isGrid , children  })=>{
         flex 
         flex-col-reverse 
         overflow-hidden 
-        
+        w-full
         lg:grid 
         ${isGrid ? "lg:grid-cols-LeftRight" : "lg:grid-cols-Profile"}
         gap-2 
@@ -650,7 +667,7 @@ const HeaderDash = ()=>{
             }),
             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 onClick: ()=>setModal(true),
-                className: "text-zinc-300 font-light cursor-pointer text-sm lg:text-base",
+                className: "text-zinc-300 font-light text-sm lg:text-base cursor-pointer w-full",
                 children: modal ? "" : "Create Post"
             }),
             /*#__PURE__*/ jsx_runtime_.jsx("div", {
@@ -672,7 +689,7 @@ const HeaderDash = ()=>{
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
                             onClick: ()=>setModal(false),
-                            className: "text-slate-500 absolute top-4 right-4 cursor-pointer",
+                            className: "  text-slate-500  absolute  top-4 right-4  cursor-pointer z-10 ",
                             children: /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineCloseCircle */.SV5, {
                                 size: 24
                             })
@@ -719,26 +736,26 @@ const HeaderDash = ()=>{
 
 const PostCard = ({ isLoaded , postText , authorName , image  })=>{
     const [isMenuOpen, setIsMenuOpen] = (0,react_.useState)(false);
-    const menu = ()=>{
-        if (isMenuOpen) {
+    const [isPin, setIsPin] = (0,react_.useState)(false);
+    const [isLiked, setIsLiked] = (0,react_.useState)(false);
+    const menu = (event)=>{
+        if (isMenuOpen && !event.target.closest(".pin")) {
             setIsMenuOpen(false);
         } else {
             setIsMenuOpen(true);
         }
     };
+    const addPin = ()=>{
+        setIsPin(!isPin);
+    };
     (0,react_.useEffect)(()=>{
-        const handleScroll = ()=>{
-            setIsMenuOpen(false);
-        };
         const handleClickOutside = (event)=>{
-            if (!event.target.closest(".menu-container")) {
+            if (!event.target.closest(".menu-container") || event.target.closest(".pin")) {
                 setIsMenuOpen(false);
             }
         };
-        window.addEventListener("scroll", handleScroll);
         document.addEventListener("click", handleClickOutside);
         return ()=>{
-            window.removeEventListener("scroll", handleScroll);
             document.removeEventListener("click", handleClickOutside);
         };
     }, []);
@@ -776,7 +793,7 @@ const PostCard = ({ isLoaded , postText , authorName , image  })=>{
                     }),
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: "relative menu-container z-0",
-                        onClick: ()=>menu(),
+                        onClick: (e)=>menu(e),
                         children: [
                             /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineMore */.fXH, {
                                 size: 22
@@ -798,14 +815,37 @@ const PostCard = ({ isLoaded , postText , authorName , image  })=>{
             `,
                                 children: /*#__PURE__*/ jsx_runtime_.jsx("ul", {
                                     className: "flex flex-col gap-3",
-                                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
-                                        className: "flex items-center gap-2 cursor-pointer",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* CiTimer */.cY3, {
-                                                size: 24
-                                            }),
-                                            "Watch later"
-                                        ]
+                                    children: /*#__PURE__*/ jsx_runtime_.jsx("li", {
+                                        onClick: ()=>addPin(),
+                                        className: `
+                    pin
+                    relative
+                    z-20
+                    pin
+                    flex 
+                    items-center 
+                    gap-2 
+                    cursor-pointer
+                  `,
+                                        children: isPin ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                                            children: [
+                                                /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* CiBookmarkMinus */.qen, {
+                                                    size: 24
+                                                }),
+                                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                    children: "Remove Pin"
+                                                })
+                                            ]
+                                        }) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                                            children: [
+                                                /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* CiBookmarkPlus */.Fis, {
+                                                    size: 24
+                                                }),
+                                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                    children: "Add Pin"
+                                                })
+                                            ]
+                                        })
                                     })
                                 })
                             })
@@ -840,11 +880,14 @@ const PostCard = ({ isLoaded , postText , authorName , image  })=>{
                 className: "flex items-center gap-5",
                 children: [
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "px-2 py-2 border flex items-center gap-2 rounded-full",
+                        onClick: ()=>setIsLiked(!isLiked),
+                        className: "px-2 py-2 border flex items-center gap-2 rounded-full cursor-pointer",
                         children: [
                             /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineHeart */.lo, {
                                 size: 24,
-                                className: "text-slate-400"
+                                className: `
+                  ${isLiked ? "text-red-500" : "text-slate-400"}
+                `
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("span", {
                                 className: "text-slate-800",
@@ -923,7 +966,7 @@ const RightSide = ()=>{
 /* harmony default export */ const dashboard_RightSide = (RightSide);
 
 ;// CONCATENATED MODULE: ./src/components/ContainerApp.jsx
-/* __next_internal_client_entry_do_not_use__  auto */ 
+
 const Container = ({ children  })=>{
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         className: "container mx-auto max-w-screen-xl flex flex-col gap-1 h-screen",
@@ -949,7 +992,7 @@ function Home() {
             children: [
                 /*#__PURE__*/ jsx_runtime_.jsx(components_Header, {}),
                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)(components_MainContainer, {
-                    isGrid: "true",
+                    isGrid: true,
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx(components_LeftSide, {}),
                         /*#__PURE__*/ jsx_runtime_.jsx(components_MainDash, {}),

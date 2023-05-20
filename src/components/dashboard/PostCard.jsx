@@ -1,33 +1,33 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { AiOutlineMore, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai'
-import { CiTimer } from 'react-icons/ci'
+import { CiBookmarkPlus, CiBookmarkMinus } from 'react-icons/ci'
 
 const PostCard = ({isLoaded, postText, authorName, image}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const menu = () => {
-    if(isMenuOpen){
+  const [isPin, setIsPin] = useState(false)
+  const [isLiked, setIsLiked] = useState(false)
+
+  const menu = (event) => {
+    if(isMenuOpen && !event.target.closest('.pin')){
       setIsMenuOpen(false)
     }else{
       setIsMenuOpen(true)
     }
   }
+  const addPin = () => {
+    setIsPin(!isPin)
+  }
   useEffect(() => {
-    const handleScroll = () => {
-      setIsMenuOpen(false);
-    };
-  
     const handleClickOutside = (event) => {
-      if (!event.target.closest('.menu-container')) {
+      if (!event.target.closest('.menu-container') || event.target.closest('.pin')) {
         setIsMenuOpen(false);
       }
     };
   
-    window.addEventListener('scroll', handleScroll);
     document.addEventListener('click', handleClickOutside);
   
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('click', handleClickOutside);
     };
   }, [])
@@ -56,7 +56,7 @@ const PostCard = ({isLoaded, postText, authorName, image}) => {
             {isLoaded ? 'now' : ''}
           </div>
         </div>
-        <div className="relative menu-container z-0" onClick={() => menu()} >
+        <div className="relative menu-container z-0" onClick={(e) => menu(e)} >
           <AiOutlineMore size={22}/>
           <div 
             className={`
@@ -75,7 +75,31 @@ const PostCard = ({isLoaded, postText, authorName, image}) => {
             `}
             >
               <ul className="flex flex-col gap-3">
-                <li className="flex items-center gap-2 cursor-pointer"><CiTimer size={24}/>Watch later</li>
+                <li 
+                  onClick={() => addPin()}
+                  className={`
+                    pin
+                    relative
+                    z-20
+                    pin
+                    flex 
+                    items-center 
+                    gap-2 
+                    cursor-pointer
+                  `}
+                >
+                  {isPin ? (
+                    <>
+                        <CiBookmarkMinus size={24}/>
+                        <span>Remove Pin</span>
+                    </>
+                  ) : (
+                    <>
+                        <CiBookmarkPlus size={24}/>
+                        <span>Add Pin</span>
+                    </>
+                  )}
+                </li>
               </ul>
           </div>
         </div>
@@ -107,8 +131,15 @@ const PostCard = ({isLoaded, postText, authorName, image}) => {
       {isLoaded ? 
         (
           <div className="flex items-center gap-5">
-            <div className="px-2 py-2 border flex items-center gap-2 rounded-full">
-              <AiOutlineHeart size={24} className='text-slate-400'/>
+            <div 
+              onClick={() => setIsLiked(!isLiked)}
+              className="px-2 py-2 border flex items-center gap-2 rounded-full cursor-pointer"
+            >
+              <AiOutlineHeart size={24} 
+                className={`
+                  ${isLiked ? "text-red-500" : "text-slate-400"}
+                `}
+              />
               <span className='text-slate-800'>0</span>
             </div>
             <div className="">

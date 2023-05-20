@@ -13,7 +13,7 @@ export default function Home() {
     <div>
       <Container>
         <Header/>
-        <MainContainer isGrid="true">
+        <MainContainer isGrid={true}>
           <LeftSide/>
           <MainDash/>
           <RightSide/>

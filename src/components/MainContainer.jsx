@@ -1,4 +1,4 @@
-'use client'
+
 const MainContainer = ({isGrid, children}) => {
   return (  
     <div 
@@ -10,7 +10,7 @@ const MainContainer = ({isGrid, children}) => {
         flex 
         flex-col-reverse 
         overflow-hidden 
-        
+        w-full
         lg:grid 
         ${isGrid ? "lg:grid-cols-LeftRight" : "lg:grid-cols-Profile"}
         gap-2 

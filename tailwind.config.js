@@ -6,10 +6,14 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    letterSpacing: {
+      big: '0.17em',
+    },
     extend: {
       gridTemplateColumns: {
         'LeftRight': '2fr 7fr 3fr',
         'Profile': '2fr 10fr',
+        '32': '3fr 2fr',
         'post': '32px 1fr'
       }
     },
