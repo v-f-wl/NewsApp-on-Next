@@ -1,11 +1,6 @@
 {
-  "/404": "pages/404.html",
-  "/api/users/UserController": "pages/api/users/UserController.js",
-  "/api/users": "pages/api/users.js",
-  "/api/users/validations": "pages/api/users/validations.js",
-  "/auth": "pages/auth.html",
-  "/profilepage": "pages/profilepage.html",
-  "/_error": "pages/_error.js",
   "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js"
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/auth": "pages/auth.js"
 }

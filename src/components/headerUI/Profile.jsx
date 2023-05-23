@@ -1,6 +1,17 @@
-import { CiHeart, CiTimer} from 'react-icons/ci'
+
+import Cookies from 'js-cookie'
+import { useEffect } from 'react'
+import {  CiTimer} from 'react-icons/ci'
 import { FiMoreVertical} from 'react-icons/fi'
+
+
 const Profile = () => {
+  
+  const exitApp = () => {
+    Cookies.remove('token')
+    window.location.href = '/'
+  }
+
   return ( 
     <div className="md:justify-self-end flex items-center md:gap-4">
       <CiTimer size={24}/>
@@ -9,7 +20,11 @@ const Profile = () => {
             <div className="w-[30px] h-[30px] bg-neutral-200 rounded-lg"></div>
             <div className="font-light text-sm text-slate-800">Tristan Preston</div>
           </div>
-          <FiMoreVertical size={24} className='text-orange-600 cursor-pointer'/>
+          <FiMoreVertical 
+            onClick={() => exitApp()}
+            size={24} 
+            className='text-orange-600 cursor-pointer'
+          />
         </div>
     </div>
   );

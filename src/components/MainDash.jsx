@@ -5,7 +5,6 @@ import PostCard from "./dashboard/PostCard";
 import axios from "axios";
 
 const MainDash = () => {
-
   const [isPostsLoading, setIsPostsLoading] = useState(true)
   const [postsArr, setPosstsArr] = useState([])
 
