@@ -1,6 +1,4 @@
 
-import Cookies from 'js-cookie'
-import { useEffect } from 'react'
 import {  CiTimer} from 'react-icons/ci'
 import { FiMoreVertical} from 'react-icons/fi'
 
@@ -8,8 +6,6 @@ import { FiMoreVertical} from 'react-icons/fi'
 const Profile = () => {
   
   const exitApp = () => {
-    Cookies.remove('token')
-    window.location.href = '/'
   }
 
   return ( 

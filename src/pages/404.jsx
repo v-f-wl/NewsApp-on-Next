@@ -3,8 +3,14 @@ import 'tailwindcss/tailwind.css';
 import Container from "../components/ContainerApp";
 import Header from "../components/Header";
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const ProfilePage = () => {
+  const router = useRouter()
+
+  const goBack = () => {
+    router.push('/')
+  }
   return ( 
     <Container>
       <Header/>
@@ -13,7 +19,7 @@ const ProfilePage = () => {
             <span className="font-bold text-8xl">404</span>
             <div className="text-4xl">Page not found</div>
           </div>
-          <Link href="/" className='text-2xl border-b-2 border-orange-400 py-2 hover:opacity-60 transition'>Return to the homepage</Link>
+          <a href="#" onClick={() => goBack()} className='text-2xl border-b-2 border-orange-400 py-2 hover:opacity-60 transition'>Return to the homepage</a>
         </div>
     </Container>
   );

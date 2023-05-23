@@ -3,19 +3,10 @@ import { useEffect, useState } from "react";
 import Profile from "./headerUI/Profile";
 import Search from "./headerUI/Search";
 import Link from "next/link";
-import Cookies from "js-cookie";
 
 
 const Header = () => {
   const [isAuth, setIsAuth] = useState(false)
-  const [cook, setCook] = useState(() => Cookies.get('token'))
-  useEffect(() => {
-    if(cook){
-      setIsAuth(true)
-    }else{
-      setIsAuth(false)
-    }
-  },[cook])
 
   return (  
     <div className="h-[65px] bg-white rounded-b-lg grid grid-cols-2 lg:grid-cols-3 items-center px-5 shadow-md shadow-slate-400/10">
