@@ -134,12 +134,22 @@ const Header = ()=>{
                 className: "justify-self-end flex gap-4 items-center",
                 children: [
                     /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                        href: "/auth",
+                        href: {
+                            pathname: "/auth",
+                            query: {
+                                id: "login"
+                            }
+                        },
                         className: "py-2 px-3 rounded-lg border text-orange-400",
                         children: "LogIn"
                     }),
                     /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                        href: "/auth?id=signin",
+                        href: {
+                            pathname: "/auth",
+                            query: {
+                                id: "signin"
+                            }
+                        },
                         className: "py-2 px-3 rounded-lg bg-orange-400 text-white",
                         children: "Sign In"
                     })

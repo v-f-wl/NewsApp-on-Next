@@ -1,8 +1,14 @@
 {
   "/404": "pages/404.html",
   "/_error": "pages/_error.js",
-  "/auth": "pages/auth.html",
   "/_app": "pages/_app.js",
+  "/api/controllers/PostController": "pages/api/controllers/PostController.js",
+  "/api/controllers/UserController": "pages/api/controllers/UserController.js",
+  "/api/postGetAll": "pages/api/postGetAll.js",
+  "/api/postGetOne": "pages/api/postGetOne.js",
+  "/api/userRegister": "pages/api/userRegister.js",
+  "/auth": "pages/auth.html",
   "/profilepage": "pages/profilepage.html",
+  "/api/userLogin": "pages/api/userLogin.js",
   "/_document": "pages/_document.js"
 }

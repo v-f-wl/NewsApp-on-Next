@@ -488,12 +488,22 @@ const Header = ()=>{
                 className: "justify-self-end flex gap-4 items-center",
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: "/auth",
+                        href: {
+                            pathname: "/auth",
+                            query: {
+                                id: "login"
+                            }
+                        },
                         className: "py-2 px-3 rounded-lg border text-orange-400",
                         children: "LogIn"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: "/auth?id=signin",
+                        href: {
+                            pathname: "/auth",
+                            query: {
+                                id: "signin"
+                            }
+                        },
                         className: "py-2 px-3 rounded-lg bg-orange-400 text-white",
                         children: "Sign In"
                     })
@@ -902,6 +912,9 @@ const MainDash = ()=>{
             ]);
     }, []);
     (0,react_.useEffect)(()=>{
+        axios/* default.get */.Z.get("/api/postGetAll").then((res)=>console.table(res.data));
+    }, []);
+    (0,react_.useEffect)(()=>{
         if (postsArr.length > 0) {
             setIsPostsLoading(false);
         }
@@ -1050,7 +1063,7 @@ const { __esModule, $$typeof } = proxy;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [567], () => (__webpack_exec__(529)));
+var __webpack_exports__ = __webpack_require__.X(0, [809], () => (__webpack_exec__(529)));
 module.exports = __webpack_exports__;
 
 })();

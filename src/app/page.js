@@ -8,17 +8,18 @@ import Container from '../components/ContainerApp'
 import 'tailwindcss/tailwind.css';
 
 
+
 export default function Home() {
   return (
     <div>
-      <Container>
-        <Header/>
-        <MainContainer isGrid={true}>
-          <LeftSide/>
-          <MainDash/>
-          <RightSide/>
-        </MainContainer>
-      </Container>
+        <Container>
+          <Header/>
+          <MainContainer isGrid={true}>
+            <LeftSide/>
+            <MainDash/>
+            <RightSide/>
+          </MainContainer>
+        </Container>
     </div>
   )
 }

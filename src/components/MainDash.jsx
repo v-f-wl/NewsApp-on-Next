@@ -13,6 +13,9 @@ const MainDash = () => {
       .then(res => [setPosstsArr(res.data)])
 
   }, [])
+  useEffect(() => {
+    axios.get('/api/postGetAll').then(res => console.table(res.data))
+  }, [])
 
   useEffect(() => {
     if(postsArr.length > 0){

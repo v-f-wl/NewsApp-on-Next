@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Profile from "./headerUI/Profile";
 import Search from "./headerUI/Search";
 import Link from "next/link";
@@ -21,8 +21,8 @@ const Header = () => {
         :
         (
           <div className="justify-self-end flex gap-4 items-center">
-            <Link href='/auth' className="py-2 px-3 rounded-lg border text-orange-400">LogIn</Link>
-            <Link href='/auth?id=signin' className="py-2 px-3 rounded-lg bg-orange-400 text-white">Sign In</Link>
+            <Link href={{ pathname: '/auth', query: { id: 'login' } }} className="py-2 px-3 rounded-lg border text-orange-400">LogIn</Link>
+            <Link href={{ pathname: '/auth', query: { id: 'signin' } }} className="py-2 px-3 rounded-lg bg-orange-400 text-white">Sign In</Link>
           </div>
         ) 
       }
