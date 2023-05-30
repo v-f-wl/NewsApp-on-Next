@@ -20,7 +20,8 @@ export default async function handler(req, res) {
         const doc = new UserModal({
           email: req.body.email,
           fullName: req.body.fullName,
-          passwordHash: hash
+          passwordHash: hash,
+          avatar: req.body.color
         })
         const user = await doc.save()
     

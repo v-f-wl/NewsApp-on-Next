@@ -48,6 +48,10 @@ const UserSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
     passwordHash: {
         type: String,
         required: true
+    },
+    avatar: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
@@ -79,15 +83,12 @@ __webpack_require__.r(__webpack_exports__);
  * @param {import('next').NextApiRequest} req 
  * @param {import('next').NextApiResponse} res 
  */ async function handler(req, res) {
-    console.log("connect DB");
-    (0,_utils_connectMongoDB__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();
     if (req.method === "POST") {
         try {
-            console.log("here");
+            await (0,_utils_connectMongoDB__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();
             const user = await _models_User__WEBPACK_IMPORTED_MODULE_1__/* ["default"].findOne */ .Z.findOne({
                 email: req.body.email
             });
-            console.log("here");
             if (!user) {
                 return res.status(404).json({
                     message: "Пользователь не найден"
@@ -105,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
                 expiresIn: "30d"
             });
             const { passwordHash , ...userData } = user._doc;
-            res.json({
+            return res.json({
                 ...userData,
                 token
             });

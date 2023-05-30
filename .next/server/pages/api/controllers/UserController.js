@@ -48,6 +48,10 @@ const UserSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
     passwordHash: {
         type: String,
         required: true
+    },
+    avatar: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true

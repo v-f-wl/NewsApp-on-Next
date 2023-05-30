@@ -88,9 +88,9 @@ export const create = async (req, res) => {
   try{
     const doc = new PostModel({
       text: req.body.text,
-      user: req.userId
+      user: req.user
     })
-
+    console.log(doc)
     const post = await doc.save()
     res.json(post)
   }catch(error){

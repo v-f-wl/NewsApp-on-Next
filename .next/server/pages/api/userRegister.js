@@ -48,6 +48,10 @@ const UserSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
     passwordHash: {
         type: String,
         required: true
+    },
+    avatar: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
@@ -89,7 +93,8 @@ __webpack_require__.r(__webpack_exports__);
             const doc = new _models_User__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z({
                 email: req.body.email,
                 fullName: req.body.fullName,
-                passwordHash: hash
+                passwordHash: hash,
+                avatar: req.body.color
             });
             const user = await doc.save();
             const token = jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default().sign({

@@ -6,15 +6,14 @@ import axios from "axios";
 
 const MainDash = () => {
   const [isPostsLoading, setIsPostsLoading] = useState(true)
-  const [postsArr, setPosstsArr] = useState([])
+  const [postsArr, setPosstsArr] = useState(false)
 
   useEffect(() =>{
-    axios.get('https://63e261b53e12b193763ea4e8.mockapi.io/group')
-      .then(res => [setPosstsArr(res.data)])
-
-  }, [])
-  useEffect(() => {
-    axios.get('/api/postGetAll').then(res => console.table(res.data))
+    axios.get('/api/postGetAll')
+      .then(res => {
+        setPosstsArr(res.data.reverse())
+      })
+      .catch((error) => console.log(error))
   }, [])
 
   useEffect(() => {
@@ -27,12 +26,20 @@ const MainDash = () => {
     <div className="relative overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none">
       <HeaderDash/>
       <div className="flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8">
-        {(isPostsLoading ? [...Array(2)] : postsArr).map((item, index) => 
+        {(isPostsLoading ? [...Array(2)] : postsArr)
+          .map((item, index) => 
           isPostsLoading ? 
           (<PostCard isLoaded={false} key={index}/>) 
           : 
           (
-            <PostCard isLoaded={true} key={item.id} postText={item.text} authorName={item.name} image={item.image}/>
+            <PostCard 
+              isLoaded={true} 
+              key={item._id} 
+              postText={item.text} 
+              authorName={item.name} 
+              createdAt={item.createdAt}
+              color={item.color}
+              image={item.image}/>
           )
         )
         }

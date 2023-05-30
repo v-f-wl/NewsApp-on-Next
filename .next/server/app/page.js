@@ -348,12 +348,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 6044:
+/***/ 3675:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 9222, 23));
-Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8301, 23));
 Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 3751, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8301, 23));
 Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 4765, 23));
 Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 5192, 23))
 
@@ -389,53 +389,84 @@ __webpack_require__.d(__webpack_exports__, {
 var jsx_runtime_ = __webpack_require__(6786);
 // EXTERNAL MODULE: external "next/dist/compiled/react"
 var react_ = __webpack_require__(8038);
-// EXTERNAL MODULE: ./node_modules/react-icons/ci/index.esm.js
-var index_esm = __webpack_require__(9859);
+// EXTERNAL MODULE: ./node_modules/js-cookie/dist/js.cookie.mjs
+var js_cookie = __webpack_require__(7270);
 // EXTERNAL MODULE: ./node_modules/react-icons/fi/index.esm.js
-var fi_index_esm = __webpack_require__(7808);
+var index_esm = __webpack_require__(7808);
 ;// CONCATENATED MODULE: ./src/components/headerUI/Profile.jsx
+/* __next_internal_client_entry_do_not_use__  auto */ 
 
 
 
 const Profile = ()=>{
-    const exitApp = ()=>{};
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+    const [modal, setModal] = (0,react_.useState)(false);
+    const nameInfo = js_cookie/* default.get */.Z.get("name");
+    const color = js_cookie/* default.get */.Z.get("color");
+    const openModal = ()=>{
+        setModal((modal)=>!modal);
+    };
+    const exit = ()=>{
+        js_cookie/* default.remove */.Z.remove("name");
+        js_cookie/* default.remove */.Z.remove("id");
+        js_cookie/* default.remove */.Z.remove("token");
+        js_cookie/* default.remove */.Z.remove("color");
+        window.location.reload();
+    };
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         className: "md:justify-self-end flex items-center md:gap-4",
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* CiTimer */.cY3, {
-                size: 24
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[300px] rounded-lg",
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "flex items-center gap-2",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "w-[30px] h-[30px] bg-neutral-200 rounded-lg"
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "font-light text-sm text-slate-800",
-                                children: "Tristan Preston"
+        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[300px] rounded-lg",
+            children: [
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "flex items-center gap-2",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            style: {
+                                backgroundColor: color
+                            },
+                            className: "w-[30px] h-[30px] bg-neutral-200 rounded-lg"
+                        }),
+                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            className: "font-light text-sm text-slate-800",
+                            children: nameInfo
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "relative",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* FiMoreVertical */.$Pu, {
+                            onClick: ()=>openModal(),
+                            size: 24,
+                            className: "text-orange-600 cursor-pointer"
+                        }),
+                        !modal ? null : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            className: "w-[100px] absolute bg-white p-2 right-0 top-10 border border-orange-400 rounded-lg",
+                            children: /*#__PURE__*/ jsx_runtime_.jsx("ul", {
+                                className: "",
+                                children: /*#__PURE__*/ jsx_runtime_.jsx("li", {
+                                    className: "cursor-pointer",
+                                    onClick: ()=>exit(),
+                                    children: "Log out"
+                                })
                             })
-                        ]
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx(fi_index_esm/* FiMoreVertical */.$Pu, {
-                        onClick: ()=>exitApp(),
-                        size: 24,
-                        className: "text-orange-600 cursor-pointer"
-                    })
-                ]
-            })
-        ]
+                        })
+                    ]
+                })
+            ]
+        })
     });
 };
 /* harmony default export */ const headerUI_Profile = (Profile);
 
+// EXTERNAL MODULE: ./node_modules/react-icons/ci/index.esm.js
+var ci_index_esm = __webpack_require__(9859);
 ;// CONCATENATED MODULE: ./src/components/headerUI/Search.jsx
 
 
+
 const Search = ()=>{
+    const [searchValue, setSearchValue] = (0,react_.useState)("");
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: "hidden lg:block justify-self-center relative",
         children: [
@@ -444,12 +475,14 @@ const Search = ()=>{
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("input", {
                         type: "text",
+                        value: searchValue,
+                        onChange: (e)=>setSearchValue(e.target.value),
                         placeholder: "Search...",
                         className: "w-full px-2 outline-none text-sm font-light"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("button", {
                         className: "p-1",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* CiSearch */.w75, {
+                        children: /*#__PURE__*/ jsx_runtime_.jsx(ci_index_esm/* CiSearch */.w75, {
                             size: 24
                         })
                     })
@@ -473,42 +506,45 @@ var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 
 
 
-const Header = ()=>{
+
+const Header = ({ search  })=>{
+    const [isLoading, setIsLoading] = (0,react_.useState)(false);
     const [isAuth, setIsAuth] = (0,react_.useState)(false);
+    const info = js_cookie/* default.get */.Z.get("id");
+    (0,react_.useEffect)(()=>{
+        if (info) {
+            setIsAuth(true);
+        }
+        setIsLoading(true);
+    }, []);
+    (0,react_.useEffect)(()=>{}, []);
+    const Buttons = ()=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "justify-self-end flex gap-4 items-center",
+            children: [
+                /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                    href: "/auth",
+                    className: "cursor-pointer py-2 px-3 rounded-lg border text-orange-400",
+                    children: "LogIn"
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                    href: "/auth?id=signup",
+                    className: "cursor-pointer py-2 px-3 rounded-lg bg-orange-400 text-white",
+                    children: "Sign Up"
+                })
+            ]
+        });
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        className: "h-[65px] bg-white rounded-b-lg grid grid-cols-2 lg:grid-cols-3 items-center px-5 shadow-md shadow-slate-400/10",
+        className: "h-[65px] bg-white rounded-b-lg grid grid-cols-2 lg:grid-cols-3 grid-rows-1 items-center px-5 shadow-md shadow-slate-400/10",
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
                 href: "/",
                 className: "text-2xl font-semibold text-slate-600 tracking-big",
                 children: "AirPlay"
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx(headerUI_Search, {}),
-            isAuth ? /*#__PURE__*/ jsx_runtime_.jsx(headerUI_Profile, {}) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "justify-self-end flex gap-4 items-center",
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: {
-                            pathname: "/auth",
-                            query: {
-                                id: "login"
-                            }
-                        },
-                        className: "py-2 px-3 rounded-lg border text-orange-400",
-                        children: "LogIn"
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                        href: {
-                            pathname: "/auth",
-                            query: {
-                                id: "signin"
-                            }
-                        },
-                        className: "py-2 px-3 rounded-lg bg-orange-400 text-white",
-                        children: "Sign In"
-                    })
-                ]
-            })
+            search ? /*#__PURE__*/ jsx_runtime_.jsx(headerUI_Search, {}) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: "hidden lg:block"
+            }),
+            !isLoading ? null : isAuth ? /*#__PURE__*/ jsx_runtime_.jsx(headerUI_Profile, {}) : /*#__PURE__*/ jsx_runtime_.jsx(Buttons, {})
         ]
     });
 };
@@ -521,15 +557,26 @@ var ai_index_esm = __webpack_require__(9722);
 
 
 
+
 const LeftSide = ()=>{
-    const [userAuth, seetUserAuth] = (0,react_.useState)(true);
+    const userInfo = js_cookie/* default.get */.Z.get("id");
+    const [linkInfo, setLinkInfo] = (0,react_.useState)("");
+    (0,react_.useEffect)(()=>{
+        if (userInfo) {
+            setLinkInfo(`/profilepage/?id=${userInfo}`);
+        } else {
+            setLinkInfo("/auth");
+        }
+    }, [
+        userInfo
+    ]);
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         className: "h-[60px] lg:h-full bg-white lg:bg-transparent rounded-lg",
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("ul", {
             className: "flex items-center justify-center lg:justify-start lg:items-start lg:flex-col gap-8 lg:gap-4 py-2",
             children: [
                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
-                    href: "/profilepage",
+                    href: linkInfo,
                     className: "flex gap-2 items-center cursor-pointer",
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineUser */.nf1, {
@@ -556,7 +603,8 @@ const LeftSide = ()=>{
                         })
                     ]
                 }),
-                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
+                    href: "/soon",
                     className: "flex gap-2 items-center cursor-pointer",
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlinePushpin */.bI9, {
@@ -566,32 +614,6 @@ const LeftSide = ()=>{
                         /*#__PURE__*/ jsx_runtime_.jsx("span", {
                             className: "hidden lg:block mt-0 tracking-wider",
                             children: "Your Pins"
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
-                    className: "flex gap-2 items-center cursor-pointer",
-                    children: [
-                        /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineMail */.Dme, {
-                            size: 24,
-                            className: "text-orange-500"
-                        }),
-                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                            className: "hidden lg:block mt-0 tracking-wider",
-                            children: "Chats"
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
-                    className: "flex gap-2 items-center cursor-pointer",
-                    children: [
-                        /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineTeam */.FDz, {
-                            size: 24,
-                            className: "text-orange-500"
-                        }),
-                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                            className: "hidden lg:block mt-0 tracking-wider",
-                            children: "Friends"
                         })
                     ]
                 }),
@@ -637,12 +659,45 @@ const MainContainer = ({ isGrid , children  })=>{
 };
 /* harmony default export */ const components_MainContainer = (MainContainer);
 
+// EXTERNAL MODULE: ./node_modules/next/navigation.js
+var navigation = __webpack_require__(9483);
+// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
+var axios = __webpack_require__(248);
 ;// CONCATENATED MODULE: ./src/components/dashboard/HeaderDash.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
 
+
+
+
 const HeaderDash = ()=>{
+    const router = (0,navigation.useRouter)();
     const [modal, setModal] = (0,react_.useState)(false);
+    const [postValue, setPostValue] = (0,react_.useState)("");
+    const idValue = js_cookie/* default.get */.Z.get("id");
+    const nameValue = js_cookie/* default.get */.Z.get("name");
+    const color = js_cookie/* default.get */.Z.get("color");
+    const isUser = ()=>{
+        if (js_cookie/* default.get */.Z.get("token")) {
+            setModal(true);
+        } else {
+            router.push("/auth");
+        }
+    };
+    const createPost = ()=>{
+        try {
+            const bodyInfo = {
+                text: postValue,
+                nameValue: nameValue,
+                userId: idValue,
+                color: color
+            };
+            axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res)).then(()=>{
+                setModal(false);
+                window.location.reload();
+            }).catch(error = console.log(error));
+        } catch (error1) {}
+    };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: " flex  items-center rounded-lg  bg-white  sticky  z-10 top-0  shadow-md  shadow-slate-400/10 ",
         children: [
@@ -650,7 +705,7 @@ const HeaderDash = ()=>{
                 className: "m-3 w-8 h-8 rounded-lg bg-slate-300"
             }),
             /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                onClick: ()=>setModal(true),
+                onClick: ()=>isUser(),
                 className: "text-zinc-300 font-light text-sm lg:text-base cursor-pointer w-full",
                 children: modal ? "" : "Create Post"
             }),
@@ -689,8 +744,8 @@ const HeaderDash = ()=>{
                                             children: "Enter You Post"
                                         }),
                                         /*#__PURE__*/ jsx_runtime_.jsx("textarea", {
-                                            name: "",
-                                            id: "",
+                                            value: postValue,
+                                            onChange: (e)=>setPostValue(e.target.value),
                                             cols: "50",
                                             rows: "3",
                                             className: "outline-none w-full resize-none",
@@ -700,6 +755,7 @@ const HeaderDash = ()=>{
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("hr", {}),
                                 /*#__PURE__*/ jsx_runtime_.jsx("button", {
+                                    onClick: ()=>createPost(),
                                     className: "border w-1/4 py-2 rounded-lg ",
                                     children: "Send"
                                 })
@@ -718,10 +774,20 @@ const HeaderDash = ()=>{
 
 
 
-const PostCard = ({ isLoaded , postText , authorName , image  })=>{
+const PostCard = ({ isLoaded , postText , authorName , createdAt , color  })=>{
+    console.log(color);
     const [isMenuOpen, setIsMenuOpen] = (0,react_.useState)(false);
     const [isPin, setIsPin] = (0,react_.useState)(false);
     const [isLiked, setIsLiked] = (0,react_.useState)(false);
+    const createData = new Date(createdAt);
+    const options = {
+        hour: "numeric",
+        minute: "numeric",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    };
+    const dateString = createData.toLocaleDateString("en-US", options);
     const menu = (event)=>{
         if (isMenuOpen && !event.target.closest(".pin")) {
             setIsMenuOpen(false);
@@ -753,7 +819,10 @@ const PostCard = ({ isLoaded , postText , authorName , image  })=>{
                         className: "grid grid-cols-post grid-rows-2 items-center gap-y-0 gap-x-2",
                         children: [
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                className: "w-8 h-8 bg-slate-300 rounded-lg row-span-full"
+                                style: {
+                                    backgroundColor: color
+                                },
+                                className: "w-8 h-8 rounded-lg row-span-full"
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("span", {
                                 className: `
@@ -771,7 +840,7 @@ const PostCard = ({ isLoaded , postText , authorName , image  })=>{
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "self-start text-xs text-slate-400",
-                                children: isLoaded ? "now" : ""
+                                children: isLoaded ? dateString : ""
                             })
                         ]
                     }),
@@ -813,7 +882,7 @@ const PostCard = ({ isLoaded , postText , authorName , image  })=>{
                   `,
                                         children: isPin ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
                                             children: [
-                                                /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* CiBookmarkMinus */.qen, {
+                                                /*#__PURE__*/ jsx_runtime_.jsx(ci_index_esm/* CiBookmarkMinus */.qen, {
                                                     size: 24
                                                 }),
                                                 /*#__PURE__*/ jsx_runtime_.jsx("span", {
@@ -822,7 +891,7 @@ const PostCard = ({ isLoaded , postText , authorName , image  })=>{
                                             ]
                                         }) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
                                             children: [
-                                                /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* CiBookmarkPlus */.Fis, {
+                                                /*#__PURE__*/ jsx_runtime_.jsx(ci_index_esm/* CiBookmarkPlus */.Fis, {
                                                     size: 24
                                                 }),
                                                 /*#__PURE__*/ jsx_runtime_.jsx("span", {
@@ -895,8 +964,6 @@ const PostCard = ({ isLoaded , postText , authorName , image  })=>{
 };
 /* harmony default export */ const dashboard_PostCard = (PostCard);
 
-// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
-var axios = __webpack_require__(248);
 ;// CONCATENATED MODULE: ./src/components/MainDash.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -905,14 +972,11 @@ var axios = __webpack_require__(248);
 
 const MainDash = ()=>{
     const [isPostsLoading, setIsPostsLoading] = (0,react_.useState)(true);
-    const [postsArr, setPosstsArr] = (0,react_.useState)([]);
+    const [postsArr, setPosstsArr] = (0,react_.useState)(false);
     (0,react_.useEffect)(()=>{
-        axios/* default.get */.Z.get("https://63e261b53e12b193763ea4e8.mockapi.io/group").then((res)=>[
-                setPosstsArr(res.data)
-            ]);
-    }, []);
-    (0,react_.useEffect)(()=>{
-        axios/* default.get */.Z.get("/api/postGetAll").then((res)=>console.table(res.data));
+        axios/* default.get */.Z.get("/api/postGetAll").then((res)=>{
+            setPosstsArr(res.data.reverse());
+        }).catch((error)=>console.log(error));
     }, []);
     (0,react_.useEffect)(()=>{
         if (postsArr.length > 0) {
@@ -935,8 +999,10 @@ const MainDash = ()=>{
                         isLoaded: true,
                         postText: item.text,
                         authorName: item.name,
+                        createdAt: item.createdAt,
+                        color: item.color,
                         image: item.image
-                    }, item.id))
+                    }, item._id))
             })
         ]
     });
@@ -977,7 +1043,9 @@ function Home() {
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(ContainerApp, {
             children: [
-                /*#__PURE__*/ jsx_runtime_.jsx(components_Header, {}),
+                /*#__PURE__*/ jsx_runtime_.jsx(components_Header, {
+                    search: true
+                }),
                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)(components_MainContainer, {
                     isGrid: true,
                     children: [
@@ -1063,7 +1131,7 @@ const { __esModule, $$typeof } = proxy;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [809], () => (__webpack_exec__(529)));
+var __webpack_exports__ = __webpack_require__.X(0, [839,815], () => (__webpack_exec__(529)));
 module.exports = __webpack_exports__;
 
 })();

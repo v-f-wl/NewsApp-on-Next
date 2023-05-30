@@ -3,11 +3,15 @@ import { useEffect, useState } from 'react';
 import { AiOutlineMore, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai'
 import { CiBookmarkPlus, CiBookmarkMinus } from 'react-icons/ci'
 
-const PostCard = ({isLoaded, postText, authorName, image}) => {
+const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
+  console.log(color)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isPin, setIsPin] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
 
+  const createData = new Date(createdAt)
+  const options = { hour: 'numeric', minute: 'numeric', year: 'numeric', month: 'long', day: 'numeric'};
+  const dateString = createData.toLocaleDateString('en-US', options);
   const menu = (event) => {
     if(isMenuOpen && !event.target.closest('.pin')){
       setIsMenuOpen(false)
@@ -36,7 +40,7 @@ const PostCard = ({isLoaded, postText, authorName, image}) => {
     <div className=" p-4 bg-white rounded-lg flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <div className="grid grid-cols-post grid-rows-2 items-center gap-y-0 gap-x-2">
-          <div className="w-8 h-8 bg-slate-300 rounded-lg row-span-full"></div>
+          <div style={{backgroundColor: color}} className="w-8 h-8 rounded-lg row-span-full"></div>
           <span 
             className={`
               ${isLoaded ? '' : 'w-[100px]'}
@@ -53,7 +57,7 @@ const PostCard = ({isLoaded, postText, authorName, image}) => {
             {isLoaded ? authorName : ''}
           </span>
           <div className="self-start text-xs text-slate-400">
-            {isLoaded ? 'now' : ''}
+            {isLoaded ? dateString : ''}
           </div>
         </div>
         <div className="relative menu-container z-0" onClick={(e) => menu(e)} >

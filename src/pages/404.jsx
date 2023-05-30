@@ -2,7 +2,6 @@
 import 'tailwindcss/tailwind.css';
 import Container from "../components/ContainerApp";
 import Header from "../components/Header";
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const ProfilePage = () => {

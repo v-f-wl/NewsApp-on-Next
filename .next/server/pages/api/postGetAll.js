@@ -26,22 +26,33 @@ const PostSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
         type: String,
         required: true
     },
+    name: {
+        type: String,
+        required: true
+    },
     likesCount: {
         type: Number,
         default: 0
+    },
+    likesUser: {
+        type: Array,
+        default: []
     },
     user: {
         type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema.Types.ObjectId),
         ref: "User",
         required: true
     },
-    avatarUrl: String
+    color: {
+        type: String,
+        required: true
+    }
 }, // это выполняет уже сама схема
 {
     timestamps: true
 });
 // первый параметр - как она будет называться, второе поле указываем схему 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models.Post) || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Post", PostSchema));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models.Posts) || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Posts", PostSchema));
 
 
 /***/ }),
@@ -62,19 +73,19 @@ __webpack_require__.r(__webpack_exports__);
  * @param {import('next').NextApiRequest} req 
  * @param {import('next').NextApiResponse} res 
  */ async function handler(req, res) {
-    (0,_utils_connectMongoDB__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();
-    try {
-        const posrs = await _models_Post__WEBPACK_IMPORTED_MODULE_1__/* ["default"].find */ .Z.find().populate("user").exec();
-        res.json(posrs);
-    } catch (error) {
-        res.status(500).json({
-            message: error
-        });
+    console.log(req.body);
+    if (req.method === "GET") {
+        try {
+            await (0,_utils_connectMongoDB__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();
+            const posts = await _models_Post__WEBPACK_IMPORTED_MODULE_1__/* ["default"].find */ .Z.find().exec();
+            res.json(posts);
+        } catch (error) {
+            res.status(500).json({
+                message: error
+            });
+        }
     }
-    return res.status(500).json({
-        message: "что-то пошлоо не так"
-    });
-} // res.status(200).json({ name: 'John efDoe' });
+}
 
 
 /***/ }),

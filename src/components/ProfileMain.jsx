@@ -1,10 +1,35 @@
 'use client'
 
-import { useState } from "react";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import {AiOutlineHeart, AiOutlineSend } from 'react-icons/ai'
+import { useRouter } from 'next/router';
+import PostCard from '../components/dashboard//PostCard'
+import axios from 'axios'
 const ProfileMain = () => {
-  const [post, usePost] = useState([1,2,3])
 
+  const router = useRouter();
+  const { id } = router.query;
+  const [post, setPost] = useState()
+  const [name, setName] = useState('')
+  const [profileColor, setProfileColor] = useState('')
+
+  useEffect(() => {
+    setProfileColor(Cookies.get('color'))
+    setName(Cookies.get('name'))
+  }, []);
+
+  useEffect(() => {
+    axios.get('/api/posrOfOneUser', {
+      params: {
+        idPerson: id
+      }
+    })
+    .then(res => {
+      setPost(res.data.reverse())
+    })
+    .catch(error => console.log(error))
+  }, [id])
   const Title = ({value}) => (
     <div className="flex flex-col gap-4">
       <h2 className="font-semibold text-xl lg:text-2xl capitalize text-slate-500">
@@ -13,25 +38,6 @@ const ProfileMain = () => {
       <hr />
     </div>
   )
-
-  const PostCard = () => (
-    <div className="border rounded-xl p-5 flex flex-col gap-8">
-      <div className="text-slate-600 text-lg">Lorem ipsum dolor sit amet. Aut natus suscipit sed omnis iste sed officia totam. Ut tenetur ducimus et voluptate adipisci sit aliquam voluptas nam ratione minus. Ut dolor quia ut sequi voluptatem eos dolores culpa.</div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-5">
-          <div className="px-2 py-2 border flex items-center gap-2 rounded-full">
-            <AiOutlineHeart size={24} className='text-slate-400'/>
-            <span className='text-slate-800'>0</span>
-          </div>
-          <div className="">
-            <AiOutlineSend size={24} className='text-orange-400'/>
-          </div>
-        </div>
-        <div className="">08.02.2022</div>
-      </div>
-    </div>
-  )
-
   const PinCard = () => (
     <div className="border-b p-2">
       <div className="flex items-center gap-2">
@@ -46,8 +52,8 @@ const ProfileMain = () => {
   return ( 
     <div className="flex flex-col gap-4 lg:block h-full">
       <div className="bg-white rounded-lg flex items-center gap-2 p-3 lg:p-5">
-        <div className="w-8 h-8 lg:w-14 lg:h-14 bg-slate-300 rounded-lg"></div>
-        <span className="font-semibold text-2xl lg:text-3xl text-slate-700 tracking-wide">Tristan Arr</span>
+        <div style={{ backgroundColor: profileColor}} className="w-8 h-8 lg:w-14 lg:h-14 rounded-lg"></div>
+        <span className="font-semibold text-2xl lg:text-3xl text-slate-700 tracking-wide">{name}</span>
       </div>
       <div className="lg:mt-10 lg:grid lg:grid-cols-32 lg:gap-12 lg:items-start">
         <div className="bg-white rounded-lg py-4 lg:py-8 px-2 lg:px-4">
@@ -56,13 +62,16 @@ const ProfileMain = () => {
           {post ? 
           (
             <div className="mt-4 flex flex-col gap-3 max-h-[60vh] overflow-y-scroll">
-              <PostCard/>
-              <PostCard/>
-              <PostCard/>
-              <PostCard/>
-              <PostCard/>
-              <PostCard/>
-              <PostCard/>
+              {post.map((item) => (
+                <PostCard
+                  key={item._id}
+                  isLoaded={true}
+                  postText={item.text}
+                  authorName={name}
+                  createdAt={item.createdAt}
+                  color={item.color}
+                />
+              ))}
             </div>
           ) 
           : 

@@ -26,22 +26,33 @@ const PostSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
         type: String,
         required: true
     },
+    name: {
+        type: String,
+        required: true
+    },
     likesCount: {
         type: Number,
         default: 0
+    },
+    likesUser: {
+        type: Array,
+        default: []
     },
     user: {
         type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema.Types.ObjectId),
         ref: "User",
         required: true
     },
-    avatarUrl: String
+    color: {
+        type: String,
+        required: true
+    }
 }, // это выполняет уже сама схема
 {
     timestamps: true
 });
 // первый параметр - как она будет называться, второе поле указываем схему 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models.Post) || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Post", PostSchema));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models.Posts) || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Posts", PostSchema));
 
 
 /***/ }),
@@ -131,8 +142,9 @@ const create = async (req, res)=>{
     try {
         const doc = new _models_Post__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z({
             text: req.body.text,
-            user: req.userId
+            user: req.user
         });
+        console.log(doc);
         const post = await doc.save();
         res.json(post);
     } catch (error) {

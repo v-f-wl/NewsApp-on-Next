@@ -8,13 +8,10 @@ import bcrypt from 'bcrypt'
  * @param {import('next').NextApiResponse} res 
  */
 export default async function handler(req, res) {
-  console.log('connect DB')
-  connectDB()
   if (req.method === 'POST') {
-      try{
-        console.log('here')
+    try{
+        await connectDB()
         const user = await UserModal.findOne({ email: req.body.email})
-        console.log('here')
         if(!user){
           return res.status(404).json({
             message: 'Пользователь не найден'
@@ -35,7 +32,7 @@ export default async function handler(req, res) {
           }
         )
         const {passwordHash, ...userData} = user._doc
-        res.json({
+        return res.json({
           ...userData,
           token
         })
