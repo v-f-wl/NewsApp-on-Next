@@ -1,17 +1,17 @@
 {
   "/_app": "pages/_app.js",
-  "/404": "pages/404.html",
   "/_error": "pages/_error.js",
   "/api/controllers/PostController": "pages/api/controllers/PostController.js",
-  "/api/postGetAll": "pages/api/postGetAll.js",
   "/api/posrOfOneUser": "pages/api/posrOfOneUser.js",
   "/api/controllers/UserController": "pages/api/controllers/UserController.js",
+  "/404": "pages/404.html",
   "/api/postCreate": "pages/api/postCreate.js",
-  "/auth": "pages/auth.html",
-  "/api/postGetOne": "pages/api/postGetOne.js",
-  "/api/userRegister": "pages/api/userRegister.js",
   "/api/userLogin": "pages/api/userLogin.js",
-  "/profilepage": "pages/profilepage.html",
+  "/api/postGetOne": "pages/api/postGetOne.js",
+  "/api/postGetAll": "pages/api/postGetAll.js",
+  "/api/userRegister": "pages/api/userRegister.js",
   "/soon": "pages/soon.html",
+  "/auth": "pages/auth.html",
+  "/profilepage": "pages/profilepage.html",
   "/_document": "pages/_document.js"
 }
