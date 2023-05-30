@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {AiOutlineClose} from 'react-icons/ai'
