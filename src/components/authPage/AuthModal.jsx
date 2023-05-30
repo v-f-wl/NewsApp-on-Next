@@ -1,7 +1,18 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {AiOutlineClose} from 'react-icons/ai'
-
-const AuthModal = ({children}) => {
+import SingUp from './SingUp'
+import LogIn from './LogIn'
+const AuthModal = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  let ComponentToRender
+  
+  if (id === 'signup') {
+    ComponentToRender = <SingUp/>
+  } else{
+    ComponentToRender = <LogIn/>
+  } 
   return ( 
     <div className="w-full h-full lg:w-2/3 lg:h-3/4 rounded-lg lg:grid lg:grid-cols-2 overflow-hidden">
       <div className="hidden lg:flex bg-orange-400  flex-col justify-center gap-4 px-20">
@@ -12,7 +23,7 @@ const AuthModal = ({children}) => {
         <Link href='/' className="absolute top-4 right-4">
           <AiOutlineClose size={24}/>
         </Link>
-        {children}
+        {ComponentToRender}
       </div>
     </div>
   );
