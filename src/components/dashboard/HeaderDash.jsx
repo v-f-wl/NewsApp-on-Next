@@ -16,7 +16,7 @@ const HeaderDash = () => {
     if(Cookies.get('token')){
       setModal(true)
     }else{
-      router.push('/auth')
+      router.push('/authpage')
     }
   }
 

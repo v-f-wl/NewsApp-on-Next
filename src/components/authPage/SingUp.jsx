@@ -101,7 +101,7 @@ const SingUp = () => {
       </form>
       <div className="text-slate-400 inline-flex gap-4">
         Already have an account?
-        <Link href='/auth' className="text-slate-600 cursor-pointer transition hover:text-orange-400">
+        <Link href='/authpage' className="text-slate-600 cursor-pointer transition hover:text-orange-400">
           LogIn
       </Link>
       </div>

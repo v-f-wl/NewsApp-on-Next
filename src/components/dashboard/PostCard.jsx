@@ -122,16 +122,6 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
       >
         {postText}
       </div>
-      <div className={`
-        w-full 
-        ${isLoaded ? 'h-auto' : 'h-[200px]'}
-        ${isLoaded ? '' : 'animate-pulse'}
-        ${isLoaded ? '' : 'rounded-lg'}
-        ${isLoaded ? '' : 'bg-slate-200'}
-        flex gap-4
-        `}
-      >
-      </div>
       {isLoaded ? 
         (
           <div className="flex items-center gap-5">

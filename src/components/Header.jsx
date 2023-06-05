@@ -20,8 +20,8 @@ const Header = ({search}) => {
   useEffect(() => {}, [])
   const Buttons = () =>(
     <div className="justify-self-end flex gap-4 items-center">
-      <Link href='/auth' className="cursor-pointer py-2 px-3 rounded-lg border text-orange-400">LogIn</Link>
-      <Link href='/auth?id=signup' className="cursor-pointer py-2 px-3 rounded-lg bg-orange-400 text-white">Sign Up</Link>
+      <Link href='/authpage' className="cursor-pointer py-2 px-3 rounded-lg border text-orange-400">LogIn</Link>
+      <Link href='/authpage?id=signup' className="cursor-pointer py-2 px-3 rounded-lg bg-orange-400 text-white">Sign Up</Link>
     </div>
   )
   

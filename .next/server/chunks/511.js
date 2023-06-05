@@ -30,7 +30,7 @@ const LeftSide = ()=>{
         if (userInfo) {
             setLinkInfo(`/profilepage/?id=${userInfo}`);
         } else {
-            setLinkInfo("/auth");
+            setLinkInfo("/authpage");
         }
     }, [
         userInfo

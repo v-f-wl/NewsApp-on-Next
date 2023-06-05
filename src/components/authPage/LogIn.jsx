@@ -77,7 +77,7 @@ const LogIn = () => {
       </form>
       <div className="text-slate-400 inline-flex gap-2 flex-wrap">
         First time using AirPlay?
-        <Link href='/auth?id=signup' className="text-slate-600 cursor-pointer transition hover:text-orange-400">
+        <Link href='/authpage?id=signup' className="text-slate-600 cursor-pointer transition hover:text-orange-400">
         Create an account
       </Link>
       </div>

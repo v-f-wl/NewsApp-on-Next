@@ -169,12 +169,12 @@ const Header = ({ search  })=>{
             className: "justify-self-end flex gap-4 items-center",
             children: [
                 /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                    href: "/auth",
+                    href: "/authpage",
                     className: "cursor-pointer py-2 px-3 rounded-lg border text-orange-400",
                     children: "LogIn"
                 }),
                 /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                    href: "/auth?id=signup",
+                    href: "/authpage?id=signup",
                     className: "cursor-pointer py-2 px-3 rounded-lg bg-orange-400 text-white",
                     children: "Sign Up"
                 })
