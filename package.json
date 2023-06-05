@@ -10,8 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@vercel/next": "^3.8.5",
-    "@vercel/node": "^2.14.3",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",

@@ -6,7 +6,7 @@ import MainContainer from "../components/MainContainer";
 import 'tailwindcss/tailwind.css';
 import SoonBody from '../components/SoonBody';
 
-const soon = () => {
+export default function soon(){
   return ( 
     <Container>
       <Header/>
@@ -18,4 +18,3 @@ const soon = () => {
   );
 }
  
-export default soon;

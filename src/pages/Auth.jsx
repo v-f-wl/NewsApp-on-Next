@@ -1,9 +1,8 @@
 import 'tailwindcss/tailwind.css';
-import AuthContainer from '../components/authPage/AuthContainer';
-import AuthModal from '../components/authPage/AuthModal';
+import AuthContainer from '../components/authPage/AuthContainer'
+import AuthModal from '../components/authPage/AuthModal'
 
-
-const Auth = () => {
+export default function Auth(){
 
   return ( 
     <AuthContainer>
@@ -11,5 +10,3 @@ const Auth = () => {
     </AuthContainer>
   );
 }
- 
-export default Auth;

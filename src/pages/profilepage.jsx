@@ -6,7 +6,7 @@ import LeftSide from "../components/LeftSide";
 import MainContainer from "../components/MainContainer";
 import ProfileMain from "../components/ProfileMain";
 
-const ProfilePage = () => {
+export default function ProfilePage(){
   return ( 
     <div className='b-col'>
         <Container>
@@ -19,5 +19,3 @@ const ProfilePage = () => {
     </div>
   );
 }
- 
-export default ProfilePage;
