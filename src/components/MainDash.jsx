@@ -26,7 +26,7 @@ const MainDash = () => {
     <div className="relative overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none">
       <HeaderDash/>
       <div className="flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8">
-        {(isPostsLoading ? [...Array(2)] : postsArr)
+        {(isPostsLoading ? [...Array(4)] : postsArr)
           .map((item, index) => 
           isPostsLoading ? 
           (<PostCard isLoaded={false} key={index}/>) 
@@ -35,9 +35,13 @@ const MainDash = () => {
             <PostCard 
               isLoaded={true} 
               key={item._id} 
+              idPost={item._id}
+              userId={item.user}
               postText={item.text} 
               authorName={item.name} 
               createdAt={item.createdAt}
+              likeCount={item.likesCount}
+              likesArr={item.likesUser}
               color={item.color}
               image={item.image}/>
           )

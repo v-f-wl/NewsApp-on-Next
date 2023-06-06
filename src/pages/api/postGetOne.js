@@ -10,7 +10,6 @@ export default async function handler(req, res) {
   //get
   try {
     const { id } = req.query
-    console.log(id)
     PostModel.findOneAndUpdate(
     {
       _id: id

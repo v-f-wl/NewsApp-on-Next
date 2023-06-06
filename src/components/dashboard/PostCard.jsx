@@ -1,17 +1,23 @@
 'use client'
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AiOutlineMore, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai'
-import { CiBookmarkPlus, CiBookmarkMinus } from 'react-icons/ci'
+import { CiBookmarkPlus, CiBookmarkMinus, CiCircleMinus } from 'react-icons/ci'
 
-const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
-  console.log(color)
+const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idPost, likesArr}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isHidden, setIsHidden] = useState(false)
   const [isPin, setIsPin] = useState(false)
+  const [isRemove, setIsRemove] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
+  const [likeCounts, setLikeCounts] = useState()
 
   const createData = new Date(createdAt)
   const options = { hour: 'numeric', minute: 'numeric', year: 'numeric', month: 'long', day: 'numeric'};
   const dateString = createData.toLocaleDateString('en-US', options);
+  const profileId = Cookies.get('id')
   const menu = (event) => {
     if(isMenuOpen && !event.target.closest('.pin')){
       setIsMenuOpen(false)
@@ -22,7 +28,40 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
   const addPin = () => {
     setIsPin(!isPin)
   }
+
+  const removePost = () =>{
+    axios.delete(`/api/postRemove/?id=${idPost}`)
+    .then(res => {
+      setIsHidden(true)
+    })
+    .catch(err => console.log(err))
+
+  }
+  const changeLikeCount = () => {
+    if(isLiked){
+      axios.patch(`/api/postLikeTarger/?id=${idPost}`, {userId: profileId})
+      .then(res => {
+        setLikeCounts(prev => prev - 1)
+        setIsLiked(false)
+      })
+    }else{
+      axios.patch(`/api/postLikeTarger/?id=${idPost}`, {userId: profileId})
+      .then(res => {
+        setLikeCounts(prev => prev + 1)
+        setIsLiked(true)
+      })
+    }
+  }
   useEffect(() => {
+    if(userId !== undefined && userId === profileId){
+      setIsRemove(true)
+    }
+    if(likesArr !== undefined){
+      setLikeCounts(likesArr.length)
+      if(likesArr.indexOf(profileId) !== -1){
+        setIsLiked(true)
+      }
+    }
     const handleClickOutside = (event) => {
       if (!event.target.closest('.menu-container') || event.target.closest('.pin')) {
         setIsMenuOpen(false);
@@ -36,10 +75,11 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
     };
   }, [])
 
+
   return ( 
-    <div className=" p-4 bg-white rounded-lg flex flex-col gap-4">
+    <div className={`${isHidden ? 'hidden' : ''} p-4 bg-white rounded-lg flex flex-col gap-4`}>
       <div className="flex items-center justify-between">
-        <div className="grid grid-cols-post grid-rows-2 items-center gap-y-0 gap-x-2">
+        <Link href={`/userprofile?id=${userId}`} className="grid grid-cols-post grid-rows-2 items-center gap-y-0 gap-x-2">
           <div style={{backgroundColor: color}} className="w-8 h-8 rounded-lg row-span-full"></div>
           <span 
             className={`
@@ -59,7 +99,7 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
           <div className="self-start text-xs text-slate-400">
             {isLoaded ? dateString : ''}
           </div>
-        </div>
+        </Link>
         <div className="relative menu-container z-0" onClick={(e) => menu(e)} >
           <AiOutlineMore size={22}/>
           <div 
@@ -78,7 +118,7 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
             shadow-slate-400/10
             `}
             >
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col">
                 <li 
                   onClick={() => addPin()}
                   className={`
@@ -104,6 +144,31 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
                     </>
                   )}
                 </li>
+                <li 
+                  onClick={() => removePost()}
+                  className={`
+                    pt-3
+                    pin
+                    relative
+                    z-20
+                    pin
+                    flex 
+                    items-center 
+                    gap-2 
+                    cursor-pointer
+                  `}
+                >
+                  {isRemove ? 
+                    (
+                      <>
+                        <CiCircleMinus size={24}/>
+                        <span className="">Remove</span>
+                      </>
+                    ) 
+                    : 
+                    null
+                  }
+                </li>
               </ul>
           </div>
         </div>
@@ -126,7 +191,7 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
         (
           <div className="flex items-center gap-5">
             <div 
-              onClick={() => setIsLiked(!isLiked)}
+              onClick={() => changeLikeCount()}
               className="px-2 py-2 border flex items-center gap-2 rounded-full cursor-pointer"
             >
               <AiOutlineHeart size={24} 
@@ -134,7 +199,7 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color}) => {
                   ${isLiked ? "text-red-500" : "text-slate-400"}
                 `}
               />
-              <span className='text-slate-800'>0</span>
+              <span className='text-slate-800'>{likeCounts}</span>
             </div>
             <div className="">
               <AiOutlineSend size={24} className='text-orange-400'/>

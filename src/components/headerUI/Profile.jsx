@@ -21,7 +21,7 @@ const Profile = () => {
     window.location.reload();
   }
   return ( 
-    <div className="md:justify-self-end flex items-center md:gap-4">
+    <div className="md:justify-self-end flex items-center md:gap-4 h-full">
         <div className="px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[300px] rounded-lg">
           <div className="flex items-center gap-2">
             <div style={{backgroundColor: color}} className="w-[30px] h-[30px] bg-neutral-200 rounded-lg"></div>
@@ -35,7 +35,7 @@ const Profile = () => {
             />
             {!modal ? null : 
               (
-                <div className="w-[100px] absolute bg-white p-2 right-0 top-10 border border-orange-400 rounded-lg">
+                <div className="w-[100px] absolute bg-white p-2 right-0 top-10 border border-orange-400 rounded-lg z-20">
                   <ul className="">
                     <li className="cursor-pointer" onClick={() => exit()}>
                       Log out

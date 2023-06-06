@@ -11,7 +11,6 @@ export default async function handler(req, res) {
     await connectDB()
     try{
       const { idPerson } = req.query
-      console.log(idPerson)
       const posts = await PostModel.find({ user: idPerson }).exec()
       res.json(posts)
     }catch(error){

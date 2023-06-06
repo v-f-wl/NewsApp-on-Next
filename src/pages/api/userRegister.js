@@ -14,9 +14,7 @@ export default async function handler(req, res) {
     try{
         const password   = req.body.password
         const salt = await bcrypt.genSalt(11)
-    
         const hash = await bcrypt.hash(password, salt)
-    
         const doc = new UserModal({
           email: req.body.email,
           fullName: req.body.fullName,

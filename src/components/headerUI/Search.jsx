@@ -5,7 +5,8 @@ const Search = () => {
   const [searchValue, setSearchValue] = useState('')
   return ( 
     <div className="hidden lg:block justify-self-center relative">
-      <div className="shadow-sm h-[40px] flex justify-between items-center gap-2 w-[300px] rounded-lg">
+      
+      {/* <div className="shadow-sm h-[40px] flex justify-between items-center gap-2 w-[300px] rounded-lg">
         <input 
           type="text" 
           value={searchValue}
@@ -17,7 +18,7 @@ const Search = () => {
           <CiSearch size={24}/>
         </button>
       </div>
-      <div className="hidden absolute top-10 border w-[1000px] right-[-50%] translate-x-2/4 bg-gray-500">modal</div>
+      <div className="hidden absolute top-10 border w-[1000px] right-[-50%] translate-x-2/4 bg-gray-500">modal</div> */}
     </div>
   );
 }

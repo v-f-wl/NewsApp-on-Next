@@ -15,6 +15,7 @@ const MainContainer = ({isGrid, children}) => {
         ${isGrid ? "lg:grid-cols-LeftRight" : "lg:grid-cols-Profile"}
         gap-2 
         lg:gap-8
+        justify-between
         `}
       >
       {children}
