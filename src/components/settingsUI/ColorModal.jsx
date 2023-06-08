@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { HexColorPicker as Picker } from 'react-colorful';
-import SettingTitle from './settingTitle';
+import SettingTitle from './SettingTitle';
 
 const ColorModal = ({isOpen}) => {
   const [newColor, setNewColor] = useState('fff')
