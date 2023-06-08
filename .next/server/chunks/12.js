@@ -113,7 +113,9 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
         if (postId !== undefined && isOpen) {
             external_axios_default().get(`/api/postGetOne/?id=${postId}`).then((res)=>{
                 if (res.data.comments.length > 0) {
-                    setCommentsHandler(res.data.comments);
+                    setCommentsHandler([
+                        ...res.data.comments
+                    ]);
                 }
             });
         }

@@ -39,8 +39,10 @@ const LogIn = () => {
       setIsLoading(false)
       router.push('/')
     })
-    .catch((err) =>
+    .catch((err) =>{
+      console.log(err)
       setSuccess(true)
+    }
     )
   }
   return ( 

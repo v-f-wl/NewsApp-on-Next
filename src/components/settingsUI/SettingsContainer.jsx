@@ -6,7 +6,6 @@ import NameModal from "./NameModal";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Feedback from "./Feedback";
-import axios from "axios";
 
 const SettingsContainer = () => {
   const [modalColor, setModalColor] = useState(false)
@@ -16,8 +15,6 @@ const SettingsContainer = () => {
   const router = useRouter()
 
   useEffect(() => {
-    axios.post('/api/update')
-    .then((res) => console.log(res.data))
     if(!getId){
       router.push('/')
     }

@@ -54,7 +54,7 @@ const Comments = (
       axios.get(`/api/postGetOne/?id=${postId}`)
       .then(res => {
         if(res.data.comments.length > 0){
-          setCommentsHandler(res.data.comments)
+          setCommentsHandler([...res.data.comments])
         }
       })
     }
