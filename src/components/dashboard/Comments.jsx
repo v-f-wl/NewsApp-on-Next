@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 import UserBlock from "./UserBlock";
 import {AiOutlineClose} from 'react-icons/ai'
+import { v4 as uuidv4 } from 'uuid';
+
 import axios from "axios";
 import Cookies from "js-cookie";
 import Link from "next/link";
-
 const Comments = (
   { isOpen, 
     userId, 
@@ -15,12 +16,26 @@ const Comments = (
     dateString, 
     onClose,
     postId,
-    postText,
+    postText
   }) => {
+
   const [areaValue, setAreaValue] = useState('')
-  const [commentsHandler, setCommentsHandler] = useState([])
+  const [commentsHandler, setCommentsHandler] = useState()
+  const [commentLoaded, setCommentLoaded] = useState(false)
   const personId = Cookies.get('id')
   const personName = Cookies.get('name')
+
+  useEffect(() => {
+    if(isOpen){
+      axios.get(`/api/getComments/?postId=${postId}`)
+      .then(res => {
+          setCommentsHandler(res.data.comments)
+          setCommentLoaded(true)
+        }
+      )
+    }
+  }, [isOpen])
+
   const sendComment =() => {
     if(areaValue.length === 0){
       return
@@ -49,16 +64,19 @@ const Comments = (
     const editData = date.toLocaleDateString('en-US', options)
     return editData
   }
-  useEffect(() => {
-    if(postId !== undefined){
-      axios.get(`/api/postGetOne/?id=${postId}`)
-      .then(res => {
-        if(res.data.comments.length > 0){
-          setCommentsHandler([...res.data.comments])
-        }
-      })
-    }
-  }, [postId])
+  const CommentBlock = ({name,userId, time, text}) => (
+    <div className="border rounded-lg p-2" key={uuidv4()}>
+      <div className="">
+        <Link href={`/userprofile/?id=${userId}`} className="font-bold text-md text-slate-500">
+          {name}
+        </Link>
+        <div className="text-xs font-light">{convertDate(time)}</div>
+      </div>
+      <div className="pt-4 text-lg">
+        {text}
+      </div>
+    </div>
+  )
   return ( 
     <div className={`${isOpen ? "flex" : "hidden"} fixed top-0 bg-slate-600 bg-opacity-20 left-0 w-full h-full z-20 items-center justify-center`}>
       <div className="h-full w-full lg:w-2/4 lg:max-h-[70vh] p-4 lg:p-8 bg-white lg:rounded-lg flex flex-col gap-4 overflow-y-scroll">
@@ -80,22 +98,19 @@ const Comments = (
         <hr />
           <h3 className="mt-2 font-bold text-slate-600 text-xl">Сomments</h3>
         <div className="h-auto overflow-y-scroll flex flex-col gap-4">
-          {commentsHandler.length > 0 ? 
-            (commentsHandler.map((item) => (
-              <div className="border rounded-lg p-2" key={item.userId}>
-                <div className="">
-                  <Link href={`/userprofile/?id=${item.userId}`} className="font-bold text-md text-slate-500">
-                    {item.name}
-                  </Link>
-                  <div className="text-xs font-light">{convertDate(item.time)}</div>
-                </div>
-                <div className="pt-4 text-lg">
-                  {item.text}
-                </div>
-              </div>
-            )))
+          {commentLoaded  ? 
+            <>
+              {commentsHandler.map(item => (
+                <CommentBlock 
+                  key={uuidv4()}
+                  userId={item.userId}
+                  time={item.time}
+                  text={item.text}
+                />
+              ))}
+            </>
             :
-            (<div className="capitalize">no comments yet</div>)
+            <div className="">Loading...</div>
           }
         </div>
         <div className="py-4 border-t flex flex-col gap-2">

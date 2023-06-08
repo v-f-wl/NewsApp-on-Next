@@ -66,6 +66,8 @@ const UserBlock = ({ userId , color , isLoaded , authorName , dateString  })=>{
 };
 /* harmony default export */ const dashboard_UserBlock = (UserBlock);
 
+// EXTERNAL MODULE: external "uuid"
+var external_uuid_ = __webpack_require__(5828);
 ;// CONCATENATED MODULE: ./src/components/dashboard/Comments.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -74,11 +76,23 @@ const UserBlock = ({ userId , color , isLoaded , authorName , dateString  })=>{
 
 
 
+
 const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString , onClose , postId , postText  })=>{
     const [areaValue, setAreaValue] = (0,external_react_.useState)("");
-    const [commentsHandler, setCommentsHandler] = (0,external_react_.useState)([]);
+    const [commentsHandler, setCommentsHandler] = (0,external_react_.useState)();
+    const [commentLoaded, setCommentLoaded] = (0,external_react_.useState)(false);
     const personId = external_js_cookie_default().get("id");
     const personName = external_js_cookie_default().get("name");
+    (0,external_react_.useEffect)(()=>{
+        if (isOpen) {
+            external_axios_default().get(`/api/getComments/?postId=${postId}`).then((res)=>{
+                setCommentsHandler(res.data.comments);
+                setCommentLoaded(true);
+            });
+        }
+    }, [
+        isOpen
+    ]);
     const sendComment = ()=>{
         if (areaValue.length === 0) {
             return;
@@ -109,20 +123,29 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
         const editData = date.toLocaleDateString("en-US", options);
         return editData;
     };
-    (0,external_react_.useEffect)(()=>{
-        if (postId !== undefined && isOpen) {
-            external_axios_default().get(`/api/postGetOne/?id=${postId}`).then((res)=>{
-                if (res.data.comments.length > 0) {
-                    setCommentsHandler([
-                        ...res.data.comments
-                    ]);
-                }
-            });
-        }
-    }, [
-        postId,
-        isOpen
-    ]);
+    const CommentBlock = ({ name , userId , time , text  })=>/*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+            className: "border rounded-lg p-2",
+            children: [
+                /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                    className: "",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
+                            href: `/userprofile/?id=${userId}`,
+                            className: "font-bold text-md text-slate-500",
+                            children: name
+                        }),
+                        /*#__PURE__*/ jsx_runtime.jsx("div", {
+                            className: "text-xs font-light",
+                            children: convertDate(time)
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ jsx_runtime.jsx("div", {
+                    className: "pt-4 text-lg",
+                    children: text
+                })
+            ]
+        }, (0,external_uuid_.v4)());
     return /*#__PURE__*/ jsx_runtime.jsx("div", {
         className: `${isOpen ? "flex" : "hidden"} fixed top-0 bg-slate-600 bg-opacity-20 left-0 w-full h-full z-20 items-center justify-center`,
         children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
@@ -158,31 +181,15 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
                 }),
                 /*#__PURE__*/ jsx_runtime.jsx("div", {
                     className: "h-auto overflow-y-scroll flex flex-col gap-4",
-                    children: commentsHandler.length > 0 ? commentsHandler.map((item)=>/*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                            className: "border rounded-lg p-2",
-                            children: [
-                                /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                    className: "",
-                                    children: [
-                                        /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                                            href: `/userprofile/?id=${item.userId}`,
-                                            className: "font-bold text-md text-slate-500",
-                                            children: item.name
-                                        }),
-                                        /*#__PURE__*/ jsx_runtime.jsx("div", {
-                                            className: "text-xs font-light",
-                                            children: convertDate(item.time)
-                                        })
-                                    ]
-                                }),
-                                /*#__PURE__*/ jsx_runtime.jsx("div", {
-                                    className: "pt-4 text-lg",
-                                    children: item.text
-                                })
-                            ]
-                        }, item.userId)) : /*#__PURE__*/ jsx_runtime.jsx("div", {
-                        className: "capitalize",
-                        children: "no comments yet"
+                    children: commentLoaded ? /*#__PURE__*/ jsx_runtime.jsx(jsx_runtime.Fragment, {
+                        children: commentsHandler.map((item)=>/*#__PURE__*/ jsx_runtime.jsx(CommentBlock, {
+                                userId: item.userId,
+                                time: item.time,
+                                text: item.text
+                            }, (0,external_uuid_.v4)()))
+                    }) : /*#__PURE__*/ jsx_runtime.jsx("div", {
+                        className: "",
+                        children: "Loading..."
                     })
                 }),
                 /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
@@ -303,8 +310,7 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
                 isLoaded: isLoaded,
                 authorName: authorName,
                 dateString: dateString,
-                postId: idPost,
-                comment: comments
+                postId: idPost
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 className: "flex items-center justify-between",

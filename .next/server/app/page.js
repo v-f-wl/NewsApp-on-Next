@@ -164,6 +164,14 @@ module.exports = require("assert");
 
 /***/ }),
 
+/***/ 6113:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("crypto");
+
+/***/ }),
+
 /***/ 2361:
 /***/ ((module) => {
 
@@ -783,6 +791,8 @@ const UserBlock = ({ userId , color , isLoaded , authorName , dateString  })=>{
 };
 /* harmony default export */ const dashboard_UserBlock = (UserBlock);
 
+// EXTERNAL MODULE: ./node_modules/uuid/dist/esm-node/v4.js + 3 modules
+var v4 = __webpack_require__(5269);
 ;// CONCATENATED MODULE: ./src/components/dashboard/Comments.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -791,11 +801,23 @@ const UserBlock = ({ userId , color , isLoaded , authorName , dateString  })=>{
 
 
 
+
 const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString , onClose , postId , postText  })=>{
     const [areaValue, setAreaValue] = (0,react_.useState)("");
-    const [commentsHandler, setCommentsHandler] = (0,react_.useState)([]);
+    const [commentsHandler, setCommentsHandler] = (0,react_.useState)();
+    const [commentLoaded, setCommentLoaded] = (0,react_.useState)(false);
     const personId = js_cookie/* default.get */.Z.get("id");
     const personName = js_cookie/* default.get */.Z.get("name");
+    (0,react_.useEffect)(()=>{
+        if (isOpen) {
+            axios/* default.get */.Z.get(`/api/getComments/?postId=${postId}`).then((res)=>{
+                setCommentsHandler(res.data.comments);
+                setCommentLoaded(true);
+            });
+        }
+    }, [
+        isOpen
+    ]);
     const sendComment = ()=>{
         if (areaValue.length === 0) {
             return;
@@ -826,20 +848,29 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
         const editData = date.toLocaleDateString("en-US", options);
         return editData;
     };
-    (0,react_.useEffect)(()=>{
-        if (postId !== undefined && isOpen) {
-            axios/* default.get */.Z.get(`/api/postGetOne/?id=${postId}`).then((res)=>{
-                if (res.data.comments.length > 0) {
-                    setCommentsHandler([
-                        ...res.data.comments
-                    ]);
-                }
-            });
-        }
-    }, [
-        postId,
-        isOpen
-    ]);
+    const CommentBlock = ({ name , userId , time , text  })=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "border rounded-lg p-2",
+            children: [
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                            href: `/userprofile/?id=${userId}`,
+                            className: "font-bold text-md text-slate-500",
+                            children: name
+                        }),
+                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            className: "text-xs font-light",
+                            children: convertDate(time)
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "pt-4 text-lg",
+                    children: text
+                })
+            ]
+        }, (0,v4/* default */.Z)());
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         className: `${isOpen ? "flex" : "hidden"} fixed top-0 bg-slate-600 bg-opacity-20 left-0 w-full h-full z-20 items-center justify-center`,
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
@@ -875,31 +906,15 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
                     className: "h-auto overflow-y-scroll flex flex-col gap-4",
-                    children: commentsHandler.length > 0 ? commentsHandler.map((item)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                            className: "border rounded-lg p-2",
-                            children: [
-                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                    className: "",
-                                    children: [
-                                        /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                            href: `/userprofile/?id=${item.userId}`,
-                                            className: "font-bold text-md text-slate-500",
-                                            children: item.name
-                                        }),
-                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                            className: "text-xs font-light",
-                                            children: convertDate(item.time)
-                                        })
-                                    ]
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                    className: "pt-4 text-lg",
-                                    children: item.text
-                                })
-                            ]
-                        }, item.userId)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "capitalize",
-                        children: "no comments yet"
+                    children: commentLoaded ? /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {
+                        children: commentsHandler.map((item)=>/*#__PURE__*/ jsx_runtime_.jsx(CommentBlock, {
+                                userId: item.userId,
+                                time: item.time,
+                                text: item.text
+                            }, (0,v4/* default */.Z)()))
+                    }) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "",
+                        children: "Loading..."
                     })
                 }),
                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
@@ -1020,8 +1035,7 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
                 isLoaded: isLoaded,
                 authorName: authorName,
                 dateString: dateString,
-                postId: idPost,
-                comment: comments
+                postId: idPost
             }),
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "flex items-center justify-between",
@@ -1312,7 +1326,7 @@ const { __esModule, $$typeof } = proxy;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [839,815], () => (__webpack_exec__(529)));
+var __webpack_exports__ = __webpack_require__.X(0, [839,258], () => (__webpack_exec__(529)));
 module.exports = __webpack_exports__;
 
 })();

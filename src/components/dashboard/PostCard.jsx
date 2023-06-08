@@ -20,7 +20,6 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
   const options = { hour: 'numeric', minute: 'numeric', year: 'numeric', month: 'long', day: 'numeric'};
   const dateString = createData.toLocaleDateString('en-US', options);
   const profileId = Cookies.get('id')
-
   const menu = (event) => {
     if(isMenuOpen && !event.target.closest('.pin')){
       setIsMenuOpen(false)
@@ -89,7 +88,6 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
         authorName={authorName}
         dateString={dateString}
         postId={idPost}
-        comment={comments}
       />
       <div className="flex items-center justify-between">
         <UserBlock
