@@ -50,7 +50,7 @@ const Comments = (
     return editData
   }
   useEffect(() => {
-    if(postId !== undefined && isOpen){
+    if(postId !== undefined){
       axios.get(`/api/postGetOne/?id=${postId}`)
       .then(res => {
         if(res.data.comments.length > 0){
@@ -58,7 +58,7 @@ const Comments = (
         }
       })
     }
-  }, [postId, isOpen])
+  }, [postId])
   return ( 
     <div className={`${isOpen ? "flex" : "hidden"} fixed top-0 bg-slate-600 bg-opacity-20 left-0 w-full h-full z-20 items-center justify-center`}>
       <div className="h-full w-full lg:w-2/4 lg:max-h-[70vh] p-4 lg:p-8 bg-white lg:rounded-lg flex flex-col gap-4 overflow-y-scroll">
