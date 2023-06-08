@@ -6,18 +6,21 @@ import Cookies from 'js-cookie';
 
 const LeftSide = () => {
   const userInfo = Cookies.get('id')
-  const [linkInfo, setLinkInfo] = useState('')
+  const [linkProfile, setLinkProfile] = useState('')
+  const [linkSettings, setLinkSettings] = useState('')
   useEffect(() => {
     if(userInfo){
-      setLinkInfo(`/profilepage/?id=${userInfo}`)
+      setLinkProfile(`/profilepage/?id=${userInfo}`)
+      setLinkSettings(`/settings/?id=${userInfo}`)
     }else{
-      setLinkInfo('/authpage')
+      setLinkProfile('/authpage')
+      setLinkSettings('/authpage')
     }
   }, [userInfo])
   return ( 
     <div className="h-[60px] lg:h-full bg-white lg:bg-transparent rounded-lg">
       <ul className="flex items-center justify-center lg:justify-start lg:items-start lg:flex-col gap-8 lg:gap-4 py-2 h-full">
-        <Link href={linkInfo} className="flex gap-2 items-center cursor-pointer">
+        <Link href={linkProfile} className="flex gap-2 items-center cursor-pointer">
             <AiOutlineUser size={24} className='text-orange-500'/>
           <span className="hidden lg:block mt-0 tracking-wider">Profile</span>
         </Link>
@@ -25,22 +28,22 @@ const LeftSide = () => {
             <AiOutlineBorderlessTable size={24} className='text-orange-500'/>
           <span className="hidden lg:block mt-0 tracking-wider">Dashdoard</span>
         </Link>
-        <Link href='/soon' className="flex gap-2 items-center cursor-pointer">
+        {/* <Link href='/soon' className="flex gap-2 items-center cursor-pointer">
             <AiOutlinePushpin size={24} className='text-orange-500'/>
           <span className="hidden lg:block mt-0 tracking-wider">Your Pins</span>
-        </Link>
+        </Link> */}
         {/* <li className="flex gap-2 items-center cursor-pointer">
             <AiOutlineMail size={24} className='text-orange-500'/>
           <span className="hidden lg:block mt-0 tracking-wider">Chats</span>
         </li> */}
-        <li className="flex gap-2 items-center cursor-pointer">
+        {/* <li className="flex gap-2 items-center cursor-pointer">
             <AiOutlineTeam size={24} className='text-orange-500'/>
           <span className="hidden lg:block mt-0 tracking-wider">Friends</span>
-        </li>
-        <li className="flex gap-2 items-center cursor-pointer">
+        </li> */}
+        <Link href={linkSettings} className="flex gap-2 items-center cursor-pointer">
             <AiOutlineSetting size={24} className='text-orange-500'/>
           <span className="hidden lg:block mt-0 tracking-wider">Settings</span>
-        </li>
+        </Link>
       </ul>
     </div>
   );

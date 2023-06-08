@@ -22,9 +22,9 @@ const Profile = () => {
   }
   return ( 
     <div className="md:justify-self-end flex items-center md:gap-4 h-full">
-        <div className="px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[300px] rounded-lg">
+        <div className="px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[310px] rounded-lg">
           <div className="flex items-center gap-2">
-            <div style={{backgroundColor: color}} className="w-[30px] h-[30px] bg-neutral-200 rounded-lg"></div>
+            <div style={{backgroundColor: color}} className="w-[25px] h-[25px] lg:w-[30px] lg:h-[30px] bg-neutral-200 rounded-lg"></div>
             <div className="font-light text-sm text-slate-800">{nameInfo}</div>
           </div>
           <div className="relative" >

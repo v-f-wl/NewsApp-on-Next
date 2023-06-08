@@ -43,7 +43,9 @@ const MainDash = () => {
               likeCount={item.likesCount}
               likesArr={item.likesUser}
               color={item.color}
-              image={item.image}/>
+              image={item.image}
+              comments={item.comments}
+            />
           )
         )
         }

@@ -16,6 +16,7 @@ const PostSchema = new mongoose.Schema(
     },
     likesUser: {
       type: Array,
+      required: true,
       default: []
     },
     user: {
@@ -27,11 +28,13 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    comments: {
+      type: Array,
+      default: []
+    }
   },
-  // это выполняет уже сама схема
   {
     timestamps: true
   }
 )
-// первый параметр - как она будет называться, второе поле указываем схему 
 export default mongoose.models.Posts || mongoose.model('Posts', PostSchema)

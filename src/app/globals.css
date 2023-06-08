@@ -9,6 +9,10 @@ body{
   background-color: #EFF2F4;
 }
 
+.safeHeight {
+  height: calc(100vh - constant(safe-area-inset-bottom)); 
+}
+
 ::-webkit-scrollbar {
   width: 0;
 }

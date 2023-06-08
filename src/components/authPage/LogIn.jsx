@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 
 const LogIn = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
   const router = useRouter()
   const { 
     register, 
@@ -38,7 +39,9 @@ const LogIn = () => {
       setIsLoading(false)
       router.push('/')
     })
-    .catch((err) => console.log(err))
+    .catch((err) =>
+      setSuccess(true)
+    )
   }
   return ( 
     <div className="w-80 flex flex-col gap-8">
@@ -55,6 +58,11 @@ const LogIn = () => {
       <div className="flex justify-center">
         <span className="font-semibold text-2xl text-slate-600">LogIn</span>
       </div>
+      {success ? (
+        <div className="text-red-400">
+          Something went wrong...
+        </div>
+      ) : null}
       <form action='handleSubmit' className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <Input
           id='email'

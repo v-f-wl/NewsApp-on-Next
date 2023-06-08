@@ -4,6 +4,7 @@ import Profile from "./headerUI/Profile";
 import Search from "./headerUI/Search";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import { AiOutlineHolder} from 'react-icons/ai'
 
 
 const Header = ({search}) => {
@@ -27,8 +28,9 @@ const Header = ({search}) => {
   
   return (  
     <div className="h-[65px] bg-white rounded-b-lg grid grid-cols-2 lg:grid-cols-3 grid-rows-1 items-center px-5 shadow-md shadow-slate-400/10">
-      <Link href='/' className="text-2xl font-semibold text-slate-600 tracking-big">
-        AirPlay
+      <Link href='/' className="font-semibold text-slate-600 flex items-center gap-1">
+        <AiOutlineHolder size={24}/> 
+        <div className="">Flumpf</div>
       </Link>
       {search ? (<Search/>) : (<div className="hidden lg:block"></div>)}
       {!isLoading ? null :  isAuth ? <Profile/> : <Buttons/>

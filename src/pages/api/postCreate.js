@@ -14,7 +14,8 @@ export default async function handler(req, res) {
         text: req.body.text,
         name: req.body.nameValue,
         user: req.body.userId,
-        color: req.body.color
+        color: req.body.color,
+        comments: []
       })
 
       const post = await doc.save()

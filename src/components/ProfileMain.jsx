@@ -22,28 +22,19 @@ const ProfileMain = () => {
     }
     setProfileColor(Cookies.get('color'))
     setName(Cookies.get('name'))
-    axios.get('/api/posrOfOneUser', {
+    axios.get('/api/postOfOneUser', {
       params: {
         idPerson: id
       }
     })
     .then(res => {
-      setPost(res.data.reverse())
+      if(res.data.length !== 0){
+        setPost(res.data.reverse())
+      }
     })
     .catch(error => console.log(error))
     setIsLoaded(true)
-  }, [id, cookies])
-  const PinCard = () => (
-    <div className="border-b p-2" >
-      <div className="flex items-center gap-2">
-        <div className="w-7 h-7 bg-slate-200 rounded-lg"></div>
-        <span className="text-slate-600 font-light text-md">Tristan Arr</span>
-      </div>
-      <div className="mt-4">
-      Lorem ipsum dolor sit amet. Aut natus suscipit sed omnis iste sed officia totam. Ut tenetur ducimus et voluptate adipisci sit aliquam voluptas
-      </div>
-    </div>
-  )
+  }, [id])
   return ( 
     <div 
       className={`
@@ -58,13 +49,13 @@ const ProfileMain = () => {
         profileColor={profileColor}
         name={name}
       />
-      <div className="lg:mt-10 lg:grid lg:grid-cols-32 lg:gap-12 lg:items-start h-full">
+      <div className="lg:mt-10 lg:grid lg:grid-cols-32 lg:gap-12 lg:items-start lg:h-auto">
         <div className="bg-white rounded-lg py-4 lg:py-8 px-2 lg:px-4">
           <ProfileTitle title='your posts'/>
 
           {post ? 
           (
-            <div className="mt-4 flex flex-col gap-3 max-h-[70vh] overflow-y-scroll">
+            <div className="mt-4 flex flex-col gap-3 h-[50vh] lg:max-h-[70vh] overflow-y-scroll ">
               {post.map((item) => (
                 <PostCard
                   key={item._id}
@@ -73,8 +64,10 @@ const ProfileMain = () => {
                   postText={item.text}
                   idPost={item._id}
                   authorName={name}
+                  likesArr={item.likesUser}
                   createdAt={item.createdAt}
                   color={item.color}
+                  comments={item.comments}
                 />
               ))}
             </div>
@@ -83,27 +76,6 @@ const ProfileMain = () => {
           (
             <div className="pt-10 text-xl font-light text-slate-300">
               *You don't have any posts yet
-            </div> 
-          )
-          }
-        </div>
-        <div className="hidden lg:block bg-white rounded-lg py-8 px-4">
-          <ProfileTitle title='your pins'/>
-          {post ? 
-          (
-            <div className=" mt-4 flex flex-col gap-4 max-h-[50vh] overflow-y-scroll">
-              <PinCard/>
-              <PinCard/>
-              <PinCard/>
-              <PinCard/>
-              <PinCard/>
-              <PinCard/>
-            </div>
-          ) 
-          : 
-          (
-            <div className="pt-10 text-xl font-light text-slate-300">
-              *You haven't added any pins yet
             </div> 
           )
           }

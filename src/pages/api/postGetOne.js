@@ -10,31 +10,16 @@ export default async function handler(req, res) {
   //get
   try {
     const { id } = req.query
-    PostModel.findOneAndUpdate(
-    {
-      _id: id
-    }, 
-    {
-      $inc: { likesCount: 1}
-    }, 
-    {
-      returnDocument: 'after'
-    }
-    )
-    .then(updatedDocument => {
-      if(!updatedDocument){
-        return res.status(404).json({
-          message: 'Статья не найдена'
-        })
-      }
-      res.json(updatedDocument)
-    })
-    .catch(error => {
-      console.log(error)
+    const user = await PostModel.findById(id)
+    if(!user){
       return res.status(404).json({
-        message: 'Статья не найдена'
+        message: 'Пользователь не найдем'
       })
-    });
+    }
+    const post = user._doc
+    res.json({
+      ...post
+    })
   } catch (error) {
       console.log(error)
       res.status(404).json({

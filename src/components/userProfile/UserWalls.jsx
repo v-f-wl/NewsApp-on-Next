@@ -21,7 +21,7 @@ const UserWalls = () => {
       routerTwo.push(`/profilepage?id=${id}`)
     }
     if(id){
-      axios.get('/api/posrOfOneUser', {
+      axios.get('/api/postOfOneUser', {
         params: {
           idPerson: id
         }
@@ -60,6 +60,7 @@ const UserWalls = () => {
                   authorName={item.name}
                   createdAt={item.createdAt}
                   color={item.color}
+                  comments={item.comments}
                 />
             ))}
           </>
