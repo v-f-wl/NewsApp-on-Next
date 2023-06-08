@@ -21,7 +21,7 @@ const SettingsContainer = () => {
     if(!getId){
       router.push('/')
     }
-  }, [getId])
+  }, [getId, router])
   const logOut = () => {
     Cookies.remove('name')
     Cookies.remove('id')

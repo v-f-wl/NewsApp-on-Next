@@ -142,8 +142,9 @@ const Header = ({ search  })=>{
             setIsAuth(true);
         }
         setIsLoading(true);
-    }, []);
-    (0,external_react_.useEffect)(()=>{}, []);
+    }, [
+        info
+    ]);
     const Buttons = ()=>/*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
             className: "justify-self-end flex gap-4 items-center",
             children: [

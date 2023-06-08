@@ -493,8 +493,9 @@ const Header = ({ search  })=>{
             setIsAuth(true);
         }
         setIsLoading(true);
-    }, []);
-    (0,react_.useEffect)(()=>{}, []);
+    }, [
+        info
+    ]);
     const Buttons = ()=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
             className: "justify-self-end flex gap-4 items-center",
             children: [
@@ -894,7 +895,7 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
                                     children: item.text
                                 })
                             ]
-                        })) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        }, item.userId)) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "capitalize",
                         children: "no comments yet"
                     })
@@ -999,7 +1000,12 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
         return ()=>{
             document.removeEventListener("click", handleClickOutside);
         };
-    }, []);
+    }, [
+        comments,
+        likesArr,
+        profileId,
+        userId
+    ]);
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: `${isHidden ? "hidden" : ""} p-4 bg-white rounded-lg flex flex-col gap-4`,
         children: [

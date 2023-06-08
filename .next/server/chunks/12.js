@@ -178,7 +178,7 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
                                     children: item.text
                                 })
                             ]
-                        })) : /*#__PURE__*/ jsx_runtime.jsx("div", {
+                        }, item.userId)) : /*#__PURE__*/ jsx_runtime.jsx("div", {
                         className: "capitalize",
                         children: "no comments yet"
                     })
@@ -283,7 +283,12 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
         return ()=>{
             document.removeEventListener("click", handleClickOutside);
         };
-    }, []);
+    }, [
+        comments,
+        likesArr,
+        profileId,
+        userId
+    ]);
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         className: `${isHidden ? "hidden" : ""} p-4 bg-white rounded-lg flex flex-col gap-4`,
         children: [

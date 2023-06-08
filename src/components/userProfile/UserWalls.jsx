@@ -32,8 +32,7 @@ const UserWalls = () => {
       })
       .catch(error => console.log(error))
     }
-  }, [id])
-  useEffect
+  }, [id, personId, routerTwo])
   return ( 
     <div className="bg-white lg:rounded-lg p-4 max-h-[70vh] overflow-y-scroll">
       <ProfileTitle title="Posts"/>

@@ -76,7 +76,7 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, [])
+  }, [comments, likesArr, profileId, userId])
   return ( 
     <div className={`${isHidden ? 'hidden' : ''} p-4 bg-white rounded-lg flex flex-col gap-4`}>
       <Comments

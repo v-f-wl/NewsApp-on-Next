@@ -34,7 +34,7 @@ const ProfileMain = () => {
     })
     .catch(error => console.log(error))
     setIsLoaded(true)
-  }, [id])
+  }, [id, cookies, router])
   return ( 
     <div 
       className={`
@@ -75,7 +75,7 @@ const ProfileMain = () => {
           : 
           (
             <div className="pt-10 text-xl font-light text-slate-300">
-              *You don't have any posts yet
+              *You don&apos;t have any posts yet
             </div> 
           )
           }

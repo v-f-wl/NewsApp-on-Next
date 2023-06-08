@@ -82,7 +82,7 @@ const Comments = (
         <div className="h-auto overflow-y-scroll flex flex-col gap-4">
           {commentsHandler.length > 0 ? 
             (commentsHandler.map((item) => (
-              <div className="border rounded-lg p-2">
+              <div className="border rounded-lg p-2" key={item.userId}>
                 <div className="">
                   <Link href={`/userprofile/?id=${item.userId}`} className="font-bold text-md text-slate-500">
                     {item.name}
