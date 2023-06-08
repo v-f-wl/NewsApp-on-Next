@@ -1,4 +1,4 @@
-import SettingTitle from "./settingTitle";
+import SettingTitle from "./SettingTitle";
 
 const Feedback = ({isOpen}) => {
   return ( 

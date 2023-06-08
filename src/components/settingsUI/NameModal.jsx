@@ -1,9 +1,8 @@
 'use client'
-import { useEffect, useState } from "react";
-import SettingTitle from "./settingTitle";
+import { useState } from "react";
+import SettingTitle from "./SettingTitle";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
 
 const NameModal = ({isOpen}) => {
   const [nameValue, setNameValue] = useState('')
