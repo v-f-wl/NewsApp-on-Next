@@ -26,8 +26,8 @@ var external_multer_default = /*#__PURE__*/__webpack_require__.n(external_multer
 
 external_cloudinary_namespaceObject.v2.config({
     cloud_name: "dxzx1bkz1",
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
+    api_key: "441643216429182",
+    api_secret: "vm-_S0mZGl9gyc3kdZG2-kco_a4"
 });
 const upload = external_multer_default()({
     dest: "uploads/"
