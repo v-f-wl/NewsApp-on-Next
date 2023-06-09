@@ -46,19 +46,16 @@ const HeaderDash = () => {
       }
       const file = JSON.stringify({data: imageSrc})
 
-      axios.post("/api/uploads/", file, { headers })
-      .then(async res => {
-        const bodyInfo = {
-          text: postValue,
-          nameValue: nameValue,
-          userId: idValue,
-          color: color,
-          imagePost: [{url: res.data.url, id: res.data.id}] // Добавляем URL изображения в массив
-        };
-    
-    
+      if(imageSrc === null){
         try {
-          await axios.post('/api/postCreate', bodyInfo)
+          const bodyInfo = {
+            text: postValue,
+            nameValue: nameValue,
+            userId: idValue,
+            color: color,
+          };
+
+          axios.post('/api/postCreate', bodyInfo)
           .then(res => console.log(res))
           setModal(false);
           setIsCreating(false);
@@ -66,9 +63,33 @@ const HeaderDash = () => {
           setPostValue('')
           window.location.reload()
         } catch (error) {
-          console.log(error);
+          console.log(error)
         }
-      });
+      }else{
+        axios.post("/api/uploads/", file, { headers })
+        .then(async res => {
+          const bodyInfo = {
+            text: postValue,
+            nameValue: nameValue,
+            userId: idValue,
+            color: color,
+            imagePost: [{url: res.data.url, id: res.data.id}] // Добавляем URL изображения в массив
+          };
+      
+      
+          try {
+            await axios.post('/api/postCreate', bodyInfo)
+            .then(res => console.log(res))
+            setModal(false);
+            setIsCreating(false);
+            setImageSrc(null)
+            setPostValue('')
+            window.location.reload()
+          } catch (error) {
+            console.log(error);
+          }
+        })
+      }
 
     }catch(error){
 

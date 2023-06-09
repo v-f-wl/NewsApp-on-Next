@@ -5,7 +5,7 @@ exports.id = 746;
 exports.ids = [746];
 exports.modules = {
 
-/***/ 5746:
+/***/ 9296:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -18,19 +18,13 @@ __webpack_require__.d(__webpack_exports__, {
 
 ;// CONCATENATED MODULE: external "cloudinary"
 const external_cloudinary_namespaceObject = require("cloudinary");
-;// CONCATENATED MODULE: external "multer"
-const external_multer_namespaceObject = require("multer");
-var external_multer_default = /*#__PURE__*/__webpack_require__.n(external_multer_namespaceObject);
 ;// CONCATENATED MODULE: ./src/pages/api/uploads.js
-
 
 external_cloudinary_namespaceObject.v2.config({
     cloud_name: "dxzx1bkz1",
     api_key: "441643216429182",
-    api_secret: "vm-_S0mZGl9gyc3kdZG2-kco_a4"
-});
-const upload = external_multer_default()({
-    dest: "uploads/"
+    api_secret: "vm-_S0mZGl9gyc3kdZG2-kco_a4",
+    secure: true
 });
 async function handler(req, res) {
     if (req.method === "POST") {
@@ -62,7 +56,7 @@ async function handler(req, res) {
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(5746));
+var __webpack_exports__ = (__webpack_exec__(9296));
 module.exports = __webpack_exports__;
 
 })();

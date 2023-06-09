@@ -692,23 +692,15 @@ const HeaderDash = ()=>{
             const file = JSON.stringify({
                 data: imageSrc
             });
-            lib_axios/* default.post */.Z.post("/api/uploads/", file, {
-                headers
-            }).then(async (res)=>{
-                const bodyInfo = {
-                    text: postValue,
-                    nameValue: nameValue,
-                    userId: idValue,
-                    color: color,
-                    imagePost: [
-                        {
-                            url: res.data.url,
-                            id: res.data.id
-                        }
-                    ] // Добавляем URL изображения в массив
-                };
+            if (imageSrc === null) {
                 try {
-                    await lib_axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res));
+                    const bodyInfo = {
+                        text: postValue,
+                        nameValue: nameValue,
+                        userId: idValue,
+                        color: color
+                    };
+                    lib_axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res));
                     setModal(false);
                     setIsCreating(false);
                     setImageSrc(null);
@@ -717,7 +709,34 @@ const HeaderDash = ()=>{
                 } catch (error) {
                     console.log(error);
                 }
-            });
+            } else {
+                lib_axios/* default.post */.Z.post("/api/uploads/", file, {
+                    headers
+                }).then(async (res)=>{
+                    const bodyInfo = {
+                        text: postValue,
+                        nameValue: nameValue,
+                        userId: idValue,
+                        color: color,
+                        imagePost: [
+                            {
+                                url: res.data.url,
+                                id: res.data.id
+                            }
+                        ] // Добавляем URL изображения в массив
+                    };
+                    try {
+                        await lib_axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res));
+                        setModal(false);
+                        setIsCreating(false);
+                        setImageSrc(null);
+                        setPostValue("");
+                        window.location.reload();
+                    } catch (error) {
+                        console.log(error);
+                    }
+                });
+            }
         } catch (error) {}
     };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
