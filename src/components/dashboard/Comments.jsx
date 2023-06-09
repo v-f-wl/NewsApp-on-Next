@@ -16,12 +16,13 @@ const Comments = (
     dateString, 
     onClose,
     postId,
-    postText
+    postText,
   }) => {
 
   const [areaValue, setAreaValue] = useState('')
   const [commentsHandler, setCommentsHandler] = useState()
   const [commentLoaded, setCommentLoaded] = useState(false)
+  const [buttonDisabled, setButtonDisabled] = useState(false)
   const personId = Cookies.get('id')
   const personName = Cookies.get('name')
 
@@ -37,9 +38,10 @@ const Comments = (
   }, [isOpen])
 
   const sendComment =() => {
-    if(areaValue.length === 0){
+    if(areaValue.length === 0 || buttonDisabled){
       return
     }
+    setButtonDisabled(true)
     const commentInfo = {
       userId: personId,
       text: areaValue,
@@ -51,8 +53,9 @@ const Comments = (
     .then((res) => {
       setAreaValue('')
       setCommentsHandler(res.data.updatedPost.comments)
+      setButtonDisabled(false)
     })
-    .catch(error => console.log(error))
+    .catch(() => setButtonDisabled(false))
 
   }
   const convertDate = (dateValue) => {
@@ -65,14 +68,14 @@ const Comments = (
     return editData
   }
   const CommentBlock = ({name,userId, time, text}) => (
-    <div className="border rounded-lg p-2" key={uuidv4()}>
+    <div className="border-l border-orange-400 p-2" key={uuidv4()}>
       <div className="">
         <Link href={`/userprofile/?id=${userId}`} className="font-bold text-md text-slate-500">
           {name}
         </Link>
         <div className="text-xs font-light">{convertDate(time)}</div>
       </div>
-      <div className="pt-4 text-lg">
+      <div className="pt-2 text-md">
         {text}
       </div>
     </div>
@@ -95,19 +98,27 @@ const Comments = (
         <div className="py-4 text-xl">
           {postText}
         </div>
-        <hr />
-          <h3 className="mt-2 font-bold text-slate-600 text-xl">Сomments</h3>
-        <div className="h-auto overflow-y-scroll flex flex-col gap-4">
+        <h3 className="font-bold text-slate-600 text-xl">Сomments</h3>
+        <div className="h-full overflow-y-scroll flex flex-col gap-4">
           {commentLoaded  ? 
             <>
-              {commentsHandler.map(item => (
-                <CommentBlock 
-                  key={uuidv4()}
-                  userId={item.userId}
-                  time={item.time}
-                  text={item.text}
-                />
-              ))}
+              {commentsHandler.length == 0 ? 
+              ( 
+                <div className="font-semibold capitalize text-lg">no comments yet</div>
+              ) 
+              : 
+              (
+                commentsHandler.map(item => (
+                  <CommentBlock 
+                    key={uuidv4()}
+                    userId={item.userId}
+                    name={item.name}
+                    time={item.time}
+                    text={item.text}
+                  />
+                ))
+              )
+              }
             </>
             :
             <div className="">Loading...</div>
@@ -123,7 +134,8 @@ const Comments = (
           </textarea>
           <div 
             onClick={()=> sendComment()}
-            className="
+            className={`
+              ${buttonDisabled ? 'opacity-40' : ''}
               rounded-lg 
               py-4
               px-2 
@@ -136,10 +148,10 @@ const Comments = (
               text-xl
               font-semibold
               cursor-pointer
-              "
+              `}
             >
               Send
-            </div>
+          </div>
         </div>
       </div>
     </div>

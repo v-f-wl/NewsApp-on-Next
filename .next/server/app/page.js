@@ -356,12 +356,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 6044:
+/***/ 3675:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 9222, 23));
-Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8301, 23));
 Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 3751, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8301, 23));
 Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 4765, 23));
 Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 5192, 23))
 
@@ -377,11 +377,11 @@ Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_
 /***/ 74:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 8314))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 6718))
 
 /***/ }),
 
-/***/ 8314:
+/***/ 6718:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -390,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ Home)
+  "default": () => (/* binding */ page_Home)
 });
 
 // EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
@@ -645,7 +645,7 @@ const MainContainer = ({ isGrid , children  })=>{
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(9483);
 // EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
-var axios = __webpack_require__(248);
+var lib_axios = __webpack_require__(248);
 ;// CONCATENATED MODULE: ./src/components/dashboard/HeaderDash.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -656,7 +656,9 @@ var axios = __webpack_require__(248);
 const HeaderDash = ()=>{
     const router = (0,navigation.useRouter)();
     const [modal, setModal] = (0,react_.useState)(false);
+    const [imageSrc, setImageSrc] = (0,react_.useState)(null);
     const [postValue, setPostValue] = (0,react_.useState)("");
+    const [isCreating, setIsCreating] = (0,react_.useState)(false);
     const idValue = js_cookie/* default.get */.Z.get("id");
     const nameValue = js_cookie/* default.get */.Z.get("name");
     const color = js_cookie/* default.get */.Z.get("color");
@@ -667,19 +669,56 @@ const HeaderDash = ()=>{
             router.push("/authpage");
         }
     };
+    const removeImage = ()=>{
+        setImageSrc(null);
+    };
+    function handleOnChange(changeEvent) {
+        const reader = new FileReader();
+        reader.onload = function(onLoadEvent) {
+            setImageSrc(onLoadEvent.target.result);
+        };
+        reader.readAsDataURL(changeEvent.target.files[0]);
+    }
     const createPost = ()=>{
+        setIsCreating(true);
+        if (imageSrc === null && postValue.length === 0) {
+            setIsCreating(false);
+            return false;
+        }
         try {
-            const bodyInfo = {
-                text: postValue,
-                nameValue: nameValue,
-                userId: idValue,
-                color: color
+            const headers = {
+                "Content-Type": "application/json"
             };
-            axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res)).then(()=>{
-                setModal(false);
-                window.location.reload();
-            }).catch(error = console.log(error));
-        } catch (error1) {}
+            const file = JSON.stringify({
+                data: imageSrc
+            });
+            lib_axios/* default.post */.Z.post("/api/uploads/", file, {
+                headers
+            }).then(async (res)=>{
+                const bodyInfo = {
+                    text: postValue,
+                    nameValue: nameValue,
+                    userId: idValue,
+                    color: color,
+                    imagePost: [
+                        {
+                            url: res.data.url,
+                            id: res.data.id
+                        }
+                    ] // Добавляем URL изображения в массив
+                };
+                try {
+                    await lib_axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res));
+                    setModal(false);
+                    setIsCreating(false);
+                    setImageSrc(null);
+                    setPostValue("");
+                    window.location.reload();
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        } catch (error) {}
     };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: " flex  items-center rounded-lg  bg-white  sticky  z-10 top-0  shadow-md  shadow-slate-400/10 ",
@@ -703,6 +742,7 @@ const HeaderDash = ()=>{
           border 
           w-full 
           bg-white
+          overflow-hidden
           rounded-lg
           shadow-lg shadow-slate-400/40
         `,
@@ -717,8 +757,14 @@ const HeaderDash = ()=>{
                             })
                         }),
                         /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                            className: "py-8 px-4 flex flex-col gap-2",
+                            className: "py-8 px-4 flex flex-col gap-2 relative",
                             children: [
+                                isCreating ? /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    className: "absolute inset-0 bg-slate-400 bg-opacity-40 z-30 flex items-center justify-center",
+                                    children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "p-8 border border-white rounded-lg animate-spin"
+                                    })
+                                }) : null,
                                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)("label", {
                                     className: "flex flex-col gap-4",
                                     children: [
@@ -736,11 +782,50 @@ const HeaderDash = ()=>{
                                         })
                                     ]
                                 }),
+                                imageSrc && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    className: "w-[150px] h-[150px] lg:w-[250px] lg:h-[250px] relative",
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            className: "absolute bg-white top-2 right-2 rounded-md",
+                                            onClick: ()=>removeImage(),
+                                            children: /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineClose */.oHP, {
+                                                size: 24,
+                                                className: "text-orange-400 cursor-pointer"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                            className: "w-full h-full rounded-lg object-cover object-center",
+                                            src: imageSrc
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    className: "flex items-center",
+                                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                        className: "w-[30px] h-[30px] overflow-hidden border relative flex items-center justify-center rounded-sm",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlinePicture */.Ypm, {
+                                                size: 26,
+                                                className: "text-orange-400"
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("form", {
+                                                method: "post",
+                                                onChange: handleOnChange,
+                                                className: "absolute top-0 opacity-0 cursor-pointer",
+                                                children: /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                                                    type: "file",
+                                                    name: "file",
+                                                    className: "cursor-pointer"
+                                                })
+                                            })
+                                        ]
+                                    })
+                                }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("hr", {}),
                                 /*#__PURE__*/ jsx_runtime_.jsx("button", {
-                                    onClick: ()=>createPost(),
-                                    className: "border w-1/4 py-2 rounded-lg ",
-                                    children: "Send"
+                                    className: "border w-1/4 py-2 rounded-lg",
+                                    onClick: createPost,
+                                    children: "Create"
                                 })
                             ]
                         })
@@ -806,11 +891,12 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
     const [areaValue, setAreaValue] = (0,react_.useState)("");
     const [commentsHandler, setCommentsHandler] = (0,react_.useState)();
     const [commentLoaded, setCommentLoaded] = (0,react_.useState)(false);
+    const [buttonDisabled, setButtonDisabled] = (0,react_.useState)(false);
     const personId = js_cookie/* default.get */.Z.get("id");
     const personName = js_cookie/* default.get */.Z.get("name");
     (0,react_.useEffect)(()=>{
         if (isOpen) {
-            axios/* default.get */.Z.get(`/api/getComments/?postId=${postId}`).then((res)=>{
+            lib_axios/* default.get */.Z.get(`/api/getComments/?postId=${postId}`).then((res)=>{
                 setCommentsHandler(res.data.comments);
                 setCommentLoaded(true);
             });
@@ -819,19 +905,21 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
         isOpen
     ]);
     const sendComment = ()=>{
-        if (areaValue.length === 0) {
+        if (areaValue.length === 0 || buttonDisabled) {
             return;
         }
+        setButtonDisabled(true);
         const commentInfo = {
             userId: personId,
             text: areaValue,
             name: personName,
             time: new Date()
         };
-        axios/* default.post */.Z.post(`/api/addComments/?id=${postId}`, commentInfo).then((res)=>{
+        lib_axios/* default.post */.Z.post(`/api/addComments/?id=${postId}`, commentInfo).then((res)=>{
             setAreaValue("");
             setCommentsHandler(res.data.updatedPost.comments);
-        }).catch((error)=>console.log(error));
+            setButtonDisabled(false);
+        }).catch(()=>setButtonDisabled(false));
     };
     const convertDate = (dateValue)=>{
         if (!dateValue) {
@@ -849,7 +937,7 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
         return editData;
     };
     const CommentBlock = ({ name , userId , time , text  })=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-            className: "border rounded-lg p-2",
+            className: "border-l border-orange-400 p-2",
             children: [
                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                     className: "",
@@ -866,7 +954,7 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
                     ]
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "pt-4 text-lg",
+                    className: "pt-2 text-md",
                     children: text
                 })
             ]
@@ -899,16 +987,19 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
                     className: "py-4 text-xl",
                     children: postText
                 }),
-                /*#__PURE__*/ jsx_runtime_.jsx("hr", {}),
                 /*#__PURE__*/ jsx_runtime_.jsx("h3", {
-                    className: "mt-2 font-bold text-slate-600 text-xl",
+                    className: "font-bold text-slate-600 text-xl",
                     children: "Сomments"
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "h-auto overflow-y-scroll flex flex-col gap-4",
+                    className: "h-full overflow-y-scroll flex flex-col gap-4",
                     children: commentLoaded ? /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {
-                        children: commentsHandler.map((item)=>/*#__PURE__*/ jsx_runtime_.jsx(CommentBlock, {
+                        children: commentsHandler.length == 0 ? /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            className: "font-semibold capitalize text-lg",
+                            children: "no comments yet"
+                        }) : commentsHandler.map((item)=>/*#__PURE__*/ jsx_runtime_.jsx(CommentBlock, {
                                 userId: item.userId,
+                                name: item.name,
                                 time: item.time,
                                 text: item.text
                             }, (0,v4/* default */.Z)()))
@@ -928,7 +1019,21 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
                             onClick: ()=>sendComment(),
-                            className: " rounded-lg  py-4 px-2  flex  flex-col  items-center  justify-center bg-orange-400 text-white text-xl font-semibold cursor-pointer ",
+                            className: `
+              ${buttonDisabled ? "opacity-40" : ""}
+              rounded-lg 
+              py-4
+              px-2 
+              flex 
+              flex-col 
+              items-center 
+              justify-center
+              bg-orange-400
+              text-white
+              text-xl
+              font-semibold
+              cursor-pointer
+              `,
                             children: "Send"
                         })
                     ]
@@ -939,6 +1044,58 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
 };
 /* harmony default export */ const dashboard_Comments = (Comments);
 
+;// CONCATENATED MODULE: ./src/components/dashboard/EditPost.jsx
+/* __next_internal_client_entry_do_not_use__  auto */ 
+
+
+const EditPost = ({ openEdit , postText , onClose , editedText , posrId  })=>{
+    const [postValue, setPostValue] = (0,react_.useState)(postText);
+    const [isLoaded, setIsLoaded] = (0,react_.useState)(false);
+    const setEdit = ()=>{
+        setIsLoaded(true);
+        lib_axios/* default.patch */.Z.patch("/api/postEdit", {
+            postId: posrId,
+            editedText: postValue
+        }).then(()=>{
+            onClose();
+            setIsLoaded(false);
+            editedText(postValue);
+        });
+    };
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+        className: `${openEdit ? "flex" : "hidden"} fixed top-0 lg:bg-slate-600 lg:bg-opacity-20 left-0 w-full h-full z-20 items-center justify-center`,
+        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "h-full w-full lg:w-2/4 lg:h-auto lg:max-h-[70vh] p-4 lg:p-8 bg-slate-600 lg:bg-white bg-opacity-20 lg:rounded-lg flex flex-col gap-4 overflow-y-scroll justify-center",
+            children: [
+                isLoaded ? /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "w-full h-[250px] bg-white border flex items-center justify-center rounded-lg font-semibold text-xl",
+                    children: "Please Wait.."
+                }) : /*#__PURE__*/ jsx_runtime_.jsx("textarea", {
+                    className: "w-full h-[250px] resize-none text-xl font-medium p-2 lg:p-4 outline-none border border-orange-400 rounded-lg",
+                    value: postValue,
+                    onChange: (e)=>setPostValue(e.target.value)
+                }),
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "flex items-center gap-2",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            onClick: onClose,
+                            className: "cursor-pointer bg-white font-semibold text-lg py-3 px-2 lg:border rounded-lg",
+                            children: "Cancel"
+                        }),
+                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            onClick: setEdit,
+                            className: "cursor-pointer font-semibold text-lg py-3 px-5 bg-orange-400 text-white rounded-lg",
+                            children: "Edit"
+                        })
+                    ]
+                })
+            ]
+        })
+    });
+};
+/* harmony default export */ const dashboard_EditPost = (EditPost);
+
 ;// CONCATENATED MODULE: ./src/components/dashboard/PostCard.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -948,14 +1105,18 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
 
 
 
-const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userId , idPost , likesArr , comments  })=>{
+
+const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userId , idPost , likesArr , comments , imagePost  })=>{
     const [isMenuOpen, setIsMenuOpen] = (0,react_.useState)(false);
     const [isHidden, setIsHidden] = (0,react_.useState)(false);
     const [isRemove, setIsRemove] = (0,react_.useState)(false);
     const [isLiked, setIsLiked] = (0,react_.useState)(false);
     const [likeCounts, setLikeCounts] = (0,react_.useState)();
+    const [isImage, setIsImage] = (0,react_.useState)(null);
     const [commentsCount, setCommentsCount] = (0,react_.useState)();
     const [commentOpen, setCommentOpen] = (0,react_.useState)(false);
+    const [textPost, setTextPost] = (0,react_.useState)(postText);
+    const [editOpen, setEditOpen] = (0,react_.useState)(false);
     const createData = new Date(createdAt);
     const options = {
         hour: "numeric",
@@ -974,22 +1135,22 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
         }
     };
     const removePost = ()=>{
-        axios/* default.delete */.Z["delete"](`/api/postRemove/?id=${idPost}`).then((res)=>{
+        lib_axios/* default.delete */.Z["delete"](`/api/postRemove/?id=${idPost}`).then(()=>{
             setIsHidden(true);
         }).catch((err)=>console.log(err));
     };
     const changeLikeCount = ()=>{
         if (isLiked) {
-            axios/* default.patch */.Z.patch(`/api/postLikeTarger/?id=${idPost}`, {
+            lib_axios/* default.patch */.Z.patch(`/api/postLikeTarger/?id=${idPost}`, {
                 userId: profileId
-            }).then((res)=>{
+            }).then(()=>{
                 setLikeCounts((prev)=>prev - 1);
                 setIsLiked(false);
             });
         } else {
-            axios/* default.patch */.Z.patch(`/api/postLikeTarger/?id=${idPost}`, {
+            lib_axios/* default.patch */.Z.patch(`/api/postLikeTarger/?id=${idPost}`, {
                 userId: profileId
-            }).then((res)=>{
+            }).then(()=>{
                 setLikeCounts((prev)=>prev + 1);
                 setIsLiked(true);
             });
@@ -1026,6 +1187,13 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: `${isHidden ? "hidden" : ""} p-4 bg-white rounded-lg flex flex-col gap-4`,
         children: [
+            /*#__PURE__*/ jsx_runtime_.jsx(dashboard_EditPost, {
+                openEdit: editOpen,
+                postText: postText,
+                editedText: (value)=>setTextPost(value),
+                onClose: ()=>setEditOpen(false),
+                posrId: idPost
+            }),
             /*#__PURE__*/ jsx_runtime_.jsx(dashboard_Comments, {
                 onClose: ()=>setCommentOpen(false),
                 isOpen: commentOpen,
@@ -1035,7 +1203,8 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
                 isLoaded: isLoaded,
                 authorName: authorName,
                 dateString: dateString,
-                postId: idPost
+                postId: idPost,
+                imagePost: imagePost
             }),
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "flex items-center justify-between",
@@ -1069,11 +1238,12 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
               shadow-md 
             shadow-slate-400/10
             `,
-                                children: /*#__PURE__*/ jsx_runtime_.jsx("ul", {
-                                    className: `flex flex-col`,
-                                    children: /*#__PURE__*/ jsx_runtime_.jsx("li", {
-                                        onClick: ()=>removePost(),
-                                        className: `
+                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("ul", {
+                                    className: `flex flex-col gap-2`,
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("li", {
+                                            onClick: ()=>removePost(),
+                                            className: `
                     pin
                     relative
                     z-20
@@ -1083,18 +1253,45 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
                     gap-2 
                     cursor-pointer
                   `,
-                                        children: isRemove ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                                            children: [
-                                                /*#__PURE__*/ jsx_runtime_.jsx(ci_index_esm/* CiCircleMinus */.gKM, {
-                                                    size: 24
-                                                }),
-                                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                                    className: "",
-                                                    children: "Remove"
-                                                })
-                                            ]
-                                        }) : null
-                                    })
+                                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                className: "flex items-center gap-1",
+                                                children: [
+                                                    /*#__PURE__*/ jsx_runtime_.jsx(ci_index_esm/* CiCircleMinus */.gKM, {
+                                                        size: 24
+                                                    }),
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                        className: "",
+                                                        children: "Remove"
+                                                    })
+                                                ]
+                                            })
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("li", {
+                                            onClick: ()=>setEditOpen(true),
+                                            className: `
+                    pin
+                    relative
+                    z-20
+                    pin
+                    flex 
+                    items-center 
+                    gap-2 
+                    cursor-pointer
+                  `,
+                                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                className: "flex items-center gap-1",
+                                                children: [
+                                                    /*#__PURE__*/ jsx_runtime_.jsx(ci_index_esm/* CiEdit */.FNg, {
+                                                        size: 24
+                                                    }),
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                        className: "",
+                                                        children: "Edit"
+                                                    })
+                                                ]
+                                            })
+                                        })
+                                    ]
                                 })
                             })
                         ]
@@ -1112,7 +1309,20 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
           lg:text-xl
           tracking-wide
         `,
-                children: postText
+                children: textPost
+            }),
+            isLoaded && /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {
+                children: imagePost.length > 0 ? /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "flex",
+                    children: imagePost.map((item)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            className: "max-w-[250px] max-height-[250px] rounded-lg overflow-hidden flex items-center",
+                            children: /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                src: item.url,
+                                alt: "Description of the image",
+                                className: "w-auto h-auto object-fill"
+                            }, `${item.id}1fd2a`)
+                        }, item.id))
+                }) : null
             }),
             isLoaded ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: `${profileId ? "flex" : "hidden"} items-center gap-5`,
@@ -1164,7 +1374,7 @@ const MainDash = ()=>{
     const [isPostsLoading, setIsPostsLoading] = (0,react_.useState)(true);
     const [postsArr, setPosstsArr] = (0,react_.useState)(false);
     (0,react_.useEffect)(()=>{
-        axios/* default.get */.Z.get("/api/postGetAll").then((res)=>{
+        lib_axios/* default.get */.Z.get("/api/postGetAll").then((res)=>{
             setPosstsArr(res.data.reverse());
         }).catch((error)=>console.log(error));
     }, []);
@@ -1196,7 +1406,8 @@ const MainDash = ()=>{
                         likesArr: item.likesUser,
                         color: item.color,
                         image: item.image,
-                        comments: item.comments
+                        comments: item.comments,
+                        imagePost: item.imagePost
                     }, item._id))
             })
         ]
@@ -1205,13 +1416,59 @@ const MainDash = ()=>{
 /* harmony default export */ const components_MainDash = (MainDash);
 
 ;// CONCATENATED MODULE: ./src/components/dashboard/RightSide.jsx
-/* __next_internal_client_entry_do_not_use__  auto */ 
-const RightSide = ()=>{
-    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        className: "hidden lg:block rounded-lg"
+/* __next_internal_client_entry_do_not_use__ default auto */ 
+
+
+function Home() {
+    const [imageSrc, setImageSrc] = useState("");
+    function handleOnChange(changeEvent) {
+        const reader = new FileReader();
+        reader.onload = function(onLoadEvent) {
+            const newImageSrc = onLoadEvent.target.result;
+            setImageSrc(newImageSrc);
+        };
+        reader.readAsDataURL(changeEvent.target.files[0]);
+    }
+    const uploadValue = async ()=>{
+        console.log(imageSrc);
+        try {
+            const headers = {
+                "Content-Type": "application/json"
+            };
+            const file = JSON.stringify({
+                data: imageSrc
+            });
+            axios.post("/api/uploads/", file, {
+                headers
+            }).then((res)=>{
+                console.log(res.data);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    return /*#__PURE__*/ _jsxs("div", {
+        className: "hidden lg:block",
+        children: [
+            /*#__PURE__*/ _jsx("img", {
+                src: imageSrc,
+                alt: ""
+            }),
+            /*#__PURE__*/ _jsx("form", {
+                onChange: handleOnChange,
+                children: /*#__PURE__*/ _jsx("input", {
+                    type: "file",
+                    name: "file"
+                })
+            }),
+            /*#__PURE__*/ _jsx("button", {
+                onClick: uploadValue,
+                className: "border p-3 mt-4",
+                children: "send"
+            })
+        ]
     });
-};
-/* harmony default export */ const dashboard_RightSide = (RightSide);
+}
 
 ;// CONCATENATED MODULE: ./src/components/ContainerApp.jsx
 
@@ -1234,7 +1491,7 @@ var tailwind = __webpack_require__(8484);
 
 
 
-function Home() {
+function page_Home() {
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(ContainerApp, {
             children: [
@@ -1245,8 +1502,7 @@ function Home() {
                     isGrid: true,
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx(components_LeftSide, {}),
-                        /*#__PURE__*/ jsx_runtime_.jsx(components_MainDash, {}),
-                        /*#__PURE__*/ jsx_runtime_.jsx(dashboard_RightSide, {})
+                        /*#__PURE__*/ jsx_runtime_.jsx(components_MainDash, {})
                     ]
                 })
             ]
@@ -1326,7 +1582,7 @@ const { __esModule, $$typeof } = proxy;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [839,258], () => (__webpack_exec__(529)));
+var __webpack_exports__ = __webpack_require__.X(0, [839,826], () => (__webpack_exec__(529)));
 module.exports = __webpack_exports__;
 
 })();

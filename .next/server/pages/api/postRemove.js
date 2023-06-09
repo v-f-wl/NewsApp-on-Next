@@ -23,8 +23,7 @@ module.exports = require("mongoose");
 
 const PostSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)({
     text: {
-        type: String,
-        required: true
+        type: String
     },
     name: {
         type: String,
@@ -49,6 +48,10 @@ const PostSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
         required: true
     },
     comments: {
+        type: Array,
+        default: []
+    },
+    imagePost: {
         type: Array,
         default: []
     }

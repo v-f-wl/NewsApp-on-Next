@@ -15,7 +15,8 @@ export default async function handler(req, res) {
         name: req.body.nameValue,
         user: req.body.userId,
         color: req.body.color,
-        comments: []
+        comments: [],
+        imagePost: req.body.imagePost
       })
 
       const post = await doc.save()

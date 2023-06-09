@@ -3,8 +3,7 @@ import mongoose from 'mongoose'
 const PostSchema = new mongoose.Schema(
   {
     text: {
-      type: String,
-      required: true,
+      type: String
     },
     name: {
       type: String,
@@ -29,6 +28,10 @@ const PostSchema = new mongoose.Schema(
       required: true
     },
     comments: {
+      type: Array,
+      default: []
+    },
+    imagePost: {
       type: Array,
       default: []
     }

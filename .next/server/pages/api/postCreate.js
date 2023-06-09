@@ -23,8 +23,7 @@ module.exports = require("mongoose");
 
 const PostSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)({
     text: {
-        type: String,
-        required: true
+        type: String
     },
     name: {
         type: String,
@@ -49,6 +48,10 @@ const PostSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
         required: true
     },
     comments: {
+        type: Array,
+        default: []
+    },
+    imagePost: {
         type: Array,
         default: []
     }
@@ -84,7 +87,8 @@ __webpack_require__.r(__webpack_exports__);
                 name: req.body.nameValue,
                 user: req.body.userId,
                 color: req.body.color,
-                comments: []
+                comments: [],
+                imagePost: req.body.imagePost
             });
             const post = await doc.save();
             res.json(post);

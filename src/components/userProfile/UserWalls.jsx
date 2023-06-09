@@ -60,35 +60,11 @@ const UserWalls = () => {
                   createdAt={item.createdAt}
                   color={item.color}
                   comments={item.comments}
+                  imagePost={item.imagePost}
                 />
             ))}
           </>
         }
-        {/* {!isLoaded ? 
-            <>
-              <PostCard
-                isLoaded={false}
-              />
-              <PostCard
-                isLoaded={false}
-              />
-            </>
-          :
-          userInfo 
-          ? 
-          <>
-            (userInfo.map((if) => (
-
-            <PostCard
-              isLoaded={true}
-              postText='kk skdn nskndvl sld'
-              authorName='kdsvmls lskdnvlks'
-              createdAt
-              color='red'
-            />
-            )))
-          </>
-        } */}
       </div>
     </div>  
   );

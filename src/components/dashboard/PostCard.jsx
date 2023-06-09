@@ -3,23 +3,29 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { AiOutlineMore, AiOutlineHeart, AiOutlineComment } from 'react-icons/ai'
-import { CiCircleMinus } from 'react-icons/ci'
+import { CiCircleMinus, CiEdit } from 'react-icons/ci'
 import UserBlock from './UserBlock';
 import Comments from './Comments';
+import EditPost  from './EditPost';
 
-const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idPost, likesArr, comments}) => {
+const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idPost, likesArr, comments, imagePost}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
   const [isRemove, setIsRemove] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
   const [likeCounts, setLikeCounts] = useState()
+  const [isImage, setIsImage] = useState(null)
   const [commentsCount, setCommentsCount] = useState()
   const [commentOpen, setCommentOpen] = useState(false)
+
+  const [textPost, setTextPost] = useState(postText)
+  const [editOpen, setEditOpen] = useState(false)
 
   const createData = new Date(createdAt)
   const options = { hour: 'numeric', minute: 'numeric', year: 'numeric', month: 'long', day: 'numeric'};
   const dateString = createData.toLocaleDateString('en-US', options);
   const profileId = Cookies.get('id')
+
   const menu = (event) => {
     if(isMenuOpen && !event.target.closest('.pin')){
       setIsMenuOpen(false)
@@ -30,22 +36,23 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
 
   const removePost = () =>{
     axios.delete(`/api/postRemove/?id=${idPost}`)
-    .then(res => {
+    .then(() => {
       setIsHidden(true)
     })
     .catch(err => console.log(err))
 
   }
+  
   const changeLikeCount = () => {
     if(isLiked){
       axios.patch(`/api/postLikeTarger/?id=${idPost}`, {userId: profileId})
-      .then(res => {
+      .then(() => {
         setLikeCounts(prev => prev - 1)
         setIsLiked(false)
       })
     }else{
       axios.patch(`/api/postLikeTarger/?id=${idPost}`, {userId: profileId})
-      .then(res => {
+      .then(() => {
         setLikeCounts(prev => prev + 1)
         setIsLiked(true)
       })
@@ -69,15 +76,22 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
         setIsMenuOpen(false);
       }
     };
-  
     document.addEventListener('click', handleClickOutside);
-  
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [comments, likesArr, profileId, userId])
+
+  
   return ( 
     <div className={`${isHidden ? 'hidden' : ''} p-4 bg-white rounded-lg flex flex-col gap-4`}>
+      <EditPost
+        openEdit={editOpen}
+        postText={postText}
+        editedText={(value) => setTextPost(value)}
+        onClose={() => setEditOpen(false)}
+        posrId={idPost}
+      />
       <Comments
         onClose={() => setCommentOpen(false)}
         isOpen={commentOpen}
@@ -88,6 +102,7 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
         authorName={authorName}
         dateString={dateString}
         postId={idPost}
+        imagePost={imagePost}
       />
       <div className="flex items-center justify-between">
         <UserBlock
@@ -116,7 +131,7 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
             `}
             >
               <ul 
-                className={`flex flex-col`}>
+                className={`flex flex-col gap-2`}>
                 <li 
                   onClick={() => removePost()}
                   className={`
@@ -130,16 +145,28 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
                     cursor-pointer
                   `}
                 >
-                  {isRemove ? 
-                    (
-                      <>
-                        <CiCircleMinus size={24}/>
-                        <span className="">Remove</span>
-                      </>
-                    ) 
-                    : 
-                    null
-                  }
+                  <div className="flex items-center gap-1">
+                    <CiCircleMinus size={24}/>
+                    <span className="">Remove</span>
+                  </div>
+                </li>
+                <li
+                  onClick={() =>setEditOpen(true)}
+                  className={`
+                    pin
+                    relative
+                    z-20
+                    pin
+                    flex 
+                    items-center 
+                    gap-2 
+                    cursor-pointer
+                  `}
+                >
+                  <div className="flex items-center gap-1">
+                      <CiEdit size={24}/>
+                      <span className="">Edit</span>
+                    </div>
                 </li>
               </ul>
           </div>
@@ -157,8 +184,25 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
           tracking-wide
         `}
       >
-        {postText}
+        {textPost}
       </div>
+      {
+        isLoaded &&
+        <>
+          {imagePost.length > 0 ? (
+            <div className="flex">
+            {imagePost.map(item => (
+                <div key={item.id} className="max-w-[250px] max-height-[250px] rounded-lg overflow-hidden flex items-center">
+                  <img src={item.url} key={`${item.id}1fd2a`} alt="Description of the image" className='w-auto h-auto object-fill'/>
+                </div>
+            ))
+            }
+            </div>)
+            : 
+          (null)
+          }
+        </>
+      }
       {isLoaded ? 
         (
           <div 

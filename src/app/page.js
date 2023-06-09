@@ -17,7 +17,6 @@ export default function Home() {
         <MainContainer isGrid={true}>
           <LeftSide/>
           <MainDash/>
-          <RightSide/>
         </MainContainer>
       </Container>
     </div>

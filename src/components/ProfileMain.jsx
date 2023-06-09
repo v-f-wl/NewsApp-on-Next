@@ -68,6 +68,7 @@ const ProfileMain = () => {
                   createdAt={item.createdAt}
                   color={item.color}
                   comments={item.comments}
+                  imagePost={item.imagePost}
                 />
               ))}
             </div>

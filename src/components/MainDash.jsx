@@ -45,6 +45,7 @@ const MainDash = () => {
               color={item.color}
               image={item.image}
               comments={item.comments}
+              imagePost={item.imagePost}
             />
           )
         )
