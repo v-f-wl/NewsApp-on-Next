@@ -1,20 +1,34 @@
 'use client'
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { AiOutlineMore, AiOutlineHeart, AiOutlineComment } from 'react-icons/ai'
 import { CiCircleMinus, CiEdit } from 'react-icons/ci'
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
 import UserBlock from './UserBlock';
 import Comments from './Comments';
 import EditPost  from './EditPost';
 
-const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idPost, likesArr, comments, imagePost}) => {
+const PostCard = ({
+  isLoaded, 
+  postText, 
+  authorName, 
+  createdAt, 
+  color, 
+  userId, 
+  idPost, 
+  likesArr, 
+  comments, 
+  imagePost, 
+  tags, 
+  selectTag}) => {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
   const [isRemove, setIsRemove] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
   const [likeCounts, setLikeCounts] = useState()
-  const [isImage, setIsImage] = useState(null)
   const [commentsCount, setCommentsCount] = useState()
   const [commentOpen, setCommentOpen] = useState(false)
 
@@ -117,7 +131,8 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
           <div 
             className={`
               ${isMenuOpen ? "visible" : "invisible"}
-              ${isMenuOpen ? "top-10" : "top-0"}
+              ${isMenuOpen ? "top-10" : "top-8"}
+              transition-all
               py-3
               px-2
               right-0
@@ -185,15 +200,36 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
         `}
       >
         {textPost}
+
+      </div>
+      <div className="">
+        {tags && (
+          <div className="flex items-center flex-wrap gap-2">
+            {tags.map(item => (
+              <div 
+                key={uuidv4()}
+                onClick={() => selectTag(item)}
+                className="text-sm cursor-pointer text-slate-400 lg:hover:text-orange-400 lg:transition"
+              >
+                #{item}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       {
         isLoaded &&
         <>
           {imagePost.length > 0 ? (
-            <div className="flex">
+            <div className="flex justify-center">
             {imagePost.map(item => (
-                <div key={item.id} className="max-w-[250px] max-height-[250px] rounded-lg overflow-hidden flex items-center">
-                  <img src={item.url} key={`${item.id}1fd2a`} alt="Description of the image" className='w-auto h-auto object-fill'/>
+                <div key={item.id} className=" max-w-[290px] max-h-[290px] lg:max-w-[350px] lg:max-h-[350px] flex items-center justify-center rounded-lg overflow-hidden">
+                  <img 
+                    key={`${item.id}1fd2a`} 
+                    src={item.url} 
+                    alt="Description of the image" 
+                    className='w-auto h-auto rounded-lg object-cover object-center'
+                  />
                 </div>
             ))
             }
@@ -219,9 +255,9 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
               <span className='text-slate-800'>{likeCounts}</span>
             </div>
             <div 
-              className="px-2 py-2 border flex items-center gap-2 rounded-full cursor-pointer"
               onClick={() => setCommentOpen(true )}
-            >
+              className="px-2 py-2 border flex items-center gap-2 rounded-full cursor-pointer"
+              >
 
               <AiOutlineComment size={24} className='text-slate-400'/>
               <span className='text-slate-800'>{commentsCount}</span>
@@ -230,9 +266,7 @@ const PostCard = ({isLoaded, postText, authorName, createdAt, color, userId, idP
         ) 
         : 
         (
-          <div 
-            className="animate-pulsew-[100px]h-[40px]rounded-lg bg-slate-300"
-          >
+          <div className="animate-pulsew-[100px]h-[40px]rounded-lg bg-slate-300">
           </div>
         )
       }

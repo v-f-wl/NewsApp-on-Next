@@ -2,44 +2,47 @@
 
 const Input = ({
   id,
-    label,
-    type,
-    disabled,
-    formatPrice,
-    required,
-    register,
-    errors,
-    pas
+  label,
+  type,
+  formatPrice,
+  pas,
+  setValue,
 }) => {
-  return ( 
+
+  const changeValue = (e) => {
+    setValue(prev => {
+      const data = { ...prev }
+      data[id] = e.target.value
+      return data
+    })
+  }
+  return (
     <div className="w-full relative">
-            <input 
-                id={id} 
-                disabled={disabled}
-                {...register(id, { required })}
-                placeholder=" "
-                type={type}
-                autoComplete={pas || ''}
-                className={`
-                    peer
-                    w-full
-                    p-4
-                    pt-6
-                    font-light
-                    bg-white
-                    border
-                    rounded-md
-                    outline-none
-                    transition
-                    disabled:opacity-70
-                    disabled:cursor-not-allowed
-                    ${formatPrice ? 'pl-9' : 'pl-4'}
-                    ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
-                    ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}
-                `}
-            />
-            <label
-                className={`
+      <input
+        id={id}
+        placeholder=" "
+        type={type}
+        onChange={(e) => changeValue(e)}
+        autoComplete={pas || ''}
+        className={`
+            peer
+            w-full
+            p-4
+            pr-11
+            pt-6
+            font-light
+            bg-white
+            rounded-md
+            outline-none
+            border
+            transition
+            disabled:opacity-70
+            disabled:cursor-not-allowed
+            ${formatPrice ? 'pl-9' : 'pl-4'}
+        `}
+      />
+      <label
+        className={`
                     absolute
                     text-md
                     duration-150
@@ -55,11 +58,11 @@ const Input = ({
                     peer-focus:-translate-y-4
                     text-zinc-400
                 `}
-            >
-                {label}
-            </label>
-        </div>
+      >
+        {label}
+      </label>
+    </div>
   );
 }
- 
+
 export default Input;

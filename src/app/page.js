@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import LeftSide from "../components/LeftSide";
 import MainContainer from "../components/MainContainer";
 import MainDash from "../components/MainDash";
-import RightSide from "../components/dashboard/RightSide";
 import Container from '../components/ContainerApp'
 import 'tailwindcss/tailwind.css';
 

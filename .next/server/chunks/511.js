@@ -38,8 +38,8 @@ const LeftSide = ()=>{
     }, [
         userInfo
     ]);
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: "h-[60px] lg:h-full bg-white lg:bg-transparent rounded-lg",
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("nav", {
+        className: "h-[40px] lg:h-full bg-white lg:bg-transparent rounded-lg",
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
             className: "flex items-center justify-center lg:justify-start lg:items-start lg:flex-col gap-8 lg:gap-4 py-2 h-full",
             children: [

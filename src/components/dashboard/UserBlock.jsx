@@ -15,6 +15,9 @@ const UserBlock = ({userId, color, isLoaded, authorName, dateString}) => {
           text-slate-800 
           text-sm 
           self-end
+          w-[250]
+          lg:w-[290px]
+          overflow-hidden
         `}
       >
         {isLoaded ? authorName : ''}

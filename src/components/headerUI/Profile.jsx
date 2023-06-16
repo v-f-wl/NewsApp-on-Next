@@ -1,7 +1,7 @@
 'use client'
-import Cookies from 'js-cookie'
 import { useState } from 'react'
 import { FiMoreVertical} from 'react-icons/fi'
+import Cookies from 'js-cookie'
 
 
 const Profile = () => {
@@ -21,11 +21,17 @@ const Profile = () => {
     window.location.reload();
   }
   return ( 
-    <div className="md:justify-self-end flex items-center md:gap-4 h-full">
-        <div className="px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[310px] rounded-lg">
-          <div className="flex items-center gap-2">
-            <div style={{backgroundColor: color}} className="w-[25px] h-[25px] lg:w-[30px] lg:h-[30px] bg-neutral-200 rounded-lg"></div>
-            <div className="font-light text-sm text-slate-800">{nameInfo}</div>
+    <div className="justify-self-end flex items-center md:gap-4 h-full">
+        <div className="px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[240px] sm:w-[310px] lg:w-[310px] rounded-lg">
+          <div className="flex items-center gap-2 overflow-hidden">
+            <div 
+              style={{backgroundColor: color}} 
+              className="w-[25px] h-[25px] lg:max-w-[30px] lg:max-h-[30px] bg-neutral-200 rounded-lg"
+            >
+            </div>
+            <div className="font-light text-sm text-slate-800 w-3/4 overflow-hidden">
+              {nameInfo}
+            </div>
           </div>
           <div className="relative" >
             <FiMoreVertical 
@@ -36,7 +42,7 @@ const Profile = () => {
             {!modal ? null : 
               (
                 <div className="w-[100px] absolute bg-white p-2 right-0 top-10 border border-orange-400 rounded-lg z-20">
-                  <ul className="">
+                  <ul >
                     <li className="cursor-pointer" onClick={() => exit()}>
                       Log out
                     </li>

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const connectDB= async () => mongoose
-.connect("mongodb+srv://admin:mGGtyZRdxf9gRNlJ@cluster0.liynhak.mongodb.net/blog?retryWrites=true&w=majority")
+.connect(process.env.MONGODB_KEY)
 .then(() => console.log('DB Okay'))
 .catch(() => console.log('Dont Connect'))
 

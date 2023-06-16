@@ -12,57 +12,6 @@ module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 9189:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1185);
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-
-const PostSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)({
-    text: {
-        type: String
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    likesCount: {
-        type: Number,
-        default: 0
-    },
-    likesUser: {
-        type: Array,
-        required: true,
-        default: []
-    },
-    user: {
-        type: (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema.Types.ObjectId),
-        ref: "User",
-        required: true
-    },
-    color: {
-        type: String,
-        required: true
-    },
-    comments: {
-        type: Array,
-        default: []
-    },
-    imagePost: {
-        type: Array,
-        default: []
-    }
-}, {
-    timestamps: true
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models.Posts) || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("Posts", PostSchema));
-
-
-/***/ }),
-
 /***/ 2338:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -82,8 +31,8 @@ __webpack_require__.r(__webpack_exports__);
     if (req.method === "PATCH") {
         await (0,_utils_connectMongoDB__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();
         try {
-            const postId = req.query.id; // Используйте req.query.id для получения параметра id из URL
-            const { userId  } = req.body; // Получите userId из тела запроса
+            const postId = req.query.id;
+            const { userId  } = req.body;
             const updatedPost = await _models_Post__WEBPACK_IMPORTED_MODULE_1__/* ["default"].findById */ .Z.findById(postId);
             if (!updatedPost) {
                 return res.status(404).json({
@@ -92,44 +41,27 @@ __webpack_require__.r(__webpack_exports__);
                 });
             }
             const { likesUser  } = updatedPost;
-            const userIndex = likesUser.indexOf(userId); // Проверяем, присутствует ли userId в массиве likesUser
+            const userIndex = likesUser.indexOf(userId);
             if (userIndex === -1) {
-                // Если userId не найден, добавляем его в массив
                 likesUser.push(userId);
             } else {
-                // Если userId найден, удаляем его из массива
                 likesUser.splice(userIndex, 1);
             }
-            updatedPost.likesCount = likesUser.length; // Обновляем likesCount на основе длины массива likesUser
-            updatedPost.markModified("likesUser"); // Помечаем likesUser как модифицированное поле
-            await updatedPost.save(); // Сохраняем обновленную статью
+            updatedPost.likesCount = likesUser.length;
+            updatedPost.markModified("likesUser");
+            await updatedPost.save();
             res.json({
                 success: true,
                 updatedPost
             });
         } catch (error) {
-            console.error(error);
             res.status(500).json({
-                message: "Не удалось обновить статью"
+                message: "Не удалось обновить статью",
+                error: error
             });
         }
     }
 }
-
-
-/***/ }),
-
-/***/ 2204:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1185);
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-
-const connectDB = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().connect("mongodb+srv://admin:mGGtyZRdxf9gRNlJ@cluster0.liynhak.mongodb.net/blog?retryWrites=true&w=majority").then(()=>console.log("DB Okay")).catch(()=>console.log("Dont Connect"));
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (connectDB);
 
 
 /***/ })
@@ -141,7 +73,7 @@ const connectDB = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().conn
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(2338));
+var __webpack_exports__ = __webpack_require__.X(0, [414], () => (__webpack_exec__(2338)));
 module.exports = __webpack_exports__;
 
 })();

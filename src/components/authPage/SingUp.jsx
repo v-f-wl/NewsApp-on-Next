@@ -1,52 +1,60 @@
 'use client'
-import Link from "next/link";
-import Input from "./Input";
-import { HexColorPicker as Picker } from 'react-colorful';
-import {
-  FieldValues,
-  SubmitHandler,
-  useForm
-} from 'react-hook-form'
-import axios from "axios";
 import { useState } from "react";
-import Cookies from 'js-cookie';
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { HexColorPicker as Picker } from 'react-colorful';
+import Cookies from 'js-cookie';
+import axios from "axios";
+
+import Input from "./Input";
 
 const SingUp = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [color, setColor] = useState()
+  const [isValid, setIsValid] = useState(false)
+  const [fetchError, setFetchError] = useState(false)
+  const [dataValue, setDataVelue] = useState({
+    fullName: '',
+    email: '',
+    password: ''
+  })
 
   const router = useRouter()
-  const { 
-    register, 
-    handleSubmit,
-    formState: {
-      errors,
-    },
-  } = useForm({
-    defaultValues: {
-      fullName: '',
-      email: '',
-      password: ''
-    },
-  })
-  const onSubmit = async (data) => {
+
+  const isValidFunc = () => {
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if(emailRegex.test(dataValue.email) && dataValue.password.length >= 8 && dataValue.fullName.length > 5){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  const onSubmit = async (event) => {
+    event.preventDefault()
     const fullData ={
-      ...data,
+      ...dataValue,
       color: color
     }
-    console.log(fullData)
-    axios.post('/api/userRegister', fullData)
-    .then((res) => {
-      setIsLoading(true)
-      Cookies.set('token', res.data.token);
-      Cookies.set('id', res.data._id);
-      Cookies.set('name', res.data.fullName);
-      Cookies.set('color', res.data.avatar);
-      setIsLoading(false)
-      router.push('/')
-    })
-    .catch((error) => console.log(error))
+    if(isValidFunc()){
+      setIsValid(false)
+      axios.post('/api/userRegister', fullData)
+      .then((res) => {
+        setIsLoading(true)
+        Cookies.set('token', res.data.token);
+        Cookies.set('id', res.data._id);
+        Cookies.set('name', res.data.fullName);
+        Cookies.set('color', res.data.avatar);
+        setIsLoading(false)
+        router.push('/')
+      })
+      .catch(() => {
+        setFetchError(true)
+      })
+    }else{
+      setIsValid(true)
+      return
+    }
   }
 
 
@@ -65,31 +73,25 @@ const SingUp = () => {
       <div className="flex justify-center">
         <span className="font-semibold text-2xl text-slate-600">SignUp</span>
       </div>
-      <form action="handleSubmit" className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <form  className="flex flex-col gap-4" >
       <Input
           id='fullName'
           label="Full Name"
           type="text"
-          required
-          register={register}
-          errors={errors}
+          setValue={(value) => setDataVelue(value)}
         />
         <Input
           id='email'
           label="Email"
           type="email"
-          required
-          register={register}
-          errors={errors}
+          setValue={(value) => setDataVelue(value)}
         />
         <Input
           id='password'
           label="Password"
           type="password"
           pas='current-password'
-          required
-          register={register}
-          errors={errors}
+          setValue={(value) => setDataVelue(value)}
         />
         <div>
           <span className="block py-2 text-center">Select a color for your avatar</span>
@@ -97,13 +99,23 @@ const SingUp = () => {
             <Picker color='a23333' onChange={setColor}/>
           </div>
         </div>
-        <button className="border border-orange-400 py-4 rounded-lg text-slate-800 text-xl" type="submit">SingUp</button>
+        {fetchError && (
+          <div className="text-sm text-red-500 text-center font-light">
+            The email address is already taken.
+          </div>
+        )}
+        {isValid && (
+          <div className="text-sm text-red-500 text-center font-light">
+            Make sure the email is entered correctly, the password is at least 8 characters long, and the name is at least 5 characters long.
+          </div>
+        )}
+        <button className="border border-orange-400 py-4 rounded-lg text-slate-800 text-xl" onClick={(event) => onSubmit(event)}>SingUp</button>
       </form>
       <div className="text-slate-400 inline-flex gap-4">
         Already have an account?
         <Link href='/authpage' className="text-slate-600 cursor-pointer transition hover:text-orange-400">
           LogIn
-      </Link>
+        </Link>
       </div>
     </div>
   );

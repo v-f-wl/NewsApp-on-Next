@@ -17,11 +17,22 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      required: true
     },
-    pin: {
-      type: Array,
-      default: []
+    avatarImg: {
+      type: String,
+      default: ''
+    },
+    city: {
+      type: String,
+      default: ''
+    },
+    age: {
+      type: String,
+      default: ''
+    },
+    hobbies: {
+      type: String,
+      default: ''
     }
   },
   {

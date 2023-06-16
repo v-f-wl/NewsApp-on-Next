@@ -15,14 +15,16 @@ export default async function handler(req, res) {
       const post = await PostModel.findById(postId);
 
       if (!post) {
-        return res.status(404).json({ message: 'Пост не найден' });
+        return res.status(404).json({ message: 'Пост не найден' })
       }
       post.text = editedText;
-      const updatedPost = await post.save();
-      res.status(200).json(updatedPost);
+      const updatedPost = await post.save()
+      res.status(200).json(updatedPost)
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Произошла ошибка при редактировании поста' });
+      res.status(500).json({ 
+        message: 'Произошла ошибка при редактировании поста',
+        error: error
+      });
     }
 
   }

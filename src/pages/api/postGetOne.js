@@ -21,9 +21,9 @@ export default async function handler(req, res) {
       ...post
     })
   } catch (error) {
-      console.log(error)
       res.status(404).json({
-        message: 'Не удалось получить пост'
+        message: 'Не удалось получить пост',
+        error: error
     })
   }
 
@@ -31,4 +31,3 @@ export default async function handler(req, res) {
     message: 'что-то пошло не так'
   })
 }
-// res.status(200).json({ name: 'John efDoe' });

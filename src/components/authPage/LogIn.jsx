@@ -1,35 +1,22 @@
 'use client'
-import Link from "next/link";
-import Input from "./Input";
-import {
-  FieldValues,
-  handleSubmit,
-  useForm
-} from 'react-hook-form'
-import axios from "axios";
 import { useState } from "react";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+import Input from "./Input";
 
 const LogIn = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const router = useRouter()
-  const { 
-    register, 
-    handleSubmit,
-    formState: {
-      errors,
-    },
-  } = useForm({
-    defaultValues: {
-      email: '',
-      password: ''
-    },
-  })
+  const [dataValue, setDataVelue] = useState({email: '', password: ''})
 
-  const onSubmit = async(data) => {
-    axios.post('/api/userLogin', data)
+
+  const onSubmit = async(event) => {
+    event.preventDefault()
+    axios.post('/api/userLogin', dataValue)
     .then(res => {
       setIsLoading(true)
       Cookies.set('id', res.data._id);
@@ -40,7 +27,6 @@ const LogIn = () => {
       router.push('/')
     })
     .catch((err) =>{
-      console.log(err)
       setSuccess(true)
     }
     )
@@ -65,28 +51,26 @@ const LogIn = () => {
           Something went wrong...
         </div>
       ) : null}
-      <form action='handleSubmit' className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col gap-4">
         <Input
           id='email'
           label="Email"
           type="email"
-          required
-          register={register}
-          errors={errors}
+          error={true}
+          setValue={(value) => setDataVelue(value)}v
         />
         <Input
           id='password'
           label="Password"
           type="password"
-          required
           pas='current-password'
-          register={register}
-          errors={errors}
+          error={true}
+          setValue={(value) => setDataVelue(value)}
         />
-        <button className="border border-orange-400 py-4 rounded-lg text-slate-800 text-xl" type="submit">LogIn</button>
+        <button onClick={(e) => onSubmit(e)} className="border border-orange-400 py-4 rounded-lg text-slate-800 text-xl">LogIn</button>
       </form>
       <div className="text-slate-400 inline-flex gap-2 flex-wrap">
-        First time using AirPlay?
+        First time using Flumpf?
         <Link href='/authpage?id=signup' className="text-slate-600 cursor-pointer transition hover:text-orange-400">
         Create an account
       </Link>

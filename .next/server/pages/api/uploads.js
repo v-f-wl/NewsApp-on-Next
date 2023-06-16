@@ -22,8 +22,8 @@ const external_cloudinary_namespaceObject = require("cloudinary");
 
 external_cloudinary_namespaceObject.v2.config({
     cloud_name: "dxzx1bkz1",
-    api_key: "441643216429182",
-    api_secret: "vm-_S0mZGl9gyc3kdZG2-kco_a4",
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
     secure: true
 });
 async function handler(req, res) {
@@ -40,7 +40,8 @@ async function handler(req, res) {
         } catch (error) {
             res.status(500).json({
                 success: false,
-                message: "Error uploading image"
+                message: "Error uploading image",
+                error: error
             });
         }
     }

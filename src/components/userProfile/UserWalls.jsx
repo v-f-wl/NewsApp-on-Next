@@ -1,11 +1,13 @@
 'use client'
-import { useRouter } from "next/router";
-import PostCard from "../dashboard/PostCard";
-import ProfileTitle from "../profileMail/ProfileTitle";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useRouter as useRouterNav } from "next/navigation";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useRouter as useRouterNav } from "next/navigation";
+
+import ProfileTitle from "../profileMail/ProfileTitle";
+import PostCard from "../dashboard/PostCard";
+import AboutInfo from "../profileMail/AboutInfo";
 
 const UserWalls = () => {
   
@@ -34,38 +36,42 @@ const UserWalls = () => {
     }
   }, [id, personId, routerTwo])
   return ( 
-    <div className="bg-white lg:rounded-lg p-4 max-h-[70vh] overflow-y-scroll">
-      <ProfileTitle title="Posts"/>
-      <div className="mt-4 flex flex-col gap-2 ">
-        {!isLoaded ? 
-          (<>
-            <PostCard
-              isLoaded={false}
-            />
-            <PostCard
-              isLoaded={false}
-            />
-          </>) 
-          :
-          <>
-            {userInfo.map((item) => (
-                <PostCard
-                  isLoaded={true}
-                  key={item._id}
-                  postText={item.text}
-                  idPost={item._id}
-                  userId={item.user}
-                  likesArr={item.likesUser}
-                  authorName={item.name}
-                  createdAt={item.createdAt}
-                  color={item.color}
-                  comments={item.comments}
-                  imagePost={item.imagePost}
-                />
-            ))}
-          </>
-        }
+    <div className="lg:mt-10 lg:grid lg:grid-cols-32 lg:gap-12 lg:items-start lg:h-auto">
+      <div className="bg-white rounded-lg py-4 lg:py-8 px-2 lg:px-4">
+        <ProfileTitle title="Posts"/>
+        <div className="mt-4 flex flex-col gap-2 ">
+          {!isLoaded ? 
+            (<>
+              <PostCard
+                isLoaded={false}
+              />
+              <PostCard
+                isLoaded={false}
+              />
+            </>) 
+            :
+            <>
+              {userInfo.map((item) => (
+                  <PostCard
+                    isLoaded={true}
+                    key={item._id}
+                    postText={item.text}
+                    idPost={item._id}
+                    userId={item.user}
+                    likesArr={item.likesUser}
+                    authorName={item.name}
+                    createdAt={item.createdAt}
+                    color={item.color}
+                    comments={item.comments}
+                    imagePost={item.imagePost}
+                  />
+              ))}
+            </>
+          }
+        </div>
       </div>
+        <AboutInfo
+        />
     </div>  
   );
 }

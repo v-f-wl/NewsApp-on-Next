@@ -9,7 +9,10 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try{
       await connectDB()
-      const { userId } = req.query
+      const { userId } = req.query 
+      if(userId === undefined){
+        res.json({mess : 'error'})
+      }
       const user = await UserModal.findById(userId)
       if(!user){
         return res.status(404).json({
@@ -24,7 +27,8 @@ export default async function handler(req, res) {
     }catch(error){
       console.log(error)
       res.status(500).json({
-        message: 'Нет доступа'
+        message: 'Нет доступа',
+        error: error
       })
     }
   }

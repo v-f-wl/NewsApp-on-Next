@@ -1,11 +1,11 @@
 'use client'
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+
 import ColorModal from "./ColorModal";
 import SettingModal from "./SettingModal";
 import NameModal from "./NameModal";
-import Cookies from "js-cookie";
-import { useRouter } from "next/router";
-import Feedback from "./Feedback";
 
 const SettingsContainer = () => {
   const [modalColor, setModalColor] = useState(false)
@@ -45,12 +45,6 @@ const SettingsContainer = () => {
         >
           Change Name
         </div>
-        <div 
-          onClick={() => setModalFeedBack(true)}
-          className="cursor-pointer border-l-2 border-orange-400 px-2"
-        >
-          Здесь можно оставить отзыв
-        </div>
         <div className="text-orange-400 cursor-pointer" onClick={logOut}>
           Log Out
         </div>
@@ -59,27 +53,14 @@ const SettingsContainer = () => {
         isOpen={modalColor}
       >
         <ColorModal
-          isOpen = {() => {
-            setModalColor(false)
-          }}
+          isOpen = {() => {setModalColor(false)}}
         />
       </SettingModal>
       <SettingModal
         isOpen={modalName}
       >
         <NameModal
-          isOpen = {() => {
-            setModalName(false)
-          }}
-        />
-      </SettingModal>
-      <SettingModal
-        isOpen={modalFeedBack}
-      >
-        <Feedback
-          isOpen = {() => {
-            setModalFeedBack(false)
-          }}
+          isOpen = {() => {setModalName(false)}}
         />
       </SettingModal>
     </div>

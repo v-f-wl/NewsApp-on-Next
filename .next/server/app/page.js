@@ -377,11 +377,11 @@ Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_
 /***/ 74:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 6718))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 6751))
 
 /***/ }),
 
-/***/ 6718:
+/***/ 6751:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -390,17 +390,22 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ page_Home)
+  "default": () => (/* binding */ Home)
 });
 
 // EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
 var jsx_runtime_ = __webpack_require__(6786);
 // EXTERNAL MODULE: external "next/dist/compiled/react"
 var react_ = __webpack_require__(8038);
+// EXTERNAL MODULE: ./node_modules/react-icons/ai/index.esm.js
+var index_esm = __webpack_require__(9722);
 // EXTERNAL MODULE: ./node_modules/js-cookie/dist/js.cookie.mjs
 var js_cookie = __webpack_require__(7270);
+// EXTERNAL MODULE: ./node_modules/next/link.js
+var next_link = __webpack_require__(1621);
+var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 // EXTERNAL MODULE: ./node_modules/react-icons/fi/index.esm.js
-var index_esm = __webpack_require__(7808);
+var fi_index_esm = __webpack_require__(7808);
 ;// CONCATENATED MODULE: ./src/components/headerUI/Profile.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -421,21 +426,21 @@ const Profile = ()=>{
         window.location.reload();
     };
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        className: "md:justify-self-end flex items-center md:gap-4 h-full",
+        className: "justify-self-end flex items-center md:gap-4 h-full",
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-            className: "px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[310px] rounded-lg",
+            className: "px-2 shadow-sm h-[40px] flex justify-between items-center gap-2 w-[240px] sm:w-[310px] lg:w-[310px] rounded-lg",
             children: [
                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                    className: "flex items-center gap-2",
+                    className: "flex items-center gap-2 overflow-hidden",
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
                             style: {
                                 backgroundColor: color
                             },
-                            className: "w-[25px] h-[25px] lg:w-[30px] lg:h-[30px] bg-neutral-200 rounded-lg"
+                            className: "w-[25px] h-[25px] lg:max-w-[30px] lg:max-h-[30px] bg-neutral-200 rounded-lg"
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "font-light text-sm text-slate-800",
+                            className: "font-light text-sm text-slate-800 w-3/4 overflow-hidden",
                             children: nameInfo
                         })
                     ]
@@ -443,7 +448,7 @@ const Profile = ()=>{
                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                     className: "relative",
                     children: [
-                        /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* FiMoreVertical */.$Pu, {
+                        /*#__PURE__*/ jsx_runtime_.jsx(fi_index_esm/* FiMoreVertical */.$Pu, {
                             onClick: ()=>openModal(),
                             size: 24,
                             className: "text-orange-600 cursor-pointer"
@@ -451,7 +456,6 @@ const Profile = ()=>{
                         !modal ? null : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                             className: "w-[100px] absolute bg-white p-2 right-0 top-10 border border-orange-400 rounded-lg z-20",
                             children: /*#__PURE__*/ jsx_runtime_.jsx("ul", {
-                                className: "",
                                 children: /*#__PURE__*/ jsx_runtime_.jsx("li", {
                                     className: "cursor-pointer",
                                     onClick: ()=>exit(),
@@ -467,26 +471,8 @@ const Profile = ()=>{
 };
 /* harmony default export */ const headerUI_Profile = (Profile);
 
-;// CONCATENATED MODULE: ./src/components/headerUI/Search.jsx
-
-
-
-const Search = ()=>{
-    const [searchValue, setSearchValue] = (0,react_.useState)("");
-    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        className: "hidden lg:block justify-self-center relative"
-    });
-};
-/* harmony default export */ const headerUI_Search = (Search);
-
-// EXTERNAL MODULE: ./node_modules/next/link.js
-var next_link = __webpack_require__(1621);
-var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
-// EXTERNAL MODULE: ./node_modules/react-icons/ai/index.esm.js
-var ai_index_esm = __webpack_require__(9722);
 ;// CONCATENATED MODULE: ./src/components/Header.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
-
 
 
 
@@ -519,14 +505,14 @@ const Header = ({ search  })=>{
                 })
             ]
         });
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("header", {
         className: "h-[65px] bg-white rounded-b-lg grid grid-cols-2 lg:grid-cols-3 grid-rows-1 items-center px-5 shadow-md shadow-slate-400/10",
         children: [
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
                 href: "/",
                 className: "font-semibold text-slate-600 flex items-center gap-1",
                 children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineHolder */.kUE, {
+                    /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineHolder */.kUE, {
                         size: 24
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
@@ -535,8 +521,8 @@ const Header = ({ search  })=>{
                     })
                 ]
             }),
-            search ? /*#__PURE__*/ jsx_runtime_.jsx(headerUI_Search, {}) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "hidden lg:block"
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: "hidden lg:block p-2"
             }),
             !isLoading ? null : isAuth ? /*#__PURE__*/ jsx_runtime_.jsx(headerUI_Profile, {}) : /*#__PURE__*/ jsx_runtime_.jsx(Buttons, {})
         ]
@@ -565,8 +551,8 @@ const LeftSide = ()=>{
     }, [
         userInfo
     ]);
-    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        className: "h-[60px] lg:h-full bg-white lg:bg-transparent rounded-lg",
+    return /*#__PURE__*/ jsx_runtime_.jsx("nav", {
+        className: "h-[40px] lg:h-full bg-white lg:bg-transparent rounded-lg",
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("ul", {
             className: "flex items-center justify-center lg:justify-start lg:items-start lg:flex-col gap-8 lg:gap-4 py-2 h-full",
             children: [
@@ -574,7 +560,7 @@ const LeftSide = ()=>{
                     href: linkProfile,
                     className: "flex gap-2 items-center cursor-pointer",
                     children: [
-                        /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineUser */.nf1, {
+                        /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineUser */.nf1, {
                             size: 24,
                             className: "text-orange-500"
                         }),
@@ -588,7 +574,7 @@ const LeftSide = ()=>{
                     href: "/",
                     className: "flex gap-2 items-center cursor-pointer",
                     children: [
-                        /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineBorderlessTable */.VdP, {
+                        /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineBorderlessTable */.VdP, {
                             size: 24,
                             className: "text-orange-500"
                         }),
@@ -602,7 +588,7 @@ const LeftSide = ()=>{
                     href: linkSettings,
                     className: "flex gap-2 items-center cursor-pointer",
                     children: [
-                        /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineSetting */.zPD, {
+                        /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineSetting */.zPD, {
                             size: 24,
                             className: "text-orange-500"
                         }),
@@ -642,10 +628,160 @@ const MainContainer = ({ isGrid , children  })=>{
 };
 /* harmony default export */ const components_MainContainer = (MainContainer);
 
+// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
+var axios = __webpack_require__(248);
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(9483);
-// EXTERNAL MODULE: ./node_modules/axios/lib/axios.js + 46 modules
-var lib_axios = __webpack_require__(248);
+// EXTERNAL MODULE: ./node_modules/compressorjs/dist/compressor.common.js
+var compressor_common = __webpack_require__(9931);
+var compressor_common_default = /*#__PURE__*/__webpack_require__.n(compressor_common);
+;// CONCATENATED MODULE: ./src/tagData/index.js
+const tags = [
+    "funny",
+    "humor",
+    "life",
+    "stories",
+    "adventures",
+    "memories",
+    "laughter",
+    "friends",
+    "family",
+    "travel",
+    "hobbies",
+    "entertainment",
+    "inspiration",
+    "creativity",
+    "food",
+    "music",
+    "books",
+    "movies",
+    "pets",
+    "nature",
+    "celebrations",
+    "random",
+    "dailyroutine",
+    "weekendvibes",
+    "relaxation",
+    "achievements",
+    "reflection"
+];
+/* harmony default export */ const tagData = (tags);
+
+;// CONCATENATED MODULE: ./src/components/dashboard/Tags.jsx
+
+const Tags = ({ value , disabled , toggle  })=>{
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+        onClick: ()=>toggle(value),
+        className: `
+        ${disabled ? "bg-orange-400" : ""}
+        ${disabled ? "text-white" : ""}
+        py-1 
+        px-2 
+        border 
+        rounded-full 
+        cursor-pointer
+      `,
+        children: value
+    });
+};
+/* harmony default export */ const dashboard_Tags = (Tags);
+
+;// CONCATENATED MODULE: ./src/components/dashboard/TagsModal.jsx
+/* __next_internal_client_entry_do_not_use__  auto */ 
+
+
+
+
+const TagsModal = ({ getTags  })=>{
+    const [modalOpen, setModalOpen] = (0,react_.useState)(false);
+    const [tagsValue, setTagsValue] = (0,react_.useState)([]);
+    const toggleTag = (value)=>{
+        if (tagsValue.indexOf(value) === -1 && tagsValue.length <= 4) {
+            const newArr = [
+                ...tagsValue,
+                value
+            ];
+            setTagsValue(newArr);
+        } else {
+            const newArr = tagsValue.filter((item)=>item !== value);
+            setTagsValue(newArr);
+        }
+    };
+    const addTag = ()=>{
+        getTags(tagsValue);
+        setModalOpen(false);
+    };
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+        className: "w-full",
+        children: [
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                onClick: ()=>setModalOpen(true),
+                className: "cursor-pointer w-1/4 py-2 rounded-lg flex items-center justify-center border",
+                children: "Add tags"
+            }),
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: `
+          ${modalOpen ? "top-0" : "-top-[800px]"} 
+          absolute 
+          left-0
+          bg-white
+          z-40 
+          w-full 
+          h-full 
+          transition-all
+          py-8
+          px-4
+          overflow-y-scroll
+        `,
+                children: [
+                    /*#__PURE__*/ jsx_runtime_.jsx("h2", {
+                        className: "font-semibold text-2xl text-slate-500",
+                        children: "Select tags"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                        className: "text-slate-600 font-light text-sm",
+                        children: "Maximum number of tags: 5"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "flex gap-2 flex-wrap mt-4  overflow-y-scroll",
+                        children: tagData.map((item)=>/*#__PURE__*/ jsx_runtime_.jsx(dashboard_Tags, {
+                                disabled: tagsValue.indexOf(item) === -1 ? false : true,
+                                value: item,
+                                toggle: toggleTag
+                            }, item))
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "flex items-center gap-4 ",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                onClick: ()=>addTag(),
+                                className: " mt-2  cursor-pointer  w-1/4  py-2  rounded-lg  flex  items-center  justify-center  text-white  bg-orange-400",
+                                children: "add"
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("span", {
+                                className: "font-light text-sm text-orange-400",
+                                children: [
+                                    "Selected ",
+                                    tagsValue.length,
+                                    "/5"
+                                ]
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "absolute top-4 right-4",
+                        onClick: ()=>setModalOpen(false),
+                        children: /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineCloseCircle */.SV5, {
+                            size: 24
+                        })
+                    })
+                ]
+            })
+        ]
+    });
+};
+/* harmony default export */ const dashboard_TagsModal = (TagsModal);
+
 ;// CONCATENATED MODULE: ./src/components/dashboard/HeaderDash.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -653,12 +789,15 @@ var lib_axios = __webpack_require__(248);
 
 
 
+
+
 const HeaderDash = ()=>{
-    const router = (0,navigation.useRouter)();
     const [modal, setModal] = (0,react_.useState)(false);
     const [imageSrc, setImageSrc] = (0,react_.useState)(null);
     const [postValue, setPostValue] = (0,react_.useState)("");
     const [isCreating, setIsCreating] = (0,react_.useState)(false);
+    const [getTags, setGetTags] = (0,react_.useState)([]);
+    const router = (0,navigation.useRouter)();
     const idValue = js_cookie/* default.get */.Z.get("id");
     const nameValue = js_cookie/* default.get */.Z.get("name");
     const color = js_cookie/* default.get */.Z.get("color");
@@ -672,78 +811,106 @@ const HeaderDash = ()=>{
     const removeImage = ()=>{
         setImageSrc(null);
     };
-    function handleOnChange(changeEvent) {
-        const reader = new FileReader();
-        reader.onload = function(onLoadEvent) {
-            setImageSrc(onLoadEvent.target.result);
-        };
-        reader.readAsDataURL(changeEvent.target.files[0]);
+    async function handleOnChange(changeEvent) {
+        const imageFile = changeEvent.target.files[0];
+        try {
+            const maxSizeMB = 1;
+            const compressedFile = await new Promise((resolve, reject)=>{
+                new (compressor_common_default())(imageFile, {
+                    quality: 0.95,
+                    maxWidth: 900,
+                    maxHeight: 900,
+                    success (result) {
+                        if (result.size <= maxSizeMB * 1024 * 1024) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const base64Image = e.target.result;
+                                setImageSrc(base64Image);
+                            };
+                            reader.onerror = function(error) {
+                                reject(error);
+                            };
+                            reader.readAsDataURL(result);
+                        } else {
+                            console.log("error");
+                        }
+                    },
+                    error (error) {
+                        reject(error);
+                    }
+                });
+            });
+        } catch (error) {
+            console.error(error);
+        }
     }
-    const createPost = ()=>{
+    const uploadPost = async ()=>{
         setIsCreating(true);
         if (imageSrc === null && postValue.length === 0) {
             setIsCreating(false);
             return false;
         }
         try {
-            const headers = {
-                "Content-Type": "application/json"
-            };
-            const file = JSON.stringify({
-                data: imageSrc
-            });
             if (imageSrc === null) {
-                try {
-                    const bodyInfo = {
-                        text: postValue,
-                        nameValue: nameValue,
-                        userId: idValue,
-                        color: color
-                    };
-                    lib_axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res));
-                    setModal(false);
+                const bodyInfo = {
+                    text: postValue,
+                    nameValue: nameValue,
+                    userId: idValue,
+                    color: color,
+                    tags: getTags
+                };
+                axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res)).catch(()=>{
                     setIsCreating(false);
-                    setImageSrc(null);
-                    setPostValue("");
-                    window.location.reload();
-                } catch (error) {
-                    console.log(error);
-                }
-            } else {
-                lib_axios/* default.post */.Z.post("/api/uploads/", file, {
-                    headers
-                }).then(async (res)=>{
-                    const bodyInfo = {
-                        text: postValue,
-                        nameValue: nameValue,
-                        userId: idValue,
-                        color: color,
-                        imagePost: [
-                            {
-                                url: res.data.url,
-                                id: res.data.id
-                            }
-                        ] // Добавляем URL изображения в массив
-                    };
-                    try {
-                        await lib_axios/* default.post */.Z.post("/api/postCreate", bodyInfo).then((res)=>console.log(res));
-                        setModal(false);
-                        setIsCreating(false);
-                        setImageSrc(null);
-                        setPostValue("");
-                        window.location.reload();
-                    } catch (error) {
-                        console.log(error);
-                    }
                 });
+                setModal(false);
+                setIsCreating(false);
+                setImageSrc(null);
+                setPostValue("");
+                window.location.reload();
+            } else {
+                const headers = {
+                    "Content-Type": "application/json"
+                };
+                const file = JSON.stringify({
+                    data: imageSrc
+                });
+                const uploadResponse = await axios/* default.post */.Z.post("/api/uploads/", file, {
+                    headers
+                });
+                const bodyInfo = {
+                    text: postValue,
+                    nameValue: nameValue,
+                    userId: idValue,
+                    color: color,
+                    tags: getTags,
+                    imagePost: [
+                        {
+                            url: uploadResponse.data.url,
+                            id: uploadResponse.data.id
+                        }
+                    ]
+                };
+                await axios/* default.post */.Z.post("/api/postCreate", bodyInfo);
+                setModal(false);
+                setIsCreating(false);
+                setImageSrc(null);
+                setPostValue("");
+                window.location.reload();
             }
-        } catch (error) {}
+        } catch (err) {
+            setIsCreating(false);
+        }
+        setIsCreating(false);
     };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: " flex  items-center rounded-lg  bg-white  sticky  z-10 top-0  shadow-md  shadow-slate-400/10 ",
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "m-3 w-8 h-8 rounded-lg bg-slate-300"
+                className: "m-3 w-8 h-8 rounded-lg bg-orange-400 flex items-center justify-center",
+                children: /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineForm */.lFz, {
+                    size: 22,
+                    className: "text-white"
+                })
             }),
             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 onClick: ()=>isUser(),
@@ -771,7 +938,7 @@ const HeaderDash = ()=>{
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
                             onClick: ()=>setModal(false),
                             className: "  text-slate-500  absolute  top-4 right-4  cursor-pointer z-10 ",
-                            children: /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineCloseCircle */.SV5, {
+                            children: /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineCloseCircle */.SV5, {
                                 size: 24
                             })
                         }),
@@ -802,28 +969,29 @@ const HeaderDash = ()=>{
                                     ]
                                 }),
                                 imageSrc && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                    className: "w-[150px] h-[150px] lg:w-[250px] lg:h-[250px] relative",
+                                    className: "max-w-[150px] max-h-[150px] lg:max-w-[250px] lg:max-h-[250px] rounded-lg relative flex items-center justify-center overflow-hidden",
                                     children: [
                                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                            className: "absolute bg-white top-2 right-2 rounded-md",
                                             onClick: ()=>removeImage(),
-                                            children: /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineClose */.oHP, {
+                                            className: "absolute bg-white top-2 right-2 rounded-md ",
+                                            children: /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineClose */.oHP, {
                                                 size: 24,
                                                 className: "text-orange-400 cursor-pointer"
                                             })
                                         }),
                                         /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                                            className: "w-full h-full rounded-lg object-cover object-center",
-                                            src: imageSrc
+                                            src: imageSrc,
+                                            alt: "image",
+                                            className: "w-auto h-auto rounded-lg object-cover object-center"
                                         })
                                     ]
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                    className: "flex items-center",
+                                    className: "flex items-center gap-2",
                                     children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                         className: "w-[30px] h-[30px] overflow-hidden border relative flex items-center justify-center rounded-sm",
                                         children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlinePicture */.Ypm, {
+                                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlinePicture */.Ypm, {
                                                 size: 26,
                                                 className: "text-orange-400"
                                             }),
@@ -841,10 +1009,18 @@ const HeaderDash = ()=>{
                                     })
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("hr", {}),
-                                /*#__PURE__*/ jsx_runtime_.jsx("button", {
-                                    className: "border w-1/4 py-2 rounded-lg",
-                                    onClick: createPost,
-                                    children: "Create"
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    className: "flex items-center gap-2",
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            onClick: uploadPost,
+                                            className: "bg-orange-400 text-white w-1/4 py-2 rounded-lg cursor-pointer flex items-center justify-center",
+                                            children: "Create"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx(dashboard_TagsModal, {
+                                            getTags: (value)=>setGetTags(value)
+                                        })
+                                    ]
                                 })
                             ]
                         })
@@ -858,6 +1034,8 @@ const HeaderDash = ()=>{
 
 // EXTERNAL MODULE: ./node_modules/react-icons/ci/index.esm.js
 var ci_index_esm = __webpack_require__(9859);
+// EXTERNAL MODULE: ./node_modules/uuid/dist/esm-node/v4.js + 3 modules
+var v4 = __webpack_require__(5269);
 ;// CONCATENATED MODULE: ./src/components/dashboard/UserBlock.jsx
 
 
@@ -883,6 +1061,9 @@ const UserBlock = ({ userId , color , isLoaded , authorName , dateString  })=>{
           text-slate-800 
           text-sm 
           self-end
+          w-[250]
+          lg:w-[290px]
+          overflow-hidden
         `,
                 children: isLoaded ? authorName : ""
             }),
@@ -895,8 +1076,6 @@ const UserBlock = ({ userId , color , isLoaded , authorName , dateString  })=>{
 };
 /* harmony default export */ const dashboard_UserBlock = (UserBlock);
 
-// EXTERNAL MODULE: ./node_modules/uuid/dist/esm-node/v4.js + 3 modules
-var v4 = __webpack_require__(5269);
 ;// CONCATENATED MODULE: ./src/components/dashboard/Comments.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
@@ -906,7 +1085,7 @@ var v4 = __webpack_require__(5269);
 
 
 
-const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString , onClose , postId , postText  })=>{
+const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString , onClose , postId , postText , imagePost  })=>{
     const [areaValue, setAreaValue] = (0,react_.useState)("");
     const [commentsHandler, setCommentsHandler] = (0,react_.useState)();
     const [commentLoaded, setCommentLoaded] = (0,react_.useState)(false);
@@ -915,13 +1094,14 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
     const personName = js_cookie/* default.get */.Z.get("name");
     (0,react_.useEffect)(()=>{
         if (isOpen) {
-            lib_axios/* default.get */.Z.get(`/api/getComments/?postId=${postId}`).then((res)=>{
+            axios/* default.get */.Z.get(`/api/getComments/?postId=${postId}`).then((res)=>{
                 setCommentsHandler(res.data.comments);
                 setCommentLoaded(true);
             });
         }
     }, [
-        isOpen
+        isOpen,
+        postId
     ]);
     const sendComment = ()=>{
         if (areaValue.length === 0 || buttonDisabled) {
@@ -934,7 +1114,7 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
             name: personName,
             time: new Date()
         };
-        lib_axios/* default.post */.Z.post(`/api/addComments/?id=${postId}`, commentInfo).then((res)=>{
+        axios/* default.post */.Z.post(`/api/addComments/?id=${postId}`, commentInfo).then((res)=>{
             setAreaValue("");
             setCommentsHandler(res.data.updatedPost.comments);
             setButtonDisabled(false);
@@ -996,15 +1176,27 @@ const Comments = ({ isOpen , userId , color , isLoaded , authorName , dateString
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
                             className: "cursor-pointer",
                             onClick: onClose,
-                            children: /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineClose */.oHP, {
+                            children: /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineClose */.oHP, {
                                 size: 24
                             })
                         })
                     ]
                 }),
-                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                     className: "py-4 text-xl",
-                    children: postText
+                    children: [
+                        postText,
+                        imagePost !== undefined && imagePost.length > 0 && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                            className: "flex items-center overflow-hidden",
+                            children: imagePost.map((item)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    className: "w-[100px] h-[100px] rounded-lg",
+                                    children: /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                        src: item.url,
+                                        className: "h-full w-full object-cover rounded-lg"
+                                    })
+                                }, `${item.id}1fddv2a`))
+                        })
+                    ]
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("h3", {
                     className: "font-bold text-slate-600 text-xl",
@@ -1072,7 +1264,7 @@ const EditPost = ({ openEdit , postText , onClose , editedText , posrId  })=>{
     const [isLoaded, setIsLoaded] = (0,react_.useState)(false);
     const setEdit = ()=>{
         setIsLoaded(true);
-        lib_axios/* default.patch */.Z.patch("/api/postEdit", {
+        axios/* default.patch */.Z.patch("/api/postEdit", {
             postId: posrId,
             editedText: postValue
         }).then(()=>{
@@ -1084,7 +1276,7 @@ const EditPost = ({ openEdit , postText , onClose , editedText , posrId  })=>{
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         className: `${openEdit ? "flex" : "hidden"} fixed top-0 lg:bg-slate-600 lg:bg-opacity-20 left-0 w-full h-full z-20 items-center justify-center`,
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-            className: "h-full w-full lg:w-2/4 lg:h-auto lg:max-h-[70vh] p-4 lg:p-8 bg-slate-600 lg:bg-white bg-opacity-20 lg:rounded-lg flex flex-col gap-4 overflow-y-scroll justify-center",
+            className: " h-full w-full  lg:w-2/4  lg:h-auto  lg:max-h-[70vh]  p-4  lg:p-8  bg-slate-600  lg:bg-white  bg-opacity-20  lg:rounded-lg  flex  flex-col  gap-4  overflow-y-scroll  justify-center ",
             children: [
                 isLoaded ? /*#__PURE__*/ jsx_runtime_.jsx("div", {
                     className: "w-full h-[250px] bg-white border flex items-center justify-center rounded-lg font-semibold text-xl",
@@ -1104,7 +1296,7 @@ const EditPost = ({ openEdit , postText , onClose , editedText , posrId  })=>{
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
                             onClick: setEdit,
-                            className: "cursor-pointer font-semibold text-lg py-3 px-5 bg-orange-400 text-white rounded-lg",
+                            className: "cursor-pointer font-semibold text-lg py-3 px-5 bg-orange-400 text-white rounded-lg ",
                             children: "Edit"
                         })
                     ]
@@ -1125,13 +1317,13 @@ const EditPost = ({ openEdit , postText , onClose , editedText , posrId  })=>{
 
 
 
-const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userId , idPost , likesArr , comments , imagePost  })=>{
+
+const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userId , idPost , likesArr , comments , imagePost , tags , selectTag  })=>{
     const [isMenuOpen, setIsMenuOpen] = (0,react_.useState)(false);
     const [isHidden, setIsHidden] = (0,react_.useState)(false);
     const [isRemove, setIsRemove] = (0,react_.useState)(false);
     const [isLiked, setIsLiked] = (0,react_.useState)(false);
     const [likeCounts, setLikeCounts] = (0,react_.useState)();
-    const [isImage, setIsImage] = (0,react_.useState)(null);
     const [commentsCount, setCommentsCount] = (0,react_.useState)();
     const [commentOpen, setCommentOpen] = (0,react_.useState)(false);
     const [textPost, setTextPost] = (0,react_.useState)(postText);
@@ -1154,20 +1346,20 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
         }
     };
     const removePost = ()=>{
-        lib_axios/* default.delete */.Z["delete"](`/api/postRemove/?id=${idPost}`).then(()=>{
+        axios/* default.delete */.Z["delete"](`/api/postRemove/?id=${idPost}`).then(()=>{
             setIsHidden(true);
         }).catch((err)=>console.log(err));
     };
     const changeLikeCount = ()=>{
         if (isLiked) {
-            lib_axios/* default.patch */.Z.patch(`/api/postLikeTarger/?id=${idPost}`, {
+            axios/* default.patch */.Z.patch(`/api/postLikeTarger/?id=${idPost}`, {
                 userId: profileId
             }).then(()=>{
                 setLikeCounts((prev)=>prev - 1);
                 setIsLiked(false);
             });
         } else {
-            lib_axios/* default.patch */.Z.patch(`/api/postLikeTarger/?id=${idPost}`, {
+            axios/* default.patch */.Z.patch(`/api/postLikeTarger/?id=${idPost}`, {
                 userId: profileId
             }).then(()=>{
                 setLikeCounts((prev)=>prev + 1);
@@ -1239,13 +1431,14 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
                         className: `${isRemove ? "flex" : "hidden"}  relative menu-container z-0`,
                         onClick: (e)=>menu(e),
                         children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineMore */.fXH, {
+                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineMore */.fXH, {
                                 size: 22
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: `
               ${isMenuOpen ? "visible" : "invisible"}
-              ${isMenuOpen ? "top-10" : "top-0"}
+              ${isMenuOpen ? "top-10" : "top-8"}
+              transition-all
               py-3
               px-2
               right-0
@@ -1330,15 +1523,29 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
         `,
                 children: textPost
             }),
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: "",
+                children: tags && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "flex items-center flex-wrap gap-2",
+                    children: tags.map((item)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            onClick: ()=>selectTag(item),
+                            className: "text-sm cursor-pointer text-slate-400 lg:hover:text-orange-400 lg:transition",
+                            children: [
+                                "#",
+                                item
+                            ]
+                        }, (0,v4/* default */.Z)()))
+                })
+            }),
             isLoaded && /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {
                 children: imagePost.length > 0 ? /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "flex",
+                    className: "flex justify-center",
                     children: imagePost.map((item)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "max-w-[250px] max-height-[250px] rounded-lg overflow-hidden flex items-center",
+                            className: " max-w-[290px] max-h-[290px] lg:max-w-[350px] lg:max-h-[350px] flex items-center justify-center rounded-lg overflow-hidden",
                             children: /*#__PURE__*/ jsx_runtime_.jsx("img", {
                                 src: item.url,
                                 alt: "Description of the image",
-                                className: "w-auto h-auto object-fill"
+                                className: "w-auto h-auto rounded-lg object-cover object-center"
                             }, `${item.id}1fd2a`)
                         }, item.id))
                 }) : null
@@ -1350,7 +1557,7 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
                         onClick: ()=>changeLikeCount(),
                         className: "px-2 py-2 border flex items-center gap-2 rounded-full cursor-pointer",
                         children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineHeart */.lo, {
+                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineHeart */.lo, {
                                 size: 24,
                                 className: `${isLiked ? "text-red-500" : "text-slate-400"}`
                             }),
@@ -1361,10 +1568,10 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
                         ]
                     }),
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        className: "px-2 py-2 border flex items-center gap-2 rounded-full cursor-pointer",
                         onClick: ()=>setCommentOpen(true),
+                        className: "px-2 py-2 border flex items-center gap-2 rounded-full cursor-pointer",
                         children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx(ai_index_esm/* AiOutlineComment */.RG4, {
+                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineComment */.RG4, {
                                 size: 24,
                                 className: "text-slate-400"
                             }),
@@ -1383,111 +1590,128 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
 };
 /* harmony default export */ const dashboard_PostCard = (PostCard);
 
+;// CONCATENATED MODULE: ./src/components/dashboard/TagsInfo.jsx
+
+
+const TagsInfo = ({ value , clearTag  })=>{
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+        className: " p-3 flex  items-center justify-between rounded-lg  bg-white  sticky  z-10 top-0  shadow-md  shadow-slate-400/10 ",
+        children: [
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: "h-8 leading-8 font-semibold text-xl text-slate-700",
+                children: [
+                    "#",
+                    value
+                ]
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                onClick: clearTag,
+                className: "cursor-pointer",
+                children: /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineCloseCircle */.SV5, {
+                    size: 20,
+                    className: "text-orange-400"
+                })
+            })
+        ]
+    });
+};
+/* harmony default export */ const dashboard_TagsInfo = (TagsInfo);
+
 ;// CONCATENATED MODULE: ./src/components/MainDash.jsx
 /* __next_internal_client_entry_do_not_use__  auto */ 
 
 
 
 
+
 const MainDash = ()=>{
     const [isPostsLoading, setIsPostsLoading] = (0,react_.useState)(true);
-    const [postsArr, setPosstsArr] = (0,react_.useState)(false);
+    const [posts, setPosts] = (0,react_.useState)([]);
+    const [modalError, setModalError] = (0,react_.useState)(false);
+    const [selectedTag, setSelectedTag] = (0,react_.useState)("");
+    const [filteredData, setFilteredData] = (0,react_.useState)(posts);
     (0,react_.useEffect)(()=>{
-        lib_axios/* default.get */.Z.get("/api/postGetAll").then((res)=>{
-            setPosstsArr(res.data.reverse());
-        }).catch((error)=>console.log(error));
-    }, []);
-    (0,react_.useEffect)(()=>{
-        if (postsArr.length > 0) {
-            setIsPostsLoading(false);
+        if (selectedTag === "") {
+            return;
         }
+        const newArr = [
+            ...posts
+        ];
+        const filteredData = newArr.filter((post)=>post.tags.includes(selectedTag));
+        setFilteredData(filteredData);
     }, [
-        postsArr
+        selectedTag,
+        posts
     ]);
+    const getPost = async ()=>{
+        setIsPostsLoading(true);
+        setModalError(false);
+        try {
+            const posts = await axios/* default.get */.Z.get("/api/postGetAll");
+            setPosts(posts.data.reverse());
+            setFilteredData(posts.data);
+            setIsPostsLoading(false);
+        } catch (error) {
+            setModalError(true);
+        }
+    };
+    (0,react_.useEffect)(()=>{
+        getPost();
+    }, []);
+    const creatTag = ()=>{
+        setSelectedTag("");
+        setFilteredData(posts);
+    };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: "relative overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none",
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx(dashboard_HeaderDash, {}),
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+            selectedTag === "" ? /*#__PURE__*/ jsx_runtime_.jsx(dashboard_HeaderDash, {}) : /*#__PURE__*/ jsx_runtime_.jsx(dashboard_TagsInfo, {
+                value: selectedTag,
+                clearTag: ()=>creatTag()
+            }),
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8",
-                children: (isPostsLoading ? [
-                    ...Array(4)
-                ] : postsArr).map((item, index)=>isPostsLoading ? /*#__PURE__*/ jsx_runtime_.jsx(dashboard_PostCard, {
-                        isLoaded: false
-                    }, index) : /*#__PURE__*/ jsx_runtime_.jsx(dashboard_PostCard, {
-                        isLoaded: true,
-                        idPost: item._id,
-                        userId: item.user,
-                        postText: item.text,
-                        authorName: item.name,
-                        createdAt: item.createdAt,
-                        likeCount: item.likesCount,
-                        likesArr: item.likesUser,
-                        color: item.color,
-                        image: item.image,
-                        comments: item.comments,
-                        imagePost: item.imagePost
-                    }, item._id))
+                children: [
+                    modalError && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: " absolute  inset-0  bg-white  rounded-t-lg  z-50 flex  flex-col  items-center  justify-center  gap-2",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: " text-xl font-semibold",
+                                children: "Something went wrong..."
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                onClick: ()=>getPost(),
+                                className: "inline-block py-3 px-2 bg-orange-400 text-white rounded-lg cursor-pointer",
+                                children: "Try Again"
+                            })
+                        ]
+                    }),
+                    (isPostsLoading ? [
+                        ...Array(4)
+                    ] : filteredData).map((item, index)=>isPostsLoading ? /*#__PURE__*/ jsx_runtime_.jsx(dashboard_PostCard, {
+                            isLoaded: false
+                        }, index) : /*#__PURE__*/ jsx_runtime_.jsx(dashboard_PostCard, {
+                            isLoaded: true,
+                            idPost: item._id,
+                            userId: item.user,
+                            postText: item.text,
+                            authorName: item.name,
+                            createdAt: item.createdAt,
+                            likeCount: item.likesCount,
+                            likesArr: item.likesUser,
+                            color: item.color,
+                            image: item.image,
+                            comments: item.comments,
+                            imagePost: item.imagePost,
+                            tags: item.tags,
+                            selectTag: (value)=>setSelectedTag(value)
+                        }, item._id))
+                ]
             })
         ]
     });
 };
 /* harmony default export */ const components_MainDash = (MainDash);
-
-;// CONCATENATED MODULE: ./src/components/dashboard/RightSide.jsx
-/* __next_internal_client_entry_do_not_use__ default auto */ 
-
-
-function Home() {
-    const [imageSrc, setImageSrc] = useState("");
-    function handleOnChange(changeEvent) {
-        const reader = new FileReader();
-        reader.onload = function(onLoadEvent) {
-            const newImageSrc = onLoadEvent.target.result;
-            setImageSrc(newImageSrc);
-        };
-        reader.readAsDataURL(changeEvent.target.files[0]);
-    }
-    const uploadValue = async ()=>{
-        console.log(imageSrc);
-        try {
-            const headers = {
-                "Content-Type": "application/json"
-            };
-            const file = JSON.stringify({
-                data: imageSrc
-            });
-            axios.post("/api/uploads/", file, {
-                headers
-            }).then((res)=>{
-                console.log(res.data);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    return /*#__PURE__*/ _jsxs("div", {
-        className: "hidden lg:block",
-        children: [
-            /*#__PURE__*/ _jsx("img", {
-                src: imageSrc,
-                alt: ""
-            }),
-            /*#__PURE__*/ _jsx("form", {
-                onChange: handleOnChange,
-                children: /*#__PURE__*/ _jsx("input", {
-                    type: "file",
-                    name: "file"
-                })
-            }),
-            /*#__PURE__*/ _jsx("button", {
-                onClick: uploadValue,
-                className: "border p-3 mt-4",
-                children: "send"
-            })
-        ]
-    });
-}
 
 ;// CONCATENATED MODULE: ./src/components/ContainerApp.jsx
 
@@ -1509,8 +1733,7 @@ var tailwind = __webpack_require__(8484);
 
 
 
-
-function page_Home() {
+function Home() {
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(ContainerApp, {
             children: [
@@ -1548,8 +1771,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const metadata = {
-    title: "Air Play",
-    description: "Generated by create next app"
+    title: "Flumpf",
+    description: ""
 };
 function RootLayout({ children  }) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("html", {
@@ -1601,7 +1824,7 @@ const { __esModule, $$typeof } = proxy;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [839,258], () => (__webpack_exec__(529)));
+var __webpack_exports__ = __webpack_require__.X(0, [839,290], () => (__webpack_exec__(529)));
 module.exports = __webpack_exports__;
 
 })();

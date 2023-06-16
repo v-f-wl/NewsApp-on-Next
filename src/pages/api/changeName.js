@@ -10,17 +10,15 @@ export default async function handler(req, res) {
   connectDB();
   if (req.method === "PATCH") {
     try {
-      const { id } = req.query; // Получаем ID пользователя из запроса
-      const { nameValue } = req.body; // Получаем код цвета из тела запроса
+      const { id } = req.query
+      const { nameValue } = req.body
 
-      // Проверяем, что идентификатор пользователя и код цвета были переданы
       if (!id || !nameValue) {
         return res.status(400).json({
           message: "Недостаточно данных для обновления",
-        });
+        })
       }
 
-      // Обновляем поле "avatar" в модели "User"
       const updatedUser = await UserModal.findOneAndUpdate(
         { _id: id },
         { $set: { fullName: nameValue } },
@@ -34,8 +32,8 @@ export default async function handler(req, res) {
       }
 
       PostsModal.updateMany(
-        { user: id }, // Условие выбора постов для обновления
-        { $set: { name: nameValue } } // Обновляем поле "color" для каждого поста
+        { user: id }, 
+        { $set: { name: nameValue } } 
       )
         .then(updatedPost => {
           if (!updatedPost) {
@@ -46,23 +44,23 @@ export default async function handler(req, res) {
           res.json({
             user: updatedUser,
             post: updatedPost,
-          });
+          })
         })
         .catch(error => {
-          console.log(error);
           res.status(500).json({
             message: "Произошла ошибка при обновлении поста",
-          });
-        });
+            error: error
+          })
+        })
     } catch (error) {
-      console.log(error);
       res.status(500).json({
         message: "Произошла ошибка при обновлении пользователя",
-      });
+        error: error
+      })
     }
   } else {
     res.status(400).json({
       message: "Метод не разрешен",
-    });
+    })
   }
 }

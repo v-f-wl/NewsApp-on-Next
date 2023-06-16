@@ -16,15 +16,15 @@ export default async function handler(req, res) {
         user: req.body.userId,
         color: req.body.color,
         comments: [],
+        tags: req.body.tags,
         imagePost: req.body.imagePost
       })
 
       const post = await doc.save()
       res.json(post)
     }catch(error){
-      console.log(error)
       res.status(510).json({
-        message: error
+        message: error,
       })
     }
   }

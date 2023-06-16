@@ -1,18 +1,19 @@
 
 import 'tailwindcss/tailwind.css';
+import '../app/globals.css'
+import Head from 'next/head';
+
 import Container from "../components/ContainerApp";
 import Header from "../components/Header";
-import '../app/globals.css'
 import MainContainer from '../components/MainContainer';
 import LeftSide from '../components/LeftSide';
 import SettingsContainer from '../components/settingsUI/SettingsContainer';
-import Head from 'next/head';
 
 const ProfilePage = () => {
   return ( 
     <Container>
       <Head>
-        <title>Air Play - settings</title>
+        <title>Flumpf - settings</title>
       </Head>
       <Header/>
       <MainContainer isGrid={false} >

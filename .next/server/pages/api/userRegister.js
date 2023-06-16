@@ -26,45 +26,6 @@ module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 1757:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1185);
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-
-const UserSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)({
-    fullName: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    passwordHash: {
-        type: String,
-        required: true
-    },
-    avatar: {
-        type: String,
-        required: true
-    },
-    pin: {
-        type: Array,
-        default: []
-    }
-}, {
-    timestamps: true
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models.User) || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("User", UserSchema));
-
-
-/***/ }),
-
 /***/ 2023:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -103,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
             const user = await doc.save();
             const token = jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default().sign({
                 _id: user._id
-            }, "secret123", {
+            }, process.env.JVT_SECRET, {
                 expiresIn: "30d"
             });
             const { passwordHash , ...userData } = user._doc;
@@ -125,21 +86,6 @@ __webpack_require__.r(__webpack_exports__);
 }
 
 
-/***/ }),
-
-/***/ 2204:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1185);
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-
-const connectDB = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().connect("mongodb+srv://admin:mGGtyZRdxf9gRNlJ@cluster0.liynhak.mongodb.net/blog?retryWrites=true&w=majority").then(()=>console.log("DB Okay")).catch(()=>console.log("Dont Connect"));
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (connectDB);
-
-
 /***/ })
 
 };
@@ -149,7 +95,7 @@ const connectDB = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().conn
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(2023));
+var __webpack_exports__ = __webpack_require__.X(0, [168], () => (__webpack_exec__(2023)));
 module.exports = __webpack_exports__;
 
 })();

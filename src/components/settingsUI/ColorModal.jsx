@@ -1,8 +1,10 @@
 'use client'
+
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
 import { HexColorPicker as Picker } from 'react-colorful';
+
 import SettingTitle from './SettingTitle';
 
 const ColorModal = ({isOpen}) => {
@@ -10,6 +12,7 @@ const ColorModal = ({isOpen}) => {
   const [colorProfile,setColorProfile] = useState('')
   const [userId, setUserId] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
   useEffect(() => {
     setColorProfile(Cookies.get('color'))
     setUserId(Cookies.get('id'))
@@ -61,7 +64,10 @@ const ColorModal = ({isOpen}) => {
     </div>
       <SettingTitle title="Choose a color"/>
       <div className="mt-8 flex justify-center gap-4">
-        <Picker color={newColor} onChange={setNewColor}/>
+        <Picker 
+          color={newColor} 
+          onChange={setNewColor}
+        />
         <div className="flex flex-col gap-8">
           <div className="flex gap-2 items-center">
             <span className="">Your color:</span>
@@ -76,8 +82,18 @@ const ColorModal = ({isOpen}) => {
         </div>
       </div>
       <div className="mt-4 flex justify-center gap-4 ">
-        <div onClick={()=>isOpen()} className="border-2 py-2 px-4 rounded-lg cursor-pointer transition hover:border-slate-900">Cancel</div>
-        <div onClick={() => changeColor()} className="bg-orange-400 text-white py-2 px-4 rounded-lg cursor-pointer hover:opacity-70">Change</div>
+        <div 
+          onClick={()=>isOpen()} 
+          className="border-2 py-2 px-4 rounded-lg cursor-pointer transition hover:border-slate-900"
+        >
+          Cancel
+        </div>
+        <div 
+          onClick={() => changeColor()} 
+          className="bg-orange-400 text-white py-2 px-4 rounded-lg cursor-pointer hover:opacity-70"
+        >
+          Change
+        </div>
       </div>
     </div>
   );

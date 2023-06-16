@@ -2,7 +2,7 @@
 (() => {
 var exports = {};
 exports.id = 242;
-exports.ids = [242];
+exports.ids = [242,168];
 exports.modules = {
 
 /***/ 1185:
@@ -36,12 +36,23 @@ const UserSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
         required: true
     },
     avatar: {
-        type: String,
-        required: true
+        type: String
     },
-    pin: {
-        type: Array,
-        default: []
+    avatarImg: {
+        type: String,
+        default: ""
+    },
+    city: {
+        type: String,
+        default: ""
+    },
+    age: {
+        type: String,
+        default: ""
+    },
+    hobbies: {
+        type: String,
+        default: ""
     }
 }, {
     timestamps: true
@@ -71,6 +82,11 @@ __webpack_require__.r(__webpack_exports__);
         try {
             await (0,_utils_connectMongoDB__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();
             const { userId  } = req.query;
+            if (userId === undefined) {
+                res.json({
+                    mess: "error"
+                });
+            }
             const user = await _models_User__WEBPACK_IMPORTED_MODULE_1__/* ["default"].findById */ .Z.findById(userId);
             if (!user) {
                 return res.status(404).json({
@@ -84,7 +100,8 @@ __webpack_require__.r(__webpack_exports__);
         } catch (error) {
             console.log(error);
             res.status(500).json({
-                message: "Нет доступа"
+                message: "Нет доступа",
+                error: error
             });
         }
     }
@@ -102,7 +119,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1185);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
 
-const connectDB = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().connect("mongodb+srv://admin:mGGtyZRdxf9gRNlJ@cluster0.liynhak.mongodb.net/blog?retryWrites=true&w=majority").then(()=>console.log("DB Okay")).catch(()=>console.log("Dont Connect"));
+const connectDB = async ()=>mongoose__WEBPACK_IMPORTED_MODULE_0___default().connect(process.env.MONGODB_KEY).then(()=>console.log("DB Okay")).catch(()=>console.log("Dont Connect"));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (connectDB);
 
 

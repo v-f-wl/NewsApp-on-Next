@@ -8,32 +8,32 @@ import PostModel from '../../../models/Post';
  */
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    await connectDB();
+    await connectDB()
     try {
-      const postId = req.query.id; // Используйте req.query.id для получения параметра id из URL// Получите userId из тела запроса
+      const postId = req.query.id
       const value = req.body
-      const updatedPost = await PostModel.findById(postId);
+      const updatedPost = await PostModel.findById(postId)
 
       if (!updatedPost) {
         return res.status(404).json({
           success: false,
           message: 'Статья не найдена',
-        });
+        })
       }
 
-      const { comments } = updatedPost;
-      comments.push(value);
-      updatedPost.markModified('comments'); // Помечаем likesUser как модифицированное поле
+      const { comments } = updatedPost
+      comments.push(value)
+      updatedPost.markModified('comments')
 
-      await updatedPost.save(); // Сохраняем обновленную статью
+      await updatedPost.save()
 
       res.json({
         updatedPost,
-      });
+      })
     } catch (error) {
-      console.error(error);
       res.status(500).json({
         message: 'Не удалось обновить статью',
+        error: error
       });
     }
   }

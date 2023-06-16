@@ -1,12 +1,12 @@
 'use client'
 import { useEffect, useState } from "react";
-import UserBlock from "./UserBlock";
 import {AiOutlineClose} from 'react-icons/ai'
 import { v4 as uuidv4 } from 'uuid';
-
+import Link from "next/link";
 import axios from "axios";
 import Cookies from "js-cookie";
-import Link from "next/link";
+
+import UserBlock from "./UserBlock";
 const Comments = (
   { isOpen, 
     userId, 
@@ -17,6 +17,7 @@ const Comments = (
     onClose,
     postId,
     postText,
+    imagePost
   }) => {
 
   const [areaValue, setAreaValue] = useState('')
@@ -35,7 +36,7 @@ const Comments = (
         }
       )
     }
-  }, [isOpen])
+  }, [isOpen, postId])
 
   const sendComment =() => {
     if(areaValue.length === 0 || buttonDisabled){
@@ -97,6 +98,16 @@ const Comments = (
         </div>
         <div className="py-4 text-xl">
           {postText}
+          {imagePost !== undefined && imagePost.length > 0 && (
+            <div className="flex items-center overflow-hidden">
+              {imagePost.map(item => (
+                <div className="w-[100px] h-[100px] rounded-lg" key={`${item.id}1fddv2a`} >
+                  <img src={item.url}className="h-full w-full object-cover rounded-lg"/>
+
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <h3 className="font-bold text-slate-600 text-xl">Сomments</h3>
         <div className="h-full overflow-y-scroll flex flex-col gap-4">

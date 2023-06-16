@@ -1,8 +1,9 @@
 'use client'
 import { useState } from "react";
-import SettingTitle from "./SettingTitle";
 import axios from "axios";
 import Cookies from "js-cookie";
+
+import SettingTitle from "./SettingTitle";
 
 const NameModal = ({isOpen}) => {
   const [nameValue, setNameValue] = useState('')
@@ -69,8 +70,18 @@ const NameModal = ({isOpen}) => {
           />
       </div>
       <div className="mt-4 flex justify-center gap-4 ">
-        <div onClick={()=> isOpen()} className="border-2 py-2 px-4 rounded-lg cursor-pointer transition hover:border-slate-900">Cancel</div>
-        <div onClick={() => changeName(nameValue)} className="bg-orange-400 text-white py-2 px-4 rounded-lg cursor-pointer hover:opacity-70">Change</div>
+        <div 
+          onClick={()=> isOpen()} 
+          className="border-2 py-2 px-4 rounded-lg cursor-pointer transition hover:border-slate-900"
+        >
+          Cancel
+        </div>
+        <div 
+        onClick={() => changeName(nameValue)} 
+        className="bg-orange-400 text-white py-2 px-4 rounded-lg cursor-pointer hover:opacity-70"
+        >
+          Change
+        </div>
       </div>
     </div>
   );

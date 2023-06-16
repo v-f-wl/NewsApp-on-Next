@@ -1,8 +1,9 @@
-import { useRouter } from "next/router";
-import HeaderName from "../profileMail/HeaderName";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 import Head from "next/head";
+
+import HeaderName from "../profileMail/HeaderName";
 
 const UserHeader = () => {
   const router = useRouter()
@@ -26,7 +27,7 @@ const UserHeader = () => {
   return ( 
     <div className="bg-white rounded-lg flex items-center justify-between">
       <Head>
-        <title>Air Play - {userName}</title>
+        <title>Flumpf - {userName}</title>
       </Head>
       <HeaderName
         profileColor={userAvatar}

@@ -1,38 +1,58 @@
 'use client'
-
-import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
-import PostCard from '../components/dashboard//PostCard'
 import axios from 'axios'
+import Cookies from "js-cookie";
+
+import PostCard from '../components/dashboard//PostCard'
 import HeaderName from "./profileMail/HeaderName";
 import ProfileTitle from "./profileMail/ProfileTitle";
-const ProfileMain = () => {
+import AboutInfo from "./profileMail/AboutInfo";
 
-  const router = useRouter()
-  const { id } = router.query
+const ProfileMain = () => {
   const [post, setPost] = useState()
   const [name, setName] = useState('')
   const [profileColor, setProfileColor] = useState('')
+
+  const [cityValue, setCityValue] = useState(null)
+  const [ageValue, setAgeValue] = useState(null)
+  const [hobbiesValue, setHobbies] = useState(null)
+
+  const [aboutValue, setAboutValue] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
+
+  const router = useRouter()
+  const { id } = router.query
   const cookies = Cookies.get('id')
+
   useEffect(() => {
     if(cookies !== id && id !== undefined){
       router.push('/authpage')
     }
-    setProfileColor(Cookies.get('color'))
-    setName(Cookies.get('name'))
-    axios.get('/api/postOfOneUser', {
-      params: {
-        idPerson: id
-      }
+    axios.get(`/api/userGetOne/?userId=${id}`)
+    .then((res) => {
+      setCityValue(res.data.city)
+      setAgeValue(res.data.age)
+      setHobbies(res.data.hobbies)
+      setName(res.data.fullName)
+      setProfileColor(res.data.avatar)
     })
-    .then(res => {
-      if(res.data.length !== 0){
-        setPost(res.data.reverse())
-      }
+    .then(() => {
+      axios.get('/api/postOfOneUser', {
+        params: {
+          idPerson: id
+        }
+      })
+      .then(res => {
+        if(res.data.length !== 0){
+          setPost(res.data.reverse())
+        }
+      })
+      .catch(error => console.log(error))
+  
     })
-    .catch(error => console.log(error))
+    .catch((err) => console.log(err))
+    setAboutValue(true)
     setIsLoaded(true)
   }, [id, cookies, router])
   return ( 
@@ -52,10 +72,9 @@ const ProfileMain = () => {
       <div className="lg:mt-10 lg:grid lg:grid-cols-32 lg:gap-12 lg:items-start lg:h-auto">
         <div className="bg-white rounded-lg py-4 lg:py-8 px-2 lg:px-4">
           <ProfileTitle title='your posts'/>
-
           {post ? 
           (
-            <div className="mt-4 flex flex-col gap-3 h-[50vh] lg:max-h-[70vh] overflow-y-scroll ">
+            <div className="mt-4 flex flex-col gap-3 h-[60vh] lg:max-h-[80vh] overflow-y-scroll ">
               {post.map((item) => (
                 <PostCard
                   key={item._id}
@@ -68,6 +87,7 @@ const ProfileMain = () => {
                   createdAt={item.createdAt}
                   color={item.color}
                   comments={item.comments}
+                  tags={item.tags}
                   imagePost={item.imagePost}
                 />
               ))}
@@ -81,6 +101,11 @@ const ProfileMain = () => {
           )
           }
         </div>
+        <AboutInfo 
+          isPerson={aboutValue} 
+          city={cityValue} 
+          age={ageValue} 
+          hobbies={hobbiesValue}/>
       </div>
     </div>
   );
