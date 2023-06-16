@@ -19,7 +19,7 @@ const LeftSide = () => {
     }
   }, [userInfo])
   return ( 
-    <nav className="h-[40px] lg:h-full bg-white lg:bg-transparent rounded-lg">
+    <nav className="h-[40px] lg:h-full bg-white lg:bg-transparent rounded-lg absolute bottom-2 z-50 left-0 right-0 lg:sticky">
       <ul className="flex items-center justify-center lg:justify-start lg:items-start lg:flex-col gap-8 lg:gap-4 py-2 h-full">
         <Link href={linkProfile} className="flex gap-2 items-center cursor-pointer">
           <AiOutlineUser size={24} className='text-orange-500'/>

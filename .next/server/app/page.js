@@ -606,7 +606,7 @@ const LeftSide = ()=>{
         userInfo
     ]);
     return /*#__PURE__*/ jsx_runtime_.jsx("nav", {
-        className: "h-[40px] lg:h-full bg-white lg:bg-transparent rounded-lg",
+        className: "h-[40px] lg:h-full bg-white lg:bg-transparent rounded-lg absolute bottom-2 z-50 left-0 right-0 lg:sticky",
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("ul", {
             className: "flex items-center justify-center lg:justify-start lg:items-start lg:flex-col gap-8 lg:gap-4 py-2 h-full",
             children: [
@@ -674,8 +674,8 @@ const MainContainer = ({ isGrid , children  })=>{
         lg:grid 
         ${isGrid ? "lg:grid-cols-LeftRight" : "lg:grid-cols-Profile"}
         gap-2 
-        lg:gap-8
-        justify-between
+        lg:gap-8 justify-end
+        lg:justify-between
         `,
         children: children
     });
@@ -1724,7 +1724,7 @@ const MainDash = ()=>{
                 clearTag: ()=>creatTag()
             }),
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8",
+                className: "flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8 pb-14",
                 children: [
                     modalError && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: " absolute  inset-0  bg-white  rounded-t-lg  z-50 flex  flex-col  items-center  justify-center  gap-2",

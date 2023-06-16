@@ -56,7 +56,7 @@ const MainDash = () => {
           />
         )
       }
-      <div className="flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8">
+      <div className="flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8 pb-14">
         {modalError && (
           <div 
             className="

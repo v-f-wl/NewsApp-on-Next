@@ -79,6 +79,7 @@ const ProfileMain = () => {
           lg:gap-12 
           lg:items-start 
           lg:h-auto
+          
           "
         >
         <div 
