@@ -716,7 +716,7 @@ const TagsModal = ({ getTags  })=>{
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 onClick: ()=>setModalOpen(true),
-                className: "cursor-pointer w-1/4 py-2 rounded-lg flex items-center justify-center border",
+                className: "cursor-pointer w-[80px] py-2 rounded-lg flex items-center justify-center border",
                 children: "Add tags"
             }),
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {

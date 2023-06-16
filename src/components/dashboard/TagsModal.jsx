@@ -29,7 +29,7 @@ const TagsModal = ({getTags}) => {
     <div className="w-full">
       <div 
         onClick={() => setModalOpen(true)} 
-        className="cursor-pointer w-1/4 py-2 rounded-lg flex items-center justify-center border"
+        className="cursor-pointer w-[80px] py-2 rounded-lg flex items-center justify-center border"
       >
         Add tags
       </div>
