@@ -1717,14 +1717,14 @@ const MainDash = ()=>{
         setFilteredData(posts);
     };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        className: "relative overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none",
+        className: "relative max-h-[80vh] lg:max-h-[90vh] overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none",
         children: [
             selectedTag === "" ? /*#__PURE__*/ jsx_runtime_.jsx(dashboard_HeaderDash, {}) : /*#__PURE__*/ jsx_runtime_.jsx(dashboard_TagsInfo, {
                 value: selectedTag,
                 clearTag: ()=>creatTag()
             }),
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8 pb-14",
+                className: "flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8 mb-4",
                 children: [
                     modalError && /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: " absolute  inset-0  bg-white  rounded-t-lg  z-50 flex  flex-col  items-center  justify-center  gap-2",
@@ -1771,7 +1771,7 @@ const MainDash = ()=>{
 
 const Container = ({ children  })=>{
     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        className: "container mx-auto max-w-screen-xl flex flex-col gap-1 h-screen h-[env(safe-area-inset-top, safe-area-inset-bottom)]",
+        className: "container mx-auto max-w-screen-xl flex flex-col gap-1 h-[100%]",
         children: children
     });
 };

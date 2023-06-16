@@ -45,7 +45,7 @@ const MainDash = () => {
     setFilteredData(posts)
   }
   return (  
-    <div className="relative overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none">
+    <div className="relative max-h-[80vh] lg:max-h-[90vh] overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none">
       {selectedTag === ''  ? 
         <HeaderDash/>
         :
@@ -56,7 +56,7 @@ const MainDash = () => {
           />
         )
       }
-      <div className="flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8 pb-14">
+      <div className="flex flex-col gap-4 overflow-hidden pt-4 lg:pt-8 mb-4">
         {modalError && (
           <div 
             className="

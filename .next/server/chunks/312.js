@@ -13,7 +13,7 @@ exports.modules = {
 
 const Container = ({ children  })=>{
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: "container mx-auto max-w-screen-xl flex flex-col gap-1 h-screen h-[env(safe-area-inset-top, safe-area-inset-bottom)]",
+        className: "container mx-auto max-w-screen-xl flex flex-col gap-1 h-[100%]",
         children: children
     });
 };
