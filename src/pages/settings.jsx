@@ -14,6 +14,8 @@ const ProfilePage = () => {
     <Container>
       <Head>
         <title>Flumpf - settings</title>
+        <meta name='viewport' content='initial-scale=1, viewport-fit=cover'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       </Head>
       <Header/>
       <MainContainer isGrid={false} >

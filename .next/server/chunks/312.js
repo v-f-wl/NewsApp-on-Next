@@ -50,10 +50,26 @@ var fi_ = __webpack_require__(2750);
 
 
 
+
+
 const Profile = ()=>{
+    const userInfo = external_js_cookie_default().get("id");
+    const [linkProfile, setLinkProfile] = (0,external_react_.useState)("");
+    const [linkSettings, setLinkSettings] = (0,external_react_.useState)("");
     const [modal, setModal] = (0,external_react_.useState)(false);
     const nameInfo = external_js_cookie_default().get("name");
     const color = external_js_cookie_default().get("color");
+    (0,external_react_.useEffect)(()=>{
+        if (userInfo) {
+            setLinkProfile(`/profilepage/?id=${userInfo}`);
+            setLinkSettings(`/settings/?id=${userInfo}`);
+        } else {
+            setLinkProfile("/authpage");
+            setLinkSettings("/authpage");
+        }
+    }, [
+        userInfo
+    ]);
     const openModal = ()=>{
         setModal((modal)=>!modal);
     };
@@ -93,13 +109,51 @@ const Profile = ()=>{
                             className: "text-orange-600 cursor-pointer"
                         }),
                         !modal ? null : /*#__PURE__*/ jsx_runtime.jsx("div", {
-                            className: "w-[100px] absolute bg-white p-2 right-0 top-10 border border-orange-400 rounded-lg z-20",
-                            children: /*#__PURE__*/ jsx_runtime.jsx("ul", {
-                                children: /*#__PURE__*/ jsx_runtime.jsx("li", {
-                                    className: "cursor-pointer",
-                                    onClick: ()=>exit(),
-                                    children: "Log out"
-                                })
+                            className: "w-[150px] absolute bg-white p-4 right-0 top-10 border  rounded-lg z-20",
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("ul", {
+                                className: "flex flex-col gap-3",
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)((link_default()), {
+                                        href: "/",
+                                        className: "cursor-pointer flex items-center gap-1",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime.jsx(ai_.AiOutlineBorderlessTable, {
+                                                size: 18
+                                            }),
+                                            "Dashdoard"
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)((link_default()), {
+                                        href: linkProfile,
+                                        className: "cursor-pointer flex items-center gap-1",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime.jsx(ai_.AiOutlineUser, {
+                                                size: 18
+                                            }),
+                                            "Profile"
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)((link_default()), {
+                                        href: linkSettings,
+                                        className: "cursor-pointer flex items-center gap-1",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime.jsx(ai_.AiOutlineSetting, {
+                                                size: 18
+                                            }),
+                                            "Settings"
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("li", {
+                                        className: "cursor-pointer flex items-center gap-1",
+                                        onClick: ()=>exit(),
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime.jsx(ai_.AiOutlinePoweroff, {
+                                                size: 18
+                                            }),
+                                            "Log out"
+                                        ]
+                                    })
+                                ]
                             })
                         })
                     ]

@@ -13,6 +13,8 @@ export default function ProfilePage(){
     <div className='b-col'>
       <Head>
         <title>Flumpf - Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name='viewport' content='initial-scale=1, viewport-fit=cover'/>
       </Head>
         <Container>
           <Header/>

@@ -885,7 +885,7 @@ const AboutInfo = ({ isPerson , city , age , hobbies  })=>{
 
 const HeaderName = ({ profileColor , name  })=>{
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "bg-white rounded-lg flex min-h-[50px] h-auto items-center gap-4 p-3 lg:p-5",
+        className: "bg-white rounded-lg flex max-h-[50px] h-full items-center gap-4 p-3 lg:p-5",
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 style: {

@@ -411,10 +411,26 @@ var fi_index_esm = __webpack_require__(7808);
 
 
 
+
+
 const Profile = ()=>{
+    const userInfo = js_cookie/* default.get */.Z.get("id");
+    const [linkProfile, setLinkProfile] = (0,react_.useState)("");
+    const [linkSettings, setLinkSettings] = (0,react_.useState)("");
     const [modal, setModal] = (0,react_.useState)(false);
     const nameInfo = js_cookie/* default.get */.Z.get("name");
     const color = js_cookie/* default.get */.Z.get("color");
+    (0,react_.useEffect)(()=>{
+        if (userInfo) {
+            setLinkProfile(`/profilepage/?id=${userInfo}`);
+            setLinkSettings(`/settings/?id=${userInfo}`);
+        } else {
+            setLinkProfile("/authpage");
+            setLinkSettings("/authpage");
+        }
+    }, [
+        userInfo
+    ]);
     const openModal = ()=>{
         setModal((modal)=>!modal);
     };
@@ -454,13 +470,51 @@ const Profile = ()=>{
                             className: "text-orange-600 cursor-pointer"
                         }),
                         !modal ? null : /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            className: "w-[100px] absolute bg-white p-2 right-0 top-10 border border-orange-400 rounded-lg z-20",
-                            children: /*#__PURE__*/ jsx_runtime_.jsx("ul", {
-                                children: /*#__PURE__*/ jsx_runtime_.jsx("li", {
-                                    className: "cursor-pointer",
-                                    onClick: ()=>exit(),
-                                    children: "Log out"
-                                })
+                            className: "w-[150px] absolute bg-white p-4 right-0 top-10 border  rounded-lg z-20",
+                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("ul", {
+                                className: "flex flex-col gap-3",
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
+                                        href: "/",
+                                        className: "cursor-pointer flex items-center gap-1",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineBorderlessTable */.VdP, {
+                                                size: 18
+                                            }),
+                                            "Dashdoard"
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
+                                        href: linkProfile,
+                                        className: "cursor-pointer flex items-center gap-1",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineUser */.nf1, {
+                                                size: 18
+                                            }),
+                                            "Profile"
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
+                                        href: linkSettings,
+                                        className: "cursor-pointer flex items-center gap-1",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineSetting */.zPD, {
+                                                size: 18
+                                            }),
+                                            "Settings"
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("li", {
+                                        className: "cursor-pointer flex items-center gap-1",
+                                        onClick: ()=>exit(),
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlinePoweroff */.k0d, {
+                                                size: 18
+                                            }),
+                                            "Log out"
+                                        ]
+                                    })
+                                ]
                             })
                         })
                     ]
@@ -1761,25 +1815,40 @@ function Home() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ RootLayout),
-/* harmony export */   "metadata": () => (/* binding */ metadata)
+/* harmony export */   "default": () => (/* binding */ RootLayout)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _globals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5553);
-/* harmony import */ var _globals_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_globals_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5548);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _globals_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5553);
+/* harmony import */ var _globals_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_globals_css__WEBPACK_IMPORTED_MODULE_2__);
 
 
-const metadata = {
-    title: "Flumpf",
-    description: ""
-};
+
 function RootLayout({ children  }) {
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("html", {
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("html", {
         lang: "en",
-        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("body", {
-            children: children
-        })
+        children: [
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_1___default()), {
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
+                        children: "Flumpf"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        name: "viewport",
+                        content: "initial-scale=1, viewport-fit=cover"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        name: "viewport",
+                        content: "width=device-width, initial-scale=1.0"
+                    })
+                ]
+            }),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("body", {
+                children: children
+            })
+        ]
     });
 }
 
@@ -1824,7 +1893,7 @@ const { __esModule, $$typeof } = proxy;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [839,290], () => (__webpack_exec__(529)));
+var __webpack_exports__ = __webpack_require__.X(0, [839,270], () => (__webpack_exec__(529)));
 module.exports = __webpack_exports__;
 
 })();

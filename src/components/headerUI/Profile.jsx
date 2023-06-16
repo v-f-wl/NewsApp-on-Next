@@ -1,13 +1,28 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FiMoreVertical} from 'react-icons/fi'
+import { AiOutlinePoweroff, AiOutlineSetting, AiOutlineBorderlessTable, AiOutlineUser } from 'react-icons/ai'
 import Cookies from 'js-cookie'
+import Link from 'next/link'
 
 
 const Profile = () => {
+  const userInfo = Cookies.get('id')
+  const [linkProfile, setLinkProfile] = useState('')
+  const [linkSettings, setLinkSettings] = useState('')
   const [modal, setModal] = useState(false)
   const nameInfo = Cookies.get('name')
   const color = Cookies.get('color')
+
+  useEffect(() => {
+    if(userInfo){
+      setLinkProfile(`/profilepage/?id=${userInfo}`)
+      setLinkSettings(`/settings/?id=${userInfo}`)
+    }else{
+      setLinkProfile('/authpage')
+      setLinkSettings('/authpage')
+    }
+  }, [userInfo])
 
   const openModal = () => {
     setModal(modal => !modal)
@@ -41,9 +56,22 @@ const Profile = () => {
             />
             {!modal ? null : 
               (
-                <div className="w-[100px] absolute bg-white p-2 right-0 top-10 border border-orange-400 rounded-lg z-20">
-                  <ul >
-                    <li className="cursor-pointer" onClick={() => exit()}>
+                <div className="w-[150px] absolute bg-white p-4 right-0 top-10 border  rounded-lg z-20">
+                  <ul className='flex flex-col gap-3'>
+                    <Link href="/" className="cursor-pointer flex items-center gap-1">
+                      <AiOutlineBorderlessTable size={18}/>
+                      Dashdoard
+                    </Link>
+                    <Link href={linkProfile} className="cursor-pointer flex items-center gap-1">
+                      <AiOutlineUser size={18}/>
+                      Profile
+                    </Link>
+                    <Link href={linkSettings} className="cursor-pointer flex items-center gap-1">
+                      <AiOutlineSetting size={18}/>
+                      Settings
+                    </Link>
+                    <li className="cursor-pointer flex items-center gap-1" onClick={() => exit()}>
+                      <AiOutlinePoweroff size={18}/>
                       Log out
                     </li>
                   </ul>
