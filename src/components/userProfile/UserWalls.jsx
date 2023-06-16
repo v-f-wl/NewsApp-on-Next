@@ -39,7 +39,7 @@ const UserWalls = () => {
     <div className="lg:mt-10 lg:grid lg:grid-cols-32 lg:gap-12 lg:items-start lg:h-auto">
       <div className="bg-white rounded-lg py-4 lg:py-8 px-2 lg:px-4">
         <ProfileTitle title="Posts"/>
-        <div className="mt-4 flex flex-col gap-2 ">
+        <div className="">
           {!isLoaded ? 
             (<>
               <PostCard
@@ -50,7 +50,7 @@ const UserWalls = () => {
               />
             </>) 
             :
-            <>
+            <div className="max-h-[60vh] overflow-y-scroll mt-4 flex flex-col gap-2 ">
               {userInfo.map((item) => (
                   <PostCard
                     isLoaded={true}
@@ -66,7 +66,7 @@ const UserWalls = () => {
                     imagePost={item.imagePost}
                   />
               ))}
-            </>
+            </div>
           }
         </div>
       </div>

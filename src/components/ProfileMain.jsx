@@ -62,19 +62,46 @@ const ProfileMain = () => {
         ${isLoaded ? 'lg:block':'hidden'}
         flex-col 
         gap-4 
-        h-full
+        max-h-[60vh]  
+        lg:max-h-[80vh] 
+        snap-none
       `}
       >
       <HeaderName
         profileColor={profileColor}
         name={name}
       />
-      <div className="lg:mt-10 lg:grid lg:grid-cols-32 lg:gap-12 lg:items-start lg:h-auto">
-        <div className="bg-white rounded-lg py-4 lg:py-8 px-2 lg:px-4">
+      <div 
+        className="
+          lg:mt-10 
+          lg:grid 
+          lg:grid-cols-32 
+          lg:gap-12 
+          lg:items-start 
+          lg:h-auto
+          "
+        >
+        <div 
+          className="
+            bg-white 
+              rounded-lg 
+              py-4 lg:py-8 
+              px-2 lg:px-4
+            "
+          >
           <ProfileTitle title='your posts'/>
           {post ? 
           (
-            <div className="mt-4 flex flex-col gap-3 h-[60vh] lg:max-h-[80vh] overflow-y-scroll ">
+            <div 
+              className="
+                mt-4 
+                flex 
+                flex-col 
+                gap-3 
+                max-h-[60vh]
+                overflow-y-scroll
+              "
+            >
               {post.map((item) => (
                 <PostCard
                   key={item._id}
