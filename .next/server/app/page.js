@@ -606,7 +606,7 @@ const LeftSide = ()=>{
         userInfo
     ]);
     return /*#__PURE__*/ jsx_runtime_.jsx("nav", {
-        className: "h-[40px] lg:h-full bg-white lg:bg-transparent rounded-lg absolute bottom-2 z-50 left-0 right-0 lg:sticky",
+        className: "h-[40px] hidden lg:block lg:h-full bg-white lg:bg-transparent rounded-lg absolute bottom-2 z-50 left-0 right-0 lg:sticky",
         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("ul", {
             className: "flex items-center justify-center lg:justify-start lg:items-start lg:flex-col gap-8 lg:gap-4 py-2 h-full",
             children: [
@@ -667,16 +667,17 @@ const MainContainer = ({ isGrid , children  })=>{
         lg:p-8 
         rounded-t-lg 
         flex 
-        flex-col-reverse 
+        flex-col-reverse
         overflow-hidden 
         h-full
         w-full
+        max-h-[90vh]
         lg:grid 
         ${isGrid ? "lg:grid-cols-LeftRight" : "lg:grid-cols-Profile"}
         gap-2 
         lg:gap-8 justify-end
         lg:justify-between
-        `,
+      `,
         children: children
     });
 };
@@ -1450,7 +1451,7 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
         userId
     ]);
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        className: `${isHidden ? "hidden" : ""} p-4 bg-white rounded-lg flex flex-col gap-4`,
+        className: `${isHidden ? "hidden" : ""} p-2 md:p-4 bg-white rounded-lg flex flex-col gap-4`,
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx(dashboard_EditPost, {
                 openEdit: editOpen,
@@ -1717,7 +1718,7 @@ const MainDash = ()=>{
         setFilteredData(posts);
     };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        className: "relative max-h-[80vh] lg:max-h-[90vh] overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none",
+        className: "relative max-h-[90vh] overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none",
         children: [
             selectedTag === "" ? /*#__PURE__*/ jsx_runtime_.jsx(dashboard_HeaderDash, {}) : /*#__PURE__*/ jsx_runtime_.jsx(dashboard_TagsInfo, {
                 value: selectedTag,

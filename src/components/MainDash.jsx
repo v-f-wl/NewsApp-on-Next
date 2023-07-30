@@ -45,7 +45,7 @@ const MainDash = () => {
     setFilteredData(posts)
   }
   return (  
-    <div className="relative max-h-[80vh] lg:max-h-[90vh] overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none">
+    <div className="relative max-h-[90vh] overflow-y-scroll rounded-lg lg:rounded-t-xl snap-none">
       {selectedTag === ''  ? 
         <HeaderDash/>
         :

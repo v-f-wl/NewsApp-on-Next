@@ -63,8 +63,6 @@ const ProfileMain = () => {
         ${isLoaded ? 'lg:block':'hidden'}
         flex-col 
         gap-4 
-        max-h-[85vh]  
-        lg:max-h-[90vh] 
         snap-none
       `}
       >

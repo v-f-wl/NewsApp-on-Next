@@ -98,7 +98,7 @@ const PostCard = ({
 
   
   return ( 
-    <div className={`${isHidden ? 'hidden' : ''} p-4 bg-white rounded-lg flex flex-col gap-4`}>
+    <div className={`${isHidden ? 'hidden' : ''} p-2 md:p-4 bg-white rounded-lg flex flex-col gap-4`}>
       <EditPost
         openEdit={editOpen}
         postText={postText}

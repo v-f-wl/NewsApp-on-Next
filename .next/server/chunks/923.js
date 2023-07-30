@@ -391,7 +391,7 @@ const PostCard = ({ isLoaded , postText , authorName , createdAt , color , userI
         userId
     ]);
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-        className: `${isHidden ? "hidden" : ""} p-4 bg-white rounded-lg flex flex-col gap-4`,
+        className: `${isHidden ? "hidden" : ""} p-2 md:p-4 bg-white rounded-lg flex flex-col gap-4`,
         children: [
             /*#__PURE__*/ jsx_runtime.jsx(dashboard_EditPost, {
                 openEdit: editOpen,

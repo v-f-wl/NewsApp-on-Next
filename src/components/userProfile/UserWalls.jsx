@@ -67,7 +67,7 @@ const UserWalls = ({isModal}) => {
               />
             </>) 
             :
-            <div className="h-[60vh] overflow-y-scroll mt-4 flex flex-col gap-2 ">
+            <div className="h-full max-h-[70vh] overflow-y-scroll mt-4 flex flex-col gap-2 ">
               {userInfo.map((item) => (
                   <PostCard
                     isLoaded={true}

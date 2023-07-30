@@ -39,7 +39,7 @@ const LeftSide = ()=>{
         userInfo
     ]);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("nav", {
-        className: "h-[40px] lg:h-full bg-white lg:bg-transparent rounded-lg absolute bottom-2 z-50 left-0 right-0 lg:sticky",
+        className: "h-[40px] hidden lg:block lg:h-full bg-white lg:bg-transparent rounded-lg absolute bottom-2 z-50 left-0 right-0 lg:sticky",
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
             className: "flex items-center justify-center lg:justify-start lg:items-start lg:flex-col gap-8 lg:gap-4 py-2 h-full",
             children: [
@@ -110,16 +110,17 @@ const MainContainer = ({ isGrid , children  })=>{
         lg:p-8 
         rounded-t-lg 
         flex 
-        flex-col-reverse 
+        flex-col-reverse
         overflow-hidden 
         h-full
         w-full
+        max-h-[90vh]
         lg:grid 
         ${isGrid ? "lg:grid-cols-LeftRight" : "lg:grid-cols-Profile"}
         gap-2 
         lg:gap-8 justify-end
         lg:justify-between
-        `,
+      `,
         children: children
     });
 };
