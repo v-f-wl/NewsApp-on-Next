@@ -21,7 +21,7 @@ const external_cloudinary_namespaceObject = require("cloudinary");
 ;// CONCATENATED MODULE: ./src/pages/api/uploads.js
 
 external_cloudinary_namespaceObject.v2.config({
-    cloud_name: process.env.NEXT_PUBLIC_CLOUD_NAME,
+    cloud_name: "dxzx1bkz1",
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
     secure: true

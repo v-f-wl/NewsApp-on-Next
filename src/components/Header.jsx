@@ -28,7 +28,7 @@ const Header = ({search}) => {
   
   return (  
     <header className="h-[65px] bg-white rounded-b-lg grid grid-cols-2 lg:grid-cols-3 grid-rows-1 items-center px-5 shadow-md shadow-slate-400/10">
-      <Link href='/' className="font-semibold text-slate-600 flex items-center gap-1">
+      <Link href='/' className="font-semibold text-slate-600 text-base lg:text-2xl flex items-center gap-1">
         <AiOutlineHolder size={24}/> 
         <div className="">Flumpf</div>
       </Link>

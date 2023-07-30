@@ -27,7 +27,7 @@ const SettingsContainer = () => {
     window.location.reload();
   }
   return ( 
-    <div className="rounded-lg lg:rounded-t-lg bg-white px-4 py-8">
+    <div className="h-full rounded-lg lg:rounded-t-lg bg-white px-4 py-8">
       <h2 className="font-bold text-3xl text-slate-700">
         Settings
       </h2>

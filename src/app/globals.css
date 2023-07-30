@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body{
   background-color: #EFF2F4;
+  max-height: 100vh;
 }
 .b-col{
   background-color: #EFF2F4;

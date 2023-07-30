@@ -28,7 +28,6 @@ __webpack_require__.r(__webpack_exports__);
  * @param {import('next').NextApiRequest} req 
  * @param {import('next').NextApiResponse} res 
  */ async function handler(req, res) {
-    console.log(req.body);
     if (req.method === "DELETE") {
         try {
             await (0,_utils_connectMongoDB__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();

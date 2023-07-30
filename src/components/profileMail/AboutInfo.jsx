@@ -1,14 +1,17 @@
 'use client'
-import { useState } from 'react';
-import { AiOutlineEdit, AiOutlineInfoCircle } from 'react-icons/ai'
+import { useEffect, useState } from 'react';
+import { AiOutlineEdit } from 'react-icons/ai'
 
 import ProfileTitle from "./ProfileTitle";
 import AboutModal from './AboutModal';
 
-const AboutInfo = ({isPerson, city, age, hobbies}) => {
-  const [isModal, setIsModal] = useState(false)
+const AboutInfo = ({isPerson, city, age, hobbies, isOpen}) => {
   const [mobileBlock, setMobileBlock] = useState(false)
+  const [isModal, setIsModal] = useState(false)
 
+  useEffect(() => {
+    setMobileBlock(isOpen)
+  }, [isOpen])
   const LiItem = ({children}) => (
     <li className="flex gap-2 items-start">
       {children}
@@ -23,7 +26,8 @@ const AboutInfo = ({isPerson, city, age, hobbies}) => {
 
 
   return ( 
-    <div className="
+    <div className={`
+      ${mobileBlock ? 'z-10' : '-z-10'} 
       absolute
       top-20
       right-0
@@ -38,25 +42,8 @@ const AboutInfo = ({isPerson, city, age, hobbies}) => {
       lg:px-4 
       lg:py-8 
       lg:bg-white
-    "
+    `}
     >
-      <div 
-        onClick={() => setMobileBlock(!mobileBlock)}
-        className="
-          absolute 
-          top-3 
-          right-4 
-          w-8 
-          h-8 
-          flex 
-          items-center 
-          justify-center 
-          rounede-lg 
-          lg:hidden
-        " 
-      >
-        <AiOutlineInfoCircle size={24} className='text-slate-500'/>
-      </div>
       <div className={`
         ${mobileBlock ? 'visible' : 'invisible'} 
         ${mobileBlock ? 'opacity-100' : 'opacity-0'} 

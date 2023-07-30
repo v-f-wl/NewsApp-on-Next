@@ -2,7 +2,7 @@
 (() => {
 var exports = {};
 exports.id = 242;
-exports.ids = [242,168];
+exports.ids = [242];
 exports.modules = {
 
 /***/ 1185:
@@ -57,7 +57,7 @@ const UserSchema = new (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema)(
 }, {
     timestamps: true
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models.User) || mongoose__WEBPACK_IMPORTED_MODULE_0___default().model("User", UserSchema));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models.User));
 
 
 /***/ }),

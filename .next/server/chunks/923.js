@@ -757,9 +757,14 @@ const AboutModal = ({ isModals , closeModals , valueHobbies , valueCity , valueA
 
 
 
-const AboutInfo = ({ isPerson , city , age , hobbies  })=>{
-    const [isModal, setIsModal] = (0,external_react_.useState)(false);
+const AboutInfo = ({ isPerson , city , age , hobbies , isOpen  })=>{
     const [mobileBlock, setMobileBlock] = (0,external_react_.useState)(false);
+    const [isModal, setIsModal] = (0,external_react_.useState)(false);
+    (0,external_react_.useEffect)(()=>{
+        setMobileBlock(isOpen);
+    }, [
+        isOpen
+    ]);
     const LiItem = ({ children  })=>/*#__PURE__*/ jsx_runtime.jsx("li", {
             className: "flex gap-2 items-start",
             children: children
@@ -772,19 +777,26 @@ const AboutInfo = ({ isPerson , city , age , hobbies  })=>{
             className: "pt-[2px] w-[200px] text-slate-500",
             children: value
         });
-    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-        className: " absolute top-20 right-0 h-auto px-2 py-4 w-full min-h-8 rounded-lg overflow-hidden lg:sticky lg:px-4  lg:py-8  lg:bg-white ",
-        children: [
-            /*#__PURE__*/ jsx_runtime.jsx("div", {
-                onClick: ()=>setMobileBlock(!mobileBlock),
-                className: " absolute  top-3  right-4  w-8  h-8  flex  items-center  justify-center  rounede-lg  lg:hidden ",
-                children: /*#__PURE__*/ jsx_runtime.jsx(ai_.AiOutlineInfoCircle, {
-                    size: 24,
-                    className: "text-slate-500"
-                })
-            }),
-            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                className: `
+    return /*#__PURE__*/ jsx_runtime.jsx("div", {
+        className: `
+      ${mobileBlock ? "z-10" : "-z-10"} 
+      absolute
+      top-20
+      right-0
+      h-auto
+      px-2
+      py-4
+      w-full
+      min-h-8
+      rounded-lg
+      overflow-hidden
+      lg:sticky
+      lg:px-4 
+      lg:py-8 
+      lg:bg-white
+    `,
+        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+            className: `
         ${mobileBlock ? "visible" : "invisible"} 
         ${mobileBlock ? "opacity-100" : "opacity-0"} 
         top-8 
@@ -802,17 +814,17 @@ const AboutInfo = ({ isPerson , city , age , hobbies  })=>{
         lg:block
         lg:border-none
         `,
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                        className: "relative",
-                        children: [
-                            /*#__PURE__*/ jsx_runtime.jsx(ProfileTitle/* default */.Z, {
-                                title: "About Me"
-                            }),
-                            /*#__PURE__*/ jsx_runtime.jsx(ai_.AiOutlineEdit, {
-                                onClick: ()=>setIsModal(true),
-                                size: 24,
-                                className: `
+            children: [
+                /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                    className: "relative",
+                    children: [
+                        /*#__PURE__*/ jsx_runtime.jsx(ProfileTitle/* default */.Z, {
+                            title: "About Me"
+                        }),
+                        /*#__PURE__*/ jsx_runtime.jsx(ai_.AiOutlineEdit, {
+                            onClick: ()=>setIsModal(true),
+                            size: 24,
+                            className: `
                 ${isPerson ? "block" : "hidden"}
                 absolute 
                 top-0
@@ -820,54 +832,53 @@ const AboutInfo = ({ isPerson , city , age , hobbies  })=>{
                 cursor-pointer
                 lg:right-4 
               `
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("ul", {
-                        className: "mt-6 flex flex-col gap-3",
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)(LiItem, {
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime.jsx(LiTitle, {
-                                        title: "City"
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime.jsx(LiValue, {
-                                        value: city
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)(LiItem, {
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime.jsx(LiTitle, {
-                                        title: "Age"
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime.jsx(LiValue, {
-                                        value: age
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)(LiItem, {
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime.jsx(LiTitle, {
-                                        title: "Hobbies"
-                                    }),
-                                    /*#__PURE__*/ jsx_runtime.jsx(LiValue, {
-                                        value: hobbies
-                                    })
-                                ]
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ jsx_runtime.jsx(profileMail_AboutModal, {
-                        isModals: isModal,
-                        valueHobbies: hobbies,
-                        valueCity: city,
-                        valueAge: age,
-                        closeModals: ()=>setIsModal(false)
-                    })
-                ]
-            })
-        ]
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ (0,jsx_runtime.jsxs)("ul", {
+                    className: "mt-6 flex flex-col gap-3",
+                    children: [
+                        /*#__PURE__*/ (0,jsx_runtime.jsxs)(LiItem, {
+                            children: [
+                                /*#__PURE__*/ jsx_runtime.jsx(LiTitle, {
+                                    title: "City"
+                                }),
+                                /*#__PURE__*/ jsx_runtime.jsx(LiValue, {
+                                    value: city
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,jsx_runtime.jsxs)(LiItem, {
+                            children: [
+                                /*#__PURE__*/ jsx_runtime.jsx(LiTitle, {
+                                    title: "Age"
+                                }),
+                                /*#__PURE__*/ jsx_runtime.jsx(LiValue, {
+                                    value: age
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,jsx_runtime.jsxs)(LiItem, {
+                            children: [
+                                /*#__PURE__*/ jsx_runtime.jsx(LiTitle, {
+                                    title: "Hobbies"
+                                }),
+                                /*#__PURE__*/ jsx_runtime.jsx(LiValue, {
+                                    value: hobbies
+                                })
+                            ]
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ jsx_runtime.jsx(profileMail_AboutModal, {
+                    isModals: isModal,
+                    valueHobbies: hobbies,
+                    valueCity: city,
+                    valueAge: age,
+                    closeModals: ()=>setIsModal(false)
+                })
+            ]
+        })
     });
 };
 /* harmony default export */ const profileMail_AboutInfo = (AboutInfo);
@@ -882,20 +893,36 @@ const AboutInfo = ({ isPerson , city , age , hobbies  })=>{
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1844);
+/* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9847);
+/* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__);
+/* __next_internal_client_entry_do_not_use__  auto */ 
 
-const HeaderName = ({ profileColor , name  })=>{
+const HeaderName = ({ profileColor , name , isOpenModal  })=>{
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "bg-white rounded-lg flex max-h-[50px] h-full items-center gap-4 p-3 lg:p-5",
+        className: "bg-white rounded-lg flex w-full max-h-[70px] h-full items-center gap-4 p-3 lg:p-5 justify-between",
         children: [
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                style: {
-                    backgroundColor: profileColor
-                },
-                className: "w-8 h-8 lg:w-14 lg:h-14 rounded-lg"
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "flex items-center gap-4",
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        style: {
+                            backgroundColor: profileColor
+                        },
+                        className: "w-8 h-8 lg:w-14 lg:h-14 rounded-lg"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                        className: "font-semibold text-xl lg:text-3xl text-slate-700 tracking-wide w-[210px] lg:w-[300px] overflow-hidden",
+                        children: name
+                    })
+                ]
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                className: "font-semibold text-xl lg:text-3xl text-slate-700 tracking-wide w-[290px] lg:w-[300px] overflow-hidden",
-                children: name
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "lg:hidden z-20",
+                onClick: ()=>isOpenModal((prev)=>prev = !prev),
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__.AiOutlineInfoCircle, {
+                    size: 24,
+                    className: "text-slate-500"
+                })
             })
         ]
     });

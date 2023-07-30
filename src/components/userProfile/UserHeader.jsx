@@ -5,7 +5,7 @@ import Head from "next/head";
 
 import HeaderName from "../profileMail/HeaderName";
 
-const UserHeader = () => {
+const UserHeader = ({isOpenModals}) => {
   const router = useRouter()
   const { id } = router.query
 
@@ -30,6 +30,7 @@ const UserHeader = () => {
         <title>Flumpf - {userName}</title>
       </Head>
       <HeaderName
+        isOpenModal={() => isOpenModals(isOpenAbout => isOpenAbout = !isOpenAbout)}
         profileColor={userAvatar}
         name={userName}
       />

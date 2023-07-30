@@ -14,6 +14,7 @@ const ProfileMain = () => {
   const [name, setName] = useState('')
   const [profileColor, setProfileColor] = useState('')
 
+  const [isOpenAbout, setIsOpenAbout] = useState(false)
   const [cityValue, setCityValue] = useState(null)
   const [ageValue, setAgeValue] = useState(null)
   const [hobbiesValue, setHobbies] = useState(null)
@@ -70,6 +71,7 @@ const ProfileMain = () => {
       <HeaderName
         profileColor={profileColor}
         name={name}
+        isOpenModal={() => setIsOpenAbout(isOpenAbout => isOpenAbout = !isOpenAbout)}
       />
       <div 
         className="
@@ -130,6 +132,7 @@ const ProfileMain = () => {
           }
         </div>
         <AboutInfo 
+          isOpen={isOpenAbout}
           isPerson={aboutValue} 
           city={cityValue} 
           age={ageValue} 

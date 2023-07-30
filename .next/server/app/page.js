@@ -564,7 +564,7 @@ const Header = ({ search  })=>{
         children: [
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
                 href: "/",
-                className: "font-semibold text-slate-600 flex items-center gap-1",
+                className: "font-semibold text-slate-600 text-base lg:text-2xl flex items-center gap-1",
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx(index_esm/* AiOutlineHolder */.kUE, {
                         size: 24

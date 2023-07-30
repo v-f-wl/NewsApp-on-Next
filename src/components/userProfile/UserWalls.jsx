@@ -9,13 +9,19 @@ import ProfileTitle from "../profileMail/ProfileTitle";
 import PostCard from "../dashboard/PostCard";
 import AboutInfo from "../profileMail/AboutInfo";
 
-const UserWalls = () => {
-  
+const UserWalls = ({isModal}) => {
   const router = useRouter()
   const routerTwo = useRouterNav()
   const { id } = router.query
+
   const [userInfo, setUserInfo] = useState()
   const [isLoaded, setIsLoaded] = useState(false)
+  const [aboutInfo, setAboutInfo] = useState({
+    city: '',
+    age: '',
+    hobbies: ''
+  })
+
   const personId = Cookies.get('id')
 
   useEffect(() => {
@@ -33,6 +39,17 @@ const UserWalls = () => {
         setIsLoaded(true)
       })
       .catch(error => console.log(error))
+
+      axios.get(`/api/userGetOne/?userId=${id}`)
+      .then(res => 
+        setAboutInfo(prev => {
+          const data = {...prev}
+          data.city = res.data.city
+          data.age = res.data.age
+          data.hobbies = res.data.hobbies
+          return data
+        })
+      )
     }
   }, [id, personId, routerTwo])
   return ( 
@@ -50,7 +67,7 @@ const UserWalls = () => {
               />
             </>) 
             :
-            <div className="max-h-[60vh] overflow-y-scroll mt-4 flex flex-col gap-2 ">
+            <div className="h-[60vh] overflow-y-scroll mt-4 flex flex-col gap-2 ">
               {userInfo.map((item) => (
                   <PostCard
                     isLoaded={true}
@@ -71,6 +88,11 @@ const UserWalls = () => {
         </div>
       </div>
         <AboutInfo
+          isOpen={isModal}
+          isPerson={false}
+          city={aboutInfo.city}
+          age={aboutInfo.age}
+          hobbies={aboutInfo.hobbies}
         />
     </div>  
   );

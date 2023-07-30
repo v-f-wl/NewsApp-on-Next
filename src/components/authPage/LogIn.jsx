@@ -57,7 +57,7 @@ const LogIn = () => {
           label="Email"
           type="email"
           error={true}
-          setValue={(value) => setDataVelue(value)}v
+          setValue={(value) => setDataVelue(value)}
         />
         <Input
           id='password'
